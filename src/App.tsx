@@ -24,9 +24,14 @@ function App() {
         <Routes>
 
           <Route path="/" element={<Enter />} />
-          {/* <Route path="/signUp" element={<SignUp />} /> */}
+          <Route path="" element={<Enter />} />
+          <Route path="/signUp" element={<SignUp />} />
           <Route path="/logIn" element={<LogIn />} />
           <Route path="/allProducts" element={<AllProducts />} />
+          {/* <Route path="/" element={<Enter />} />
+          <Route path="/" element={<Enter />} />
+          <Route path="/" element={<Enter />} />
+          <Route path="/" element={<Enter />} /> */}
         </Routes>
       </Router>
      

@@ -1,13 +1,31 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {combineReducers} from "redux";
+import { legacy_createStore, compose } from "redux";
+import { categoryReducer } from './store/Reducers/Category';
 
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = legacy_createStore(
+  combineReducers({ ca: categoryReducer }),
+  composeEnhancers()
+);
 ReactDOM.render(
-  
   <React.StrictMode>
+    <Provider store={store}>
     <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
