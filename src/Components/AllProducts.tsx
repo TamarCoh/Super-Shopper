@@ -2,7 +2,7 @@ import { TableBody, TableCell, TableContainer, TableHead, TableRow, Table, TextF
 import Paper from '@mui/material/Paper';
 import { useForm, } from "react-hook-form";
 import axios from "axios";
-import {styled } from "@material-ui/core";
+import {StyledComponentProps } from "@material-ui/core";
 import { } from "@material-ui/core";
 import { Component, useState, useEffect } from "react";
 import { JsxElement } from "typescript";
