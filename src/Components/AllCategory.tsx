@@ -60,7 +60,7 @@ async function getProducts(category: Category) {
   return (
     <Box sx={{ pb: 7 }} ref={ref}>
       <CssBaseline />
-      <AllProducts productList={productList}></AllProducts>
+     
       <Paper sx={{ position: "fixed", top: 0, right: 0 }} elevation={3}>
         <BottomNavigation
           showLabels
@@ -74,7 +74,8 @@ async function getProducts(category: Category) {
         }
           
         </BottomNavigation>
-      </Paper>
+      </Paper> 
+      <AllProducts productList={productList} catgory={category}></AllProducts>
     </Box>
   );
 }
