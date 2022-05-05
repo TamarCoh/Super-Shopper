@@ -10,25 +10,26 @@ import "./PurchaseList.css"
 import { Product } from "./Product";
 import Category from "./Category";
 import ProdInCategory from "./ProdInCategory";
-export function AllProducts() {
+import { ProductByCategory } from "../utils/modals";
+export function AllProducts(props:any) {
 
-    const [category, setCategory] = useState<Category[]>();
-    const [products, setProduct] = useState<ProdInCategory[]>();
-    useEffect(() => {
-        var productsPromise = axios.get("https://localhost:44378/api/Product").then((response) => {
-            setProduct(response.data);
-            console.log("hhhh")
-        });
-    }, []);
-    useEffect(() => {
-        var categoryPromise = axios.get("https://localhost:44378/api/Category").then((response) => {
-            setCategory(response.data);
-            console.log("hhhh")
-        });
-    }, []);
+    // const [category, setCategory] = useState<Category[]>();
+    // const [products, setProduct] = useState<ProdInCategory[]>();
+    // useEffect(() => {
+    //     var productsPromise = axios.get("https://localhost:44378/api/Product").then((response) => {
+    //         setProduct(response.data);
+    //         console.log("hhhh")
+    //     });
+    // }, []);
+    // useEffect(() => {
+    //     var categoryPromise = axios.get("https://localhost:44378/api/Category").then((response) => {
+    //         setCategory(response.data);
+    //         console.log("hhhh")
+    //     });
+    // }, []);
     return <div>
         <div id="wrap">
-            {category== null ? <span>wait...</span> :
+            {props.catgory== null ? <span>wait...</span> :
 
                 <TableContainer component={Paper}>
                     <Table >
@@ -43,16 +44,16 @@ export function AllProducts() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {category?.map((row) => (
+                            {props.productList?.map((row:ProductByCategory) => (
                                 <TableRow
-                                    key={row.ProductCategoryId}
+                                    key={row.id}
 
                                 >
                                     {/* <TableCell component="th" scope="row">
                                         {row.CustomerId}
                                     </TableCell> */}
 
-                                    <TableCell align="right">{row.Name}</TableCell>
+                                    <TableCell align="right">{row.name}</TableCell>
                                     {/* <TableCell align="right">{row.ProductId}</TableCell> */}
 
                                     {/* <TableCell align="right">{row.Email}</TableCell> */}
