@@ -16,5 +16,13 @@ export interface Category{
 export interface ProductByCategory{
     id:number,
     name :string,
-    category:Category
+    category:number
+}
+export interface ProductByBuy{
+    id:number,
+    name :string,
+    category:Category,
+    PurchasesHistoryId:string,
+    PurchasePrognosisId:string,
+    amount:number
 }
