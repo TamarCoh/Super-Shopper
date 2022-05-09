@@ -7,10 +7,10 @@ import { } from "@material-ui/core";
 import { Component, useState, useEffect } from "react";
 import { JsxElement } from "typescript";
 import "./PurchaseList.css"
-import { Product } from "./Product";
 import Category from "./Category";
 import ProdInCategory from "./ProdInCategory";
 import { ProductByCategory } from "../utils/modals";
+import Product from "./ProductByBuy";
 export function AllProducts(props:any) {
 
     // const [category, setCategory] = useState<Category[]>();
@@ -53,7 +53,7 @@ export function AllProducts(props:any) {
                                         {row.CustomerId}
                                     </TableCell> */}
 
-                                    <TableCell align="right">{row.name}</TableCell>
+                                    <TableCell align="right"  key={row.id}><Product product={row}  key={row.id}/></TableCell>
                                     {/* <TableCell align="right">{row.ProductId}</TableCell> */}
 
                                     {/* <TableCell align="right">{row.Email}</TableCell> */}
@@ -71,4 +71,4 @@ export function AllProducts(props:any) {
 
 
 }
-export default AllProducts;
+

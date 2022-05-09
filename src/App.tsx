@@ -9,7 +9,8 @@ import Enter from './Components/Enter';
 import Logo from './Components/Logo';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Nav from './Components/Nav';
-import AllProducts from './Components/AllProducts';
+import CategoriesNavigation from './Components/AllCategory';
+import { AllProducts } from './Components/AllProducts';
 
 function App() {
 
@@ -28,6 +29,8 @@ function App() {
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/logIn" element={<LogIn />} />
           <Route path="/allProducts" element={<AllProducts />} />
+          <Route path="/allCategory" element={<CategoriesNavigation />} />
+
           {/* <Route path="/" element={<Enter />} />
           <Route path="/" element={<Enter />} />
           <Route path="/" element={<Enter />} />
