@@ -2,18 +2,18 @@
 // import { TypeAction } from "@mui/material";
 import { ActionTypes } from "@mui/base";
 import * as Action_Types from "../actionsTypes";
-const initialState = {   
-    selectedCategory: null
-}
+// const initialState = {   
+//     selectedCategory: null
+// }
 
-export const categoryReducer = (state = initialState, action:any) => {
-    switch (action.type) {
+// export const categoryReducer = (state = initialState, action:any) => {
+//     switch (action.type) {
         
-        case Action_Types.SELECT_CATEGORY:
-            return {
-                ...state,
-                selectedCategory: action.payload
-            }
-    }
-    return state;
-}
+//         case Action_Types.SELECT_CATEGORY:
+//             return {
+//                 ...state,
+//                 selectedCategory: action.payload
+//             }
+//     }
+//     return state;
+// }
