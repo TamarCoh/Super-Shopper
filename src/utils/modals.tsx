@@ -14,13 +14,13 @@ export interface Category{
 }
 
 export interface ProductByCategory{
-    id:number,
+    id:string,
     name :string,
-    category:number
+    categoryId:number
 }
 
 export interface ProductByMount{
-    id:number,
+    id:string,
     name :string,
     category:Category,
     PurchasesHistoryId:string,

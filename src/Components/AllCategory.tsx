@@ -26,10 +26,10 @@ const mockupCategoriesList: Category[] = [
 ];
 
 const mockupProductList: ProductByCategory[] = [
-  { id: 1, name: "category1", category: 1 },
-  { id: 2, name: "category2", category: 1 },
-  { id: 3, name: "category3", category: 1 },
-  { id: 123, name: "category4", category: 1 },
+  { id: "1", name: "category1", categoryId: 1 },
+  { id: "2", name: "category2", categoryId: 2 },
+  { id: "3", name: "category3", categoryId: 3 },
+  { id: "123", name: "category4", categoryId: 4 },
 ];
 
 function getCategoies() {
@@ -61,7 +61,7 @@ function getProducts(category: Category) {
 export default function CategoriesNavigation() {
   const [category, setCategory] = React.useState<Category>({
     id: 1,
-    title: "blabla",
+    title: "category1",
   });
   const ref = React.useRef<HTMLDivElement>(null);
   const [productList, setProductList] = React.useState<ProductByCategory[]>();
@@ -80,7 +80,7 @@ export default function CategoriesNavigation() {
     <Box sx={{ pb: 1000 }} ref={ref}>
       <CssBaseline />
 
-      <Paper sx={{ position: "relative",  top: 0, right: 0 }} elevation={3}>
+      <Paper sx={{ position: "relative", top: 0, right: 0 }} elevation={3}>
         <BottomNavigation
           showLabels
           value={category}

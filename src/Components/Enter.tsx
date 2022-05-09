@@ -97,7 +97,7 @@ export function Enter() {
             </Modal>
 
             <Stack direction="row" >
-                <IconButton ><ArrowBackTwoToneIcon />My Previous Purchases </IconButton>
+                <IconButton><ArrowBackTwoToneIcon />My Previous Purchases </IconButton>
                 <IconButton >Make me a purchase <ArrowForwardIcon /></IconButton>
             </Stack >
 
