@@ -1,41 +1,41 @@
+
 import { TableBody, TableCell, TableContainer, TableHead, TableRow, Table, TextField } from "@material-ui/core";
 import Paper from '@mui/material/Paper';
 import { useForm, } from "react-hook-form";
 import axios from "axios";
-import {StyledComponentProps } from "@material-ui/core";
+import { StyledComponentProps } from "@material-ui/core";
 import { } from "@material-ui/core";
 import { Component, useState, useEffect } from "react";
 import { JsxElement } from "typescript";
 import "./PurchaseList.css"
 import { Product } from "./Product";
-import Category from "./Category";
-import ProdInCategory from "./ProdInCategory";
-export function AllProducts() {
+import { ProductByCategory } from "../utils/modals";
+export function AllProducts(props: any) {
 
-    const [category, setCategory] = useState<Category[]>();
-    const [products, setProduct] = useState<ProdInCategory[]>();
-    useEffect(() => {
-        var productsPromise = axios.get("https://localhost:44378/api/Product").then((response) => {
-            setProduct(response.data);
-            console.log("hhhh")
-        });
-    }, []);
-    useEffect(() => {
-        var categoryPromise = axios.get("https://localhost:44378/api/Category").then((response) => {
-            setCategory(response.data);
-            console.log("hhhh")
-        });
-    }, []);
+    // const [category, setCategory] = useState<Category[]>();
+    // const [products, setProduct] = useState<ProdInCategory[]>();
+    // useEffect(() => {
+    //     var productsPromise = axios.get("https://localhost:44378/api/Product").then((response) => {
+    //         setProduct(response.data);
+    //         console.log("hhhh")
+    //     });
+    // }, []);
+    // useEffect(() => {
+    //     var categoryPromise = axios.get("https://localhost:44378/api/Category").then((response) => {
+    //         setCategory(response.data);
+    //         console.log("hhhh")
+    //     });
+    // }, []);
     return <div>
         <div id="wrap">
-            {category== null ? <span>wait...</span> :
+            {props.catgory == null ? <span>wait...</span> :
 
                 <TableContainer component={Paper}>
                     <Table >
                         <TableHead>
                             <TableRow>
-                                
-                                <TableCell align="right">קטגוריה</TableCell>
+
+                                <TableCell align="right">Category</TableCell>
                                 {/* <TableCell align="right">קוד מוצר</TableCell> */}
 
                                 {/* <TableCell align="right">דוא"ל</TableCell> */}
@@ -43,16 +43,16 @@ export function AllProducts() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {category?.map((row) => (
+                            {props.productList?.map((row: ProductByCategory) => (
                                 <TableRow
-                                    key={row.ProductCategoryId}
+                                    key={row.id}
 
                                 >
                                     {/* <TableCell component="th" scope="row">
                                         {row.CustomerId}
                                     </TableCell> */}
 
-                                    <TableCell align="right">{row.Name}</TableCell>
+                                    <TableCell align="right">{row.name}</TableCell>
                                     {/* <TableCell align="right">{row.ProductId}</TableCell> */}
 
                                     {/* <TableCell align="right">{row.Email}</TableCell> */}
@@ -71,3 +71,4 @@ export function AllProducts() {
 
 }
 export default AllProducts;
+

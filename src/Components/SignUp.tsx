@@ -76,7 +76,7 @@ export function SignUp(): JSX.Element {
                 <Button type="submit" variant="contained"
                     color="secondary"
                     endIcon={<SendIcon />}>
-                    Send
+                    Register
                 </Button>
             </form>
 
