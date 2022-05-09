@@ -18,6 +18,7 @@ export interface ProductByCategory{
     name :string,
     category:number
 }
+
 export interface ProductByMount{
     id:number,
     name :string,
