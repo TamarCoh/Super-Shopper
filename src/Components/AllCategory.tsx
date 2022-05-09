@@ -49,10 +49,15 @@ async function getProducts(category: Category) {
   const ref = React.useRef<HTMLDivElement>(null);
   const [productList, setProductList] = React.useState<ProductByCategory[]>();
 
-   React.useEffect(async () => {
+   React.useEffect( () => {
     (ref.current as HTMLDivElement).ownerDocument.body.scrollTop = 0;
-    const tempProducts=await getProducts(category)
-    setProductList(tempProducts);
+    async function anyNameFunction() {
+      const tempProducts=await getProducts(category)
+      setProductList(tempProducts);
+
+    }
+    anyNameFunction();
+
   }, [category, productList]);
   const categoryList = await getCategoies() ;
  
