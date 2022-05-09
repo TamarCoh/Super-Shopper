@@ -18,7 +18,8 @@ export interface ProductByCategory{
     name :string,
     category:number
 }
-export interface ProductByBuy{
+
+export interface ProductByMount{
     id:number,
     name :string,
     category:Category,

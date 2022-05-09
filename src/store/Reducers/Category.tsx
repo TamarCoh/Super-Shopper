@@ -1,7 +1,6 @@
 // import { ActionTypes } from "@mui/base";
 // import { TypeAction } from "@mui/material";
 import { ActionTypes } from "@mui/base";
-import Category from "../../Components/Category";
 import * as Action_Types from "../actionsTypes";
 const initialState = {   
     selectedCategory: null

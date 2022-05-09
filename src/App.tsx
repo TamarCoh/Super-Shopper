@@ -10,17 +10,18 @@ import Logo from './Components/Logo';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Nav from './Components/Nav';
 import AllProducts from './Components/AllProducts';
+import AllCategory from "./Components/AllCategory";
+
 
 function App() {
 
   return (
     <div className="App">
 
-     
 
       <Router>
         {/* <Nav /> */}
-       
+
         <Routes>
 
           <Route path="/" element={<Enter />} />
@@ -30,11 +31,10 @@ function App() {
           <Route path="/allProducts" element={<AllProducts />} />
           {/* <Route path="/" element={<Enter />} />
           <Route path="/" element={<Enter />} />
-          <Route path="/" element={<Enter />} />
-          <Route path="/" element={<Enter />} /> */}
+  <Route path="/" element={<Enter />} />*/}
         </Routes>
       </Router>
-     
+
       {/* <SignUp/> */}
       {/* <PurchaseList/> */}
     </div>

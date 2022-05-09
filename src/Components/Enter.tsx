@@ -6,6 +6,11 @@ import LogIn from './LogIn';
 import SignUp from './SignUp';
 import './Enter.css';
 import Logo from './Logo';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowBackTwoToneIcon from '@mui/icons-material/ArrowBackTwoTone';
+import IconButton from '@mui/material/IconButton';
+import Stack from '@mui/material/Stack';
+
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -32,7 +37,7 @@ function ChildModal() {
 
     return (
         <React.Fragment>
-            <Button id="b1" onClick={handleOpen}>ליצירת חשבון חדש</Button>
+            <Button id="b1" onClick={handleOpen}>Don't have an account?</Button>
             <Modal
                 hideBackdrop
                 open={open}
@@ -49,7 +54,7 @@ function ChildModal() {
         </Box> */}
                 <div >
                     <SignUp />
-                    <Button onClick={handleClose}>ליציאה ולהתחברות</Button>
+                    <Button onClick={handleClose}>Exit</Button>
                 </div>
 
             </Modal>
@@ -68,8 +73,8 @@ export function Enter() {
 
     return (
         <div>
-             <Logo />
-            <Button onClick={handleOpen}>כניסה</Button>
+            <Logo />
+            <Button onClick={handleOpen}>Enter</Button>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -84,13 +89,19 @@ export function Enter() {
          
         </Box> */}
                 <div>
-                   
+
                     <LogIn />
                     <ChildModal />
                 </div>
 
             </Modal>
-        </div>
+
+            <Stack direction="row" >
+                <IconButton ><ArrowBackTwoToneIcon />My Previous Purchases </IconButton>
+                <IconButton >Make me a purchase <ArrowForwardIcon /></IconButton>
+            </Stack >
+
+        </div >
     );
 }
 export default Enter;
