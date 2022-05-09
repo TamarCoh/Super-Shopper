@@ -16,70 +16,87 @@ import axios from "axios";
 import { Category, ProductByCategory } from "../utils/modals";
 import AllProducts from "./AllProducts";
 import { Product } from "./Product";
+import { JsxElement } from "typescript";
 // import { Category } from "@mui/icons-material";
+const mockupCategoriesList: Category[] = [
+  { id: 1, title: "category1" },
+  { id: 2, title: "category2" },
+  { id: 3, title: "category3" },
+  { id: 4, title: "category4" },
+];
 
-async function getCategoies() {
-  let categoriesList:Category[] = [];
-  try {
-    const res = await axios.get("https://localhost:44378/api/Category");
-    categoriesList = res.data.toList();
-  } catch {
-    categoriesList = [];
-  }
-  return categoriesList;
+const mockupProductList: ProductByCategory[] = [
+  { id: 1, name: "category1", category: 1 },
+  { id: 2, name: "category2", category: 1 },
+  { id: 3, name: "category3", category: 1 },
+  { id: 123, name: "category4", category: 1 },
+];
+
+function getCategoies() {
+  let categoriesList: Category[] = [];
+  // try {
+  //   const res = await axios.get("https://localhost:44378/api/Category");
+  //   categoriesList = res.data.toList();
+  // } catch {
+  //   categoriesList = [];
+  // }
+  // return categoriesList;
+  return mockupCategoriesList;
 }
 
-async function getProducts(category: Category) {
-  let productList: ProductByCategory[] = [];
-  try {
-    const res = await axios.get(
-      `https://localhost:44378/api/Products?category=${category.id}`
-    );
-    productList = res.data as ProductByCategory[];
-  } catch {
-    productList = [];
-  }
-  return productList ;
+function getProducts(category: Category) {
+  // let productList: ProductByCategory[] = [];
+  // try {
+  //   const res = await axios.get(
+  //     `https://localhost:44378/api/Products?category=${category}`
+  //   );
+  //   productList = res.data as ProductByCategory[];
+  // } catch {
+  //   productList = [];
+  // }
+  // return productList;
+  return [mockupProductList[category.id - 1]];
 }
 
-
-
- export default async function CategoriesNavigation() {
-  const [category, setCategory] = React.useState<Category>({id: 1,title:"blabla"});
+export default function CategoriesNavigation() {
+  const [category, setCategory] = React.useState<Category>({
+    id: 1,
+    title: "blabla",
+  });
   const ref = React.useRef<HTMLDivElement>(null);
   const [productList, setProductList] = React.useState<ProductByCategory[]>();
 
-   React.useEffect( () => {
+  React.useEffect(() => {
     (ref.current as HTMLDivElement).ownerDocument.body.scrollTop = 0;
-    async function anyNameFunction() {
-      const tempProducts=await getProducts(category)
+    function anyNameFunction() {
+      const tempProducts = getProducts(category);
       setProductList(tempProducts);
-
     }
     anyNameFunction();
+  }, [category]);
+  const categoryList = getCategoies();
 
-  }, [category, productList]);
-  const categoryList = await getCategoies() ;
- 
-   
   return (
-    <Box sx={{ pb: 7 }} ref={ref}>
+    <Box sx={{ pb: 1000 }} ref={ref}>
       <CssBaseline />
-     
-      <Paper sx={{ position: "fixed", top: 0, right: 0 }} elevation={3}>
+
+      <Paper sx={{ position: "relative",  top: 0, right: 0 }} elevation={3}>
         <BottomNavigation
           showLabels
           value={category}
           onChange={(event, newValue) => {
             setCategory(newValue);
-
           }}
-        >{
-          categoryList.map((category:Category)=>(<BottomNavigationAction label={category.title} icon={<RestoreIcon />} />))
-        }
-          
+        >
+          {categoryList.map((category: Category) => (
+            <BottomNavigationAction
+              value={category}
+              label={category.title}
+              icon={<RestoreIcon />}
+            />
+          ))}
         </BottomNavigation>
-      </Paper> 
+      </Paper>
       <AllProducts productList={productList} catgory={category}></AllProducts>
     </Box>
   );
