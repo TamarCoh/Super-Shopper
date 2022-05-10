@@ -14,9 +14,10 @@ import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
 import axios from "axios";
 import { Category, ProductByCategory } from "../utils/modals";
-import AllProducts from "./AllProducts";
-import { Product } from "./Product";
+
+
 import { JsxElement } from "typescript";
+import { AllProducts } from "./AllProducts";
 // import { Category } from "@mui/icons-material";
 const mockupCategoriesList: Category[] = [
   { id: 1, title: "category1" },
@@ -55,7 +56,8 @@ function getProducts(category: Category) {
   //   productList = [];
   // }
   // return productList;
-  return [mockupProductList[category.id - 1]];
+  // return [mockupProductList[category.id - 1]];
+  return mockupProductList;
 }
 
 export default function CategoriesNavigation() {
@@ -80,7 +82,7 @@ export default function CategoriesNavigation() {
     <Box sx={{ pb: 1000 }} ref={ref}>
       <CssBaseline />
 
-      <Paper sx={{ position: "relative",  top: 0, right: 0 }} elevation={3}>
+      <Paper sx={{ position: "relative", top: 0, right: 0 }} elevation={3}>
         <BottomNavigation
           showLabels
           value={category}

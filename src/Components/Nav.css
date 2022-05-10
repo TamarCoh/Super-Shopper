@@ -1,19 +1,25 @@
 .Nav {
     /* display: flex; */
     /* justify-content: space-between; */
-    min-height: 6vh;
-    background-color: rgb(58, 82, 94);
+    min-height: 10vh;
+    background-color: #4c6a92;
+
     /* color: white; */
     text-align: left;
-    margin-top: 0%;
+    margin: 0;
 }
 
+#nav-logIn{
+    float: right;
+    width: auto;
+    margin-top: 0;
+}
 .nav-links {
     width: 40%;
     display: inline;
     /* align-items: center; */
     color: white;
     text-decoration: none;
-    margin-top: 15vh;
+    /* margin-top: 15vh; */
     margin-inline: 10px;
 }

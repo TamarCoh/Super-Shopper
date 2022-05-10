@@ -5,9 +5,9 @@ import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {combineReducers} from "redux";
+import { combineReducers } from "redux";
 import { legacy_createStore, compose } from "redux";
-import {productInListReducer} from "./store/Reducers/ProductInList"
+import { productInListReducer } from "./store/Reducers/ProductInList"
 
 
 declare global {
@@ -19,13 +19,13 @@ declare global {
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = legacy_createStore(
-  combineReducers({pro: productInListReducer}),
+  combineReducers({ pro: productInListReducer }),
   composeEnhancers()
 );
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-    <App />
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
