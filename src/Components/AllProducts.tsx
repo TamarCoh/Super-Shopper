@@ -1,17 +1,17 @@
+
 import { TableBody, TableCell, TableContainer, TableHead, TableRow, Table, TextField } from "@material-ui/core";
 import Paper from '@mui/material/Paper';
 import { useForm, } from "react-hook-form";
 import axios from "axios";
-import {StyledComponentProps } from "@material-ui/core";
+import { StyledComponentProps } from "@material-ui/core";
 import { } from "@material-ui/core";
 import { Component, useState, useEffect } from "react";
 import { JsxElement } from "typescript";
 import "./PurchaseList.css"
 import Category from "./Category";
-import ProdInCategory from "./ProdInCategory";
 import { ProductByCategory } from "../utils/modals";
 import Product from "./ProductByBuy";
-export function AllProducts(props:any) {
+export function AllProducts(props: any) {
 
     // const [category, setCategory] = useState<Category[]>();
     // const [products, setProduct] = useState<ProdInCategory[]>();
@@ -29,14 +29,14 @@ export function AllProducts(props:any) {
     // }, []);
     return <div>
         <div id="wrap">
-            {props.catgory== null ? <span>wait...</span> :
+            {props.catgory == null ? <span>wait...</span> :
 
                 <TableContainer component={Paper}>
                     <Table >
                         <TableHead>
                             <TableRow>
-                                
-                                <TableCell align="right">קטגוריה</TableCell>
+
+                                <TableCell align="right">Category</TableCell>
                                 {/* <TableCell align="right">קוד מוצר</TableCell> */}
 
                                 {/* <TableCell align="right">דוא"ל</TableCell> */}
@@ -44,7 +44,7 @@ export function AllProducts(props:any) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {props.productList?.map((row:ProductByCategory) => (
+                            {props.productList?.map((row: ProductByCategory) => (
                                 <TableRow
                                     key={row.id}
 
@@ -53,7 +53,7 @@ export function AllProducts(props:any) {
                                         {row.CustomerId}
                                     </TableCell> */}
 
-                                    <TableCell align="right"  key={row.id}><Product product={row}  key={row.id}/></TableCell>
+                                    <TableCell align="right" key={row.id}><Product product={row} key={row.id} /></TableCell>
                                     {/* <TableCell align="right">{row.ProductId}</TableCell> */}
 
                                     {/* <TableCell align="right">{row.Email}</TableCell> */}
