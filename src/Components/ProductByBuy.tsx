@@ -16,74 +16,74 @@ import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import IconButton from '@mui/material/IconButton';
-import { ProductByBuy, ProductByCategory } from '../utils/modals';
-function AddProductBuy(product:ProductByCategory,amount:number){
-let productByBuy:ProductByBuy={} as ProductByBuy;
-productByBuy.name=product.name;
-productByBuy.id=product.id;
-productByBuy.amount=amount;
+import { ProductByMount, ProductByCategory } from '../utils/modals';
+function AddProductBuy(product: ProductByCategory, amount: number) {
+  let productByBuy: ProductByMount = {} as ProductByMount;
+  productByBuy.name = product.name;
+  productByBuy.id = product.id;
+  productByBuy.amount = amount;
 
 
 }
- function BadgeVisibility(product:any) {
-    const [count, setCount] = React.useState(1);
-    const [invisible, setInvisible] = React.useState(false);
-  
-    const handleBadgeVisibility = () => {
-      setInvisible(!invisible);
-    };
-  
-    return (
-      <Box
-        sx={{
-          color: 'action.active',
-          display: 'flex',
-          flexDirection: 'column',
-          '& > *': {
-            marginBottom: 2,
-          },
-          '& .MuiBadge-root': {
-            marginRight: 4,
-          },
-        }}
-      >
-        <div>
-        
-          <ButtonGroup>
-              <Badge color="secondary" badgeContent={count}>
-        <IconButton color="primary" aria-label="add to shopping cart"  size="small" onClick={()=>{
-        AddProductBuy(product,count);
-        setCount(0);
-        }}>
-          <AddShoppingCartIcon />
-        </IconButton>
+function BadgeVisibility(product: any) {
+  const [count, setCount] = React.useState(1);
+  const [invisible, setInvisible] = React.useState(false);
+
+  const handleBadgeVisibility = () => {
+    setInvisible(!invisible);
+  };
+
+  return (
+    <Box
+      sx={{
+        color: 'action.active',
+        display: 'flex',
+        flexDirection: 'column',
+        '& > *': {
+          marginBottom: 2,
+        },
+        '& .MuiBadge-root': {
+          marginRight: 4,
+        },
+      }}
+    >
+      <div>
+
+        <ButtonGroup>
+          <Badge color="secondary" badgeContent={count}>
+            <IconButton color="primary" aria-label="add to shopping cart" size="small" onClick={() => {
+              AddProductBuy(product, count);
+              setCount(0);
+            }}>
+              <AddShoppingCartIcon />
+            </IconButton>
           </Badge>
-            <Button
-              aria-label="reduce"
-              onClick={() => {
-                setCount(Math.max(count - 1, 0));
-              }}
-            >
-              <RemoveIcon fontSize="small" />
-            </Button>
-          
-            <Button
-              aria-label="increase"
-              onClick={() => {
-                setCount(count + 1);
-              }}
-            >
-              <AddIcon fontSize="small" />
-            </Button>
-          </ButtonGroup>
-        </div>
-      
-      </Box>
-    );
-  }
+          <Button
+            aria-label="reduce"
+            onClick={() => {
+              setCount(Math.max(count - 1, 0));
+            }}
+          >
+            <RemoveIcon fontSize="small" />
+          </Button>
+
+          <Button
+            aria-label="increase"
+            onClick={() => {
+              setCount(count + 1);
+            }}
+          >
+            <AddIcon fontSize="small" />
+          </Button>
+        </ButtonGroup>
+      </div>
+
+    </Box>
+  );
+}
 
 
-export default function   Product(props:any){
+export default function Product(props: any) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -94,12 +94,12 @@ export default function   Product(props:any){
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-         sdgfhgjhkj {props.name}
+          sdgfhgjhkj {props.name}
         </Typography>
-       
+
       </CardContent>
       <CardActions>
-       <BadgeVisibility product={props}/>
+        <BadgeVisibility product={props} />
       </CardActions>
     </Card>
   );
