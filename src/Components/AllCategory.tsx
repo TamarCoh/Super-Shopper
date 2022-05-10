@@ -82,7 +82,7 @@ export default function CategoriesNavigation() {
     <Box sx={{ pb: 1000 }} ref={ref}>
       <CssBaseline />
 
-      <Paper sx={{ position: "relative",  top: 0, right: 0 }} elevation={3}>
+      <Paper sx={{ position: "relative", top: 0, right: 0 }} elevation={3}>
         <BottomNavigation
           showLabels
           value={category}

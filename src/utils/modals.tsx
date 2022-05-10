@@ -22,7 +22,7 @@ export interface ProductByCategory{
 export interface ProductByMount{
     id:number,
     name :string,
-    category:Category,
+    category:number,
     PurchasesHistoryId:string,
     PurchasePrognosisId:string,
     amount:number

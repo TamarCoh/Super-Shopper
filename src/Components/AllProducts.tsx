@@ -1,4 +1,3 @@
-
 import { TableBody, TableCell, TableContainer, TableHead, TableRow, Table, TextField } from "@material-ui/core";
 import Paper from '@mui/material/Paper';
 import { useForm, } from "react-hook-form";
@@ -8,7 +7,9 @@ import { } from "@material-ui/core";
 import { Component, useState, useEffect } from "react";
 import { JsxElement } from "typescript";
 import "./PurchaseList.css"
-import Category from "./Category";
+import "./AllProducts.css"
+// import Category from "./Category";
+// import ProdInCategory from "./ProdInCategory";
 import { ProductByCategory } from "../utils/modals";
 import Product from "./ProductByBuy";
 export function AllProducts(props: any) {
@@ -28,42 +29,18 @@ export function AllProducts(props: any) {
     //     });
     // }, []);
     return <div>
-        <div id="wrap">
+        <div >
             {props.catgory == null ? <span>wait...</span> :
-
-                <TableContainer component={Paper}>
-                    <Table >
-                        <TableHead>
-                            <TableRow>
-
-                                <TableCell align="right">Category</TableCell>
-                                {/* <TableCell align="right">קוד מוצר</TableCell> */}
-
-                                {/* <TableCell align="right">דוא"ל</TableCell> */}
-
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {props.productList?.map((row: ProductByCategory) => (
-                                <TableRow
-                                    key={row.id}
-
-                                >
-                                    {/* <TableCell component="th" scope="row">
-                                        {row.CustomerId}
-                                    </TableCell> */}
-
-                                    <TableCell align="right" key={row.id}><Product product={row} key={row.id} /></TableCell>
-                                    {/* <TableCell align="right">{row.ProductId}</TableCell> */}
-
-                                    {/* <TableCell align="right">{row.Email}</TableCell> */}
+                <div id="wrap">
+                    {props.productList?.map((row: ProductByCategory) => (
 
 
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                        <Product product={row} key={row.id} className="allCard" />
+
+
+                    ))}
+                </div>
+
             }
         </div>
 

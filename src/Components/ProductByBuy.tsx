@@ -17,13 +17,17 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import IconButton from '@mui/material/IconButton';
 import { ProductByMount, ProductByCategory } from '../utils/modals';
+import { increaseProductInList } from '../store/Actions/ProductInList';
+import { connect } from 'tls';
+import "./CommonColor.css";
+import "./AllProducts.css"
+
 function AddProductBuy(product: ProductByCategory, amount: number) {
   let productByBuy: ProductByMount = {} as ProductByMount;
   productByBuy.name = product.name;
   productByBuy.id = product.id;
   productByBuy.amount = amount;
-
-
+  increaseProductInList(productByBuy);
 }
 function BadgeVisibility(product: any) {
   const [count, setCount] = React.useState(1);
@@ -34,7 +38,7 @@ function BadgeVisibility(product: any) {
   };
 
   return (
-    <Box
+    <Box className='allCard'
       sx={{
         color: 'action.active',
         display: 'flex',
@@ -49,9 +53,11 @@ function BadgeVisibility(product: any) {
     >
       <div>
 
-        <ButtonGroup>
-          <Badge color="secondary" badgeContent={count}>
-            <IconButton color="primary" aria-label="add to shopping cart" size="small" onClick={() => {
+
+        <ButtonGroup >
+          <Badge color="primary" badgeContent={count}>
+            <IconButton sx={{ color: "#4c6a92"}} aria-label="add to shopping cart" size="small" onClick={() => {
+ 
               AddProductBuy(product, count);
               setCount(0);
             }}>
@@ -94,7 +100,7 @@ export default function Product(props: any) {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          sdgfhgjhkj {props.name}
+          {props.product.name}
         </Typography>
 
       </CardContent>
