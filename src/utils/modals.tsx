@@ -1,6 +1,8 @@
 export interface User {
-    name: string,
-    passward: string
+    firstName: string,
+    lastName: string,
+    password: string,
+    email:string
 }
 
 export const enum categories {

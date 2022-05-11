@@ -20,11 +20,11 @@ import { type } from "os";
 import { ClassNames } from "@emotion/react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import Customer from "./Customer";
+// import Customer from "./Customer";
 import SignUp from "./SignUp";
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
-
+import { User } from "../utils/modals";
 import { useNavigate } from "react-router-dom";
 import { SsidChart } from "@mui/icons-material";
 
@@ -32,11 +32,11 @@ import { SsidChart } from "@mui/icons-material";
 export function LogIn(): JSX.Element {
 
     const navigate = useNavigate();
-    const { register, handleSubmit, formState: { errors } } = useForm<Customer>();
-    const addCustomer = async (data: Customer) => {
+    const { register, handleSubmit, formState: { errors } } = useForm<User>();
+    const addCustomer = async (data: User) => {
         console.log("start")
         console.log(data);
-        let customerPromise = axios.get("https://localhost:44378/api/GetSpecific/" + data.Password + "/" + data.FirstName + "/" + data.LastName);
+        let customerPromise = axios.get("https://localhost:44378/api/GetSpecific/" + data.password + "/" + data.firstName + "/" + data.lastName);
         let response = await customerPromise;
         if (response.data === null) {
             console.log("customer not found!!")
@@ -62,32 +62,32 @@ export function LogIn(): JSX.Element {
 
 
                 <span className="op">
-                    <TextField id="standard-basic" variant="standard" type="text" label="FirstName"   {...register('FirstName', { required: true, minLength: 2, maxLength: 10 })}
+                    <TextField id="standard-basic" variant="standard" type="text" label="FirstName"   {...register('firstName', { required: true, minLength: 2, maxLength: 10 })}
                     // InputProps={{ startAdornment: (<InputAdornment position="start">  <AccountCircleIcon /> </InputAdornment>), }}
                     />
-                    {errors.FirstName?.type === "required" && <span>FirstName is Missing</span>}
-                    {errors.FirstName?.type === "minLength" && <span>FirstName is too short</span>}
-                    {errors.FirstName?.type === "maxLength" && <span>FirstName is too long</span>}
+                    {errors.firstName?.type === "required" && <span>FirstName is Missing</span>}
+                    {errors.firstName?.type === "minLength" && <span>FirstName is too short</span>}
+                    {errors.firstName?.type === "maxLength" && <span>FirstName is too long</span>}
                 </span><br />
 
                 <span className="op">
-                    <TextField id="standard-basic" variant="standard" type="text" label="LastName"  {...register('LastName', { required: true, minLength: 2, maxLength: 10 })}
+                    <TextField id="standard-basic" variant="standard" type="text" label="LastName"  {...register('lastName', { required: true, minLength: 2, maxLength: 10 })}
                     // InputProps={{ startAdornment: (<InputAdornment position="start">  <AccountCircleIcon /> </InputAdornment>), }}
                     />
-                    {errors.LastName?.type === "required" && <span>LastName is Missing</span>}
-                    {errors.LastName?.type === "minLength" && <span>LastName is too short</span>}
-                    {errors.LastName?.type === "maxLength" && <span>LastName is too long</span>}
+                    {errors.lastName?.type === "minLength" && <span>LastName is too short</span>}
+                    {errors.lastName?.type === "maxLength" && <span>LastName is too long</span>}
+                    {errors.lastName?.type === "required" && <span>LastName is Missing</span>}
                 </span><br />
 
 
 
                 <span className="op">
-                    <TextField id="standard-basic" variant="standard" type="password" label="Password"  {...register('Password', { required: true, minLength: 6, maxLength: 8 })}
+                    <TextField id="standard-basic" variant="standard" type="password" label="Password"  {...register('password', { required: true, minLength: 6, maxLength: 8 })}
                     // InputProps={{ startAdornment: (<InputAdornment position="start" > <IconButton ><VisibilityIcon /></IconButton> </InputAdornment>), }}
                     />
-                    {errors.Password?.type === "required" && <span>Password is Missing</span>}
-                    {errors.Password?.type === "minLength" && <span>Password is too short</span>}
-                    {errors.Password?.type === "maxLength" && <span>Password is too long</span>}
+                    {errors.password?.type === "required" && <span>Password is Missing</span>}
+                    {errors.password?.type === "minLength" && <span>Password is too short</span>}
+                    {errors.password?.type === "maxLength" && <span>Password is too long</span>}
                 </span><br />
 
 
