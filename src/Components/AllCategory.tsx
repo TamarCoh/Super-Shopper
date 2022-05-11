@@ -18,10 +18,10 @@ import { JsxElement } from "typescript";
 import { AllProducts } from "./AllProducts";
 // import { Category } from "@mui/icons-material";
 const mockupCategoriesList: Category[] = [
-  { id: 1, title: "category1" },
-  { id: 2, title: "category2" },
-  { id: 3, title: "category3" },
-  { id: 4, title: "category4" },
+  { id: 1, title: "Sales" },
+  { id: 2, title: "Drinks" },
+  { id: 3, title: "Milk" },
+  { id: 4, title: "Meat" },
 ];
 
 const mockupProductList: ProductByCategory[] = [
@@ -43,7 +43,7 @@ function getCategoies() {
   return mockupCategoriesList;
 }
 
-function getProducts(category: Category) {
+function getProductsByCategory(category: Category) {
   // let productList: ProductByCategory[] = [];
   // try {
   //   const res = await axios.get(
@@ -61,7 +61,7 @@ function getProducts(category: Category) {
 export default function CategoriesNavigation() {
   const [category, setCategory] = React.useState<Category>({
     id: 1,
-    title: "category1",
+    title: "Sales",
   });
   const ref = React.useRef<HTMLDivElement>(null);
   const [productList, setProductList] = React.useState<ProductByCategory[]>();
@@ -69,7 +69,7 @@ export default function CategoriesNavigation() {
   React.useEffect(() => {
     (ref.current as HTMLDivElement).ownerDocument.body.scrollTop = 0;
     function anyNameFunction() {
-      const tempProducts = getProducts(category);
+      const tempProducts = getProductsByCategory(category);
       setProductList(tempProducts);
     }
     anyNameFunction();
