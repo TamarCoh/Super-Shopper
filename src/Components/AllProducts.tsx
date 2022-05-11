@@ -12,6 +12,8 @@ import "./AllProducts.css"
 // import ProdInCategory from "./ProdInCategory";
 import { ProductByCategory } from "../utils/modals";
 import Product from "./ProductByBuy";
+import "./AllProducts.css";
+
 export function AllProducts(props: any) {
 
     // const [category, setCategory] = useState<Category[]>();
@@ -30,17 +32,17 @@ export function AllProducts(props: any) {
     // }, []);
     return <div>
         <div >
-            {props.catgory == null ? <span>wait...</span> :
+            {props.catgory == null ? <span>please wait...</span> :
                 <div id="wrap">
-                    {props.productList?.map((row: ProductByCategory) => (
+                    {props.productList==null?<span>no products suitable...</span>:props.productList.map((row: ProductByCategory) => (
 
 
-                        <Product product={row} key={row.id} className="allCard" />
+                        <Product class="allCard" product={row} key={row.id} />
 
 
                     ))}
                 </div>
-
+                
             }
         </div>
 

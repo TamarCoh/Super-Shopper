@@ -8,7 +8,6 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Badge from '@mui/material/Badge';
 import ButtonGroup from '@mui/material/ButtonGroup';
-
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import MailIcon from '@mui/icons-material/Mail';
@@ -21,6 +20,7 @@ import { increaseProductInList } from '../store/Actions/ProductInList';
 import { connect } from 'tls';
 import "./CommonColor.css";
 import "./AllProducts.css"
+import { margin } from '@mui/system';
 
 function AddProductBuy(product: ProductByCategory, amount: number) {
   let productByBuy: ProductByMount = {} as ProductByMount;
@@ -56,12 +56,13 @@ function BadgeVisibility(product: any) {
 
         <ButtonGroup >
           <Badge color="primary" badgeContent={count}>
-            <IconButton sx={{ color: "#4c6a92"}} aria-label="add to shopping cart" size="small" onClick={() => {
- 
+            <IconButton sx={{ color: "#4c6a92" }} aria-label="add to shopping cart" size="small" onClick={() => {
+
               AddProductBuy(product, count);
               setCount(0);
             }}>
               <AddShoppingCartIcon />
+              <p>add</p>
             </IconButton>
           </Badge>
           <Button
@@ -77,6 +78,7 @@ function BadgeVisibility(product: any) {
             aria-label="increase"
             onClick={() => {
               setCount(count + 1);
+              AddProductBuy(product,count);
             }}
           >
             <AddIcon fontSize="small" />
@@ -91,7 +93,7 @@ function BadgeVisibility(product: any) {
 
 export default function Product(props: any) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, margin:4}}>
       <CardMedia
         component="img"
         height="140"
@@ -105,7 +107,7 @@ export default function Product(props: any) {
 
       </CardContent>
       <CardActions>
-        <BadgeVisibility product={props} />
+        <BadgeVisibility product={props.product} />
       </CardActions>
     </Card>
   );
