@@ -1,6 +1,6 @@
 import { User } from "../../utils/modals"
 const initialState = {
-    CurrrentUser: null,
+    currentUser: null,
     usersList: [] = []
 }
 export const usertReducer = (state = initialState, action: any) => {
@@ -18,8 +18,8 @@ export const usertReducer = (state = initialState, action: any) => {
             }
         case "SignUp":
             return {
-                usersList: [...state.usersList, action.payload],
-                currentUser: action.payload
+                currentUser: action.payload,
+                usersList: [...state.usersList, action.payload]
             }
     }
 
