@@ -50,7 +50,7 @@ export const productInListReducer = (state = initialState, action: any) => {
         case Action_Types.DECREASE_PRODUCT:
             return {
                 ...state,
-                productsList: [...state.productsList.map((i: ProductByMount) => i == action.payload ? i.amount == 1 ? removeProductFromList(i) : i.amount -= 1 : i)],//check recurse
+                productsList: [...state.productsList.map((i: ProductByMount) => i == action.payload ?   i.amount -= 1 : i)],//check recurse
                 amountProducts:state.amountProducts-1
 
             }
