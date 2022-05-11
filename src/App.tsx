@@ -25,21 +25,16 @@ function App() {
 
           <Route path="/" element={<Enter />} />
           <Route path="" element={<Enter />} />
+          <Route path="/homePage" element={<Enter />} />
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/logIn" element={<LogIn />} />
           <Route path="/allProducts" element={<AllProducts />} />
           <Route path="/allCategory" element={<CategoriesNavigation />} />
-          <Route path="/PurchaseList" element={<PurchaseList />} />
-         
+          <Route path="/purchaseList" element={<PurchaseList />} />
 
-          {/* <Route path="/" element={<Enter />} />
-          <Route path="/" element={<Enter />} />
-  <Route path="/" element={<Enter />} />*/}
         </Routes>
       </Router>
 
-      {/* <SignUp/> */}
-      {/* <PurchaseList/> */}
     </div>
   );
 }

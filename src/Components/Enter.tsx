@@ -37,27 +37,26 @@ function ChildModal() {
 
     return (
         <React.Fragment>
-            <Button id="b1" onClick={handleOpen}>Don't have an account?</Button>
-            <Modal
-                hideBackdrop
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="child-modal-title"
-                aria-describedby="child-modal-description"
-            >
-                {/* <Box sx={{ ...style, width: 200 }}>
-           <h2 id="child-modal-title">Text in a child modal</h2>
-          <p id="child-modal-description">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          </p> 
-           
-        </Box> */}
-                <div >
-                    <SignUp />
-                    <Button onClick={handleClose}>Exit</Button>
-                </div>
+            <>
+                {!open && <div>
+                    <>Don't have an account?</>
+                    <Button id="lin" onClick={handleOpen}>sign up</Button></div>}
+                <Modal
+                    hideBackdrop
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="child-modal-title"
+                    aria-describedby="child-modal-description"
+                >
+                    <>
+                        <SignUp />
+                        <>A registered user?</>
+                        <Button onClick={handleClose} id="lin">log in</Button>
 
-            </Modal>
+                    </>
+
+                </Modal>
+            </>
         </React.Fragment>
     );
 }
@@ -81,13 +80,6 @@ export function Enter() {
                 aria-labelledby="parent-modal-title"
                 aria-describedby="parent-modal-description"
             >
-                {/* <Box sx={{ ...style, width: 400 }}>
-          <h2 id="parent-modal-title">Text in a modal</h2>
-          <p id="parent-modal-description">
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </p>
-         
-        </Box> */}
                 <div>
 
                     <LogIn />
