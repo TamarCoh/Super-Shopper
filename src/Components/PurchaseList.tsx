@@ -7,13 +7,13 @@ import { } from "@material-ui/core";
 import { Component, useState, useEffect } from "react";
 import { JsxElement } from "typescript";
 import "./PurchaseList.css"
-import { Product } from "./Product";
+import Product from "./ProductByBuy";
 import { connect } from "react-redux";
 import { ProductByMount } from "../utils/modals";
 export function PurchaseList(props: any) {
 
-    const [person, setPerson] = useState<Product>();
-     const [data, setData] = useState<Product[]>([]);
+    // const [person, setPerson] = useState<User>();
+    const [data, setData] = useState<ProductByMount[]>([]);
     useEffect(() => {
         var peoplePromise = axios.get("https://localhost:44378/api/PurchasePrognosis").then((response) => {
             setData(response.data);

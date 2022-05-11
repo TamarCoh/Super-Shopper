@@ -21,7 +21,6 @@ import axios from "axios";
 // }
 
 const initialState = {
-    // selectedCategory: null
     productsList: [] = [{
         id: 123,
         name: "name",
