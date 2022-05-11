@@ -28,7 +28,9 @@ const initialState = {
         PurchasesHistoryId: "123",
         PurchasePrognosisId: "fgvhj",
         amount: 3
-    }]
+    }],
+    CurrrentUser: null,
+    amountProducts:0
 }
 // function handleRemove(id:number) {
 //     const newList = state.productsList.filter((item) => item.id !== id);
@@ -42,21 +44,27 @@ export const productInListReducer = (state = initialState, action: any) => {
             return {
                 ...state,
                 productsList: [...state.productsList.filter(i => i !== action.payload)],
+                amountProducts:state.amountProducts-action.payload.amount
+
             }
         case Action_Types.DECREASE_PRODUCT:
             return {
                 ...state,
-                productsList: [...state.productsList.map((i: ProductByMount) => i == action.payload ? i.amount == 1 ? removeProductFromList(i) : i.amount -= 1 : i)]//check recurse
+                productsList: [...state.productsList.map((i: ProductByMount) => i == action.payload ? i.amount == 1 ? removeProductFromList(i) : i.amount -= 1 : i)],//check recurse
+                amountProducts:state.amountProducts-1
+
             }
         case Action_Types.INCREAES_PRODUCT:
             if (state.productsList.find((i: ProductByMount) => i == action.payload))
                 return {
                     ...state,
-                    productsList: [...state.productsList.map((i: ProductByMount) => i == action.payload ? i.amount += action.payload.amount : i)]
+                    productsList: [...state.productsList.map((i: ProductByMount) => i == action.payload ? i.amount += action.payload.amount : i)],
+                    amountProducts:state.amountProducts+action.payload.amount
                 }
             else return {
                 ...state,
-                productsList: [...state.productsList, action.payload]
+                productsList: [...state.productsList, action.payload],
+               amountProducts:state.amountProducts+action.payload.amount
             }
     }
 
