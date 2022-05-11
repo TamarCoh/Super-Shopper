@@ -3,27 +3,27 @@ export interface User {
     passward: string
 }
 
-export const enum catepories {
-'milk',
-''
+export const enum categories {
+    'milk',
+    ''
 }
 
-export interface Category{
-    id:number,
-    title :string
+export interface Category {
+    id: number,
+    title: string
 }
 
-export interface ProductByCategory{
-    id:number,
-    name :string,
-    category:number
+export interface ProductByCategory {
+    id: number,
+    name: string,
+    category: number
 }
 
-export interface ProductByMount{
-    id:number,
-    name :string,
-    category:number,
-    PurchasesHistoryId:string,
-    PurchasePrognosisId:string,
-    amount:number
+export interface ProductByMount {
+    id: number,
+    name: string,
+    category: number,
+    PurchasesHistoryId: string,
+    PurchasePrognosisId: string,
+    amount: number
 }

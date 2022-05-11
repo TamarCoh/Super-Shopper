@@ -14,8 +14,6 @@ import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
 import axios from "axios";
 import { Category, ProductByCategory } from "../utils/modals";
-
-
 import { JsxElement } from "typescript";
 import { AllProducts } from "./AllProducts";
 // import { Category } from "@mui/icons-material";
@@ -27,10 +25,10 @@ const mockupCategoriesList: Category[] = [
 ];
 
 const mockupProductList: ProductByCategory[] = [
-  { id: 1, name: "category1", category: 1 },
-  { id: 2, name: "category2", category: 1 },
-  { id: 3, name: "category3", category: 1 },
-  { id: 123, name: "category4", category: 1 },
+  { id: 11, name: "product1", category: 1 },
+  { id: 22, name: "product2", category: 2 },
+  { id: 33, name: "product3", category: 3 },
+  { id: 44, name: "product4", category: 4 },
 ];
 
 function getCategoies() {
@@ -63,7 +61,7 @@ function getProducts(category: Category) {
 export default function CategoriesNavigation() {
   const [category, setCategory] = React.useState<Category>({
     id: 1,
-    title: "blabla",
+    title: "category1",
   });
   const ref = React.useRef<HTMLDivElement>(null);
   const [productList, setProductList] = React.useState<ProductByCategory[]>();

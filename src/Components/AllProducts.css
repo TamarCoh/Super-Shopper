@@ -1,10 +1,10 @@
+
+#allCard{
+    margin: 18%;
+} 
 #wrap{
 display: flex;
 width: 100%;
 flex-wrap: wrap;
 
-}
-
-.allCard{
-    margin: 8%;
 }
