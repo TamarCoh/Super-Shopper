@@ -21,7 +21,6 @@ import axios from "axios";
 // }
 
 const initialState = {
-    // selectedCategory: null
     productsList: [] = [{
         id: 123,
         name: "name",
@@ -29,8 +28,7 @@ const initialState = {
         PurchasesHistoryId: "123",
         PurchasePrognosisId: "fgvhj",
         amount: 3
-    }],
-    CurrrentUser: null
+    }]
 }
 // function handleRemove(id:number) {
 //     const newList = state.productsList.filter((item) => item.id !== id);

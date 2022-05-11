@@ -37,7 +37,7 @@ export function AllProducts(props: any) {
                     {props.productList==null?<span>no products suitable...</span>:props.productList.map((row: ProductByCategory) => (
 
 
-                        <Product class="allCard" product={row} key={row.id} />
+                        <Product product={row} key={row.id} />
 
 
                     ))}
