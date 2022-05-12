@@ -42,7 +42,6 @@ function Nav(): JSX.Element {
                 <Link to='/' className="nav-links" >
                     {/* <HomeRoundedIcon></HomeRoundedIcon> */}
                     <li className="nav-links">Home</li>
-
                 </Link>
 
                 {/* <Link to='/signUp' className="nav-links" >
