@@ -10,6 +10,8 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackTwoToneIcon from '@mui/icons-material/ArrowBackTwoTone';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
+import { animated, useSpring } from 'react-spring';
+import { useNavigate } from 'react-router-dom';
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -51,7 +53,7 @@ function ChildModal() {
                     <>
                         <SignUp />
                         <>A registered user?</>
-                        <Button onClick={handleClose} id="lin">log in</Button>
+                        <Button id="lin" onClick={handleClose} >log in</Button>
 
                     </>
 
@@ -69,7 +71,7 @@ export function Enter() {
     const handleClose = () => {
         setOpen(false);
     };
-
+    const navigate=useNavigate();
     return (
         <div>
             <Logo />
@@ -87,13 +89,38 @@ export function Enter() {
                 </div>
 
             </Modal>
-
+            
             <Stack direction="row" >
-                <IconButton ><ArrowBackTwoToneIcon />My Previous Purchases </IconButton>
-                <IconButton >Make me a purchase <ArrowForwardIcon /></IconButton>
+                <div id="left" ><IconButton ><ArrowBackTwoToneIcon />My Previous Purchases </IconButton></div>
+                <div id="right" onClick={()=>navigate('./purchaseList')}><IconButton >Make me a purchase <ArrowForwardIcon /></IconButton></div>
             </Stack >
 
         </div >
     );
 }
+// function BackwardsCompatability() {
+//     const [styles, api] = useSpring(() => ({
+//       from: { x: -50, opacity: 1 },
+//     }))
+  
+//     React.useEffect(() => {
+//       api({
+//         x: 50,
+//         opacity: 1,
+//         loop: { reverse: true },
+//       })
+//     }, [])
+  
+//     return (
+//       <animated.div
+//         style={{
+//           width: 80,
+//           height: 80,
+//           backgroundColor: '#46e891',
+//           borderRadius: 16,
+//           ...styles,
+//         }}
+//       />
+//     )
+//   }
 export default Enter;

@@ -18,9 +18,9 @@ function App() {
 
   return (
     <div className="App">
-      
+
       <Router>
-      <Nav />
+        <Nav />
         <Routes>
 
           <Route path="/" element={<Enter />} />
@@ -31,6 +31,7 @@ function App() {
           <Route path="/allProducts" element={<AllProducts />} />
           <Route path="/allCategory" element={<CategoriesNavigation />} />
           <Route path="/purchaseList" element={<PurchaseList />} />
+          {/* <Route path="/fullFeaturedCrudGrid" element={<FullFeaturedCrudGrid />} /> */}
 
         </Routes>
       </Router>
