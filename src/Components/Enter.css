@@ -6,3 +6,7 @@
     position: relative;
     left: 61vw;
 }
+#left{
+    position: relative;
+    right: -1vw;
+}

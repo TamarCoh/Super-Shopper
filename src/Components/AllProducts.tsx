@@ -34,7 +34,7 @@ export function AllProducts(props: any) {
         <div >
             {props.catgory == null ? <span>please wait...</span> :
                 <div id="wrap">
-                    {props.productList==null?<span>no products suitable...</span>:props.productList.map((row: ProductByCategory) => (
+                    {props.productList == null ? <span>no products suitable...</span> : props.productList.map((row: ProductByCategory) => (
 
 
                         <Product product={row} key={row.id} />
@@ -42,7 +42,7 @@ export function AllProducts(props: any) {
 
                     ))}
                 </div>
-                
+
             }
         </div>
 
