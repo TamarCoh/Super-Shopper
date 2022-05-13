@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import { combineReducers } from "redux";
 import { legacy_createStore, compose } from "redux";
 import { productInListReducer } from "./store/Reducers/ProductInList"
-import { usertReducer } from './store/Reducers/User';
+import { userReducer } from './store/Reducers/User';
 
 
 declare global {
@@ -20,7 +20,7 @@ declare global {
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = legacy_createStore(
-  combineReducers({ pro: productInListReducer,Use:usertReducer }),
+  combineReducers({ pro: productInListReducer,Use:userReducer }),
   composeEnhancers()
 );
 ReactDOM.render(

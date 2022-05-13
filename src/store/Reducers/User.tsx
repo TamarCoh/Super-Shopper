@@ -3,7 +3,7 @@ const initialState = {
     currentUser: null,
     usersList: [] = []
 }
-export const usertReducer = (state = initialState, action: any) => {
+export const userReducer = (state = initialState, action: any) => {
     switch (action.type) {
 
         case "logIn":

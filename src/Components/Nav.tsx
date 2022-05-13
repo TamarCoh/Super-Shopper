@@ -9,6 +9,9 @@ import Badge, { BadgeProps } from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+// import connect from "react-redux/es/components/connect";
+import { connect } from "react-redux";
+import { count } from "console";
 
 const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -29,14 +32,14 @@ function CustomizedBadges(props: any) {
         </IconButton>
     );
 }
-function Nav(): JSX.Element {
+function Nav(props:any): JSX.Element {
     return (
         <div className="Nav" >
             <ul>
                 <Link to='/PurchaseList' className="nav-links" >
                     {/* <HomeRoundedIcon></HomeRoundedIcon> */}
                     {/* get count from state */}
-                    <li className="nav-links"><CustomizedBadges count={2} /></li>
+                    <li className="nav-links"><CustomizedBadges count={props.count} /></li>
 
                 </Link>
                 <Link to='/' className="nav-links" >
@@ -61,5 +64,18 @@ function Nav(): JSX.Element {
         </div >
     );
 }
-
-export default Nav;
+const mapStateToProps = (st: any) => {
+    //הפונקציה תחזיר אובייקט ובו כל השדות שאנו רוצים שייכנסו לפרופס של הקומםוננטה שלנו
+    //מתןך הסטייט הכללי
+    return {
+        //  myArr: st.pro.productsList,
+         count: st.pro.amountProducts
+        // myArr:[]=[{d: 123,
+        //     name: "name",
+        //     category: 1,
+        //     PurchasesHistoryId: "123",
+        //     PurchasePrognosisId: "fgvhj",
+        //     amount: 3}]
+    };
+}
+export default connect(mapStateToProps)(Nav);
