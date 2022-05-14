@@ -114,7 +114,7 @@ const mapStateToProps = (st: any) => {
     //הפונקציה תחזיר אובייקט ובו כל השדות שאנו רוצים שייכנסו לפרופס של הקומםוננטה שלנו
     //מתןך הסטייט הכללי
     return {
-         myArr: st.pro.productsList,
+        myArr: st.pro.productsList,
         // myArr:[]=[{d: 123,
         //     name: "name",
         //     category: 1,

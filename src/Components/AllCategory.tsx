@@ -16,6 +16,7 @@ import axios from "axios";
 import { Category, ProductByCategory } from "../utils/modals";
 import { JsxElement } from "typescript";
 import { AllProducts } from "./AllProducts";
+import { Container } from "@material-ui/core";
 // import { Category } from "@mui/icons-material";
 // const mockupCategoriesList: Category[] = [
 //   { id: 1, title: "Sales" },
@@ -31,7 +32,7 @@ import { AllProducts } from "./AllProducts";
 //   { id: 44, name: "product4", category: 4 },
 // ];
 
-async function getCategoies() {
+async function getCategories() {
   let categoriesList: Category[] = [];
   try {
     const res = await axios.get("https://localhost:44378/api/Category");
@@ -54,17 +55,15 @@ async function getProductsByCategory(category: Category) {
     productList = [];
   }
   return productList;
-  // return [mockupProductList[category.id - 1]];
+  // return [mockupProductList[category.id - 1]]; 
   // return mockupProductList;
 }
 
-export default async function CategoriesNavigation() {
-  const [category, setCategory] = React.useState<Category>({
-    id: 1,
-    title: "Sales",
-  });
+export default function CategoriesNavigation() {
+  const [category, setCategory] = React.useState<Category>({ id: 1, title: "Sales" });
   const ref = React.useRef<HTMLDivElement>(null);
   const [productList, setProductList] = React.useState<ProductByCategory[]>();
+  const [categoryList, setCategoryList] = React.useState<Category[]>();
 
   React.useEffect(() => {
     (ref.current as HTMLDivElement).ownerDocument.body.scrollTop = 0;
@@ -72,33 +71,39 @@ export default async function CategoriesNavigation() {
       const tempProducts = await getProductsByCategory(category);
       setProductList(tempProducts);
     }
+    async function anyNameFunction2() {
+      const tempCategoryList = await getCategories();
+      setCategoryList(tempCategoryList);
+    }
+    anyNameFunction2();
     anyNameFunction();
   }, [category]);
-  const categoryList = await getCategoies();
+
 
   return (
-    <>
-      <Box sx={{ pb: 1000 }} ref={ref}>
-        <CssBaseline />
-        <Paper sx={{ position: "relative", top: 0, right: 0 }} elevation={3}>
-          <BottomNavigation
-            showLabels
-            value={category}
-            onChange={(event, newValue) => {
-              setCategory(newValue);
-            }}
-          >
-            {categoryList.map((category: Category) => (
-              <BottomNavigationAction
-                value={category}
-                label={category.title}
-                icon={<RestoreIcon />}
-              />
-            ))}
-          </BottomNavigation>
-        </Paper>
-        <AllProducts productList={productList} catgory={category}></AllProducts>
-      </Box>
-    </>
+
+    <Box sx={{ pb: 1000 }} ref={ref}>
+      <CssBaseline />
+      <Paper sx={{ position: "relative", top: 0, right: 0 }} elevation={3}>
+        <BottomNavigation
+          showLabels
+          value={category}
+          onChange={(event, newValue) => {
+            setCategory(newValue);
+          }}
+        >
+          {categoryList==null ? <span> no categories</span> : categoryList.map((category: Category) => (
+            <BottomNavigationAction
+              value={category}
+              label={category.title}
+              icon={<RestoreIcon />}
+            />
+          ))}
+        </BottomNavigation>
+      </Paper>
+      <AllProducts productList={productList} catgory={category}></AllProducts>
+    </Box>
+
+
   );
 }

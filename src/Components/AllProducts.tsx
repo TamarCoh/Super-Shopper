@@ -32,18 +32,18 @@ export function AllProducts(props: any) {
     // }, []);
     return <div>
         <div >
-            {props.catgory == null ? <span>please wait...</span> :
-                <div id="wrap">
-                    {props.productList == null ? <span>no products suitable...</span> : props.productList.map((row: ProductByCategory) => (
+            {/* {props.catgory == null ? <span>please wait...</span> : */}
+            <div id="wrap">
+                {props.productList == null ? <span> no products found suitable...</span> : props.productList.map((row: ProductByCategory) => (
 
 
-                        <Product product={row} key={row.id} />
+                    <Product product={row} key={row.id} />
 
 
-                    ))}
-                </div>
+                ))}
+            </div>
 
-            }
+            {/* } */}
         </div>
 
     </div>
