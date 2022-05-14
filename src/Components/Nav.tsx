@@ -46,16 +46,10 @@ function Nav(props:any): JSX.Element {
                     {/* <HomeRoundedIcon></HomeRoundedIcon> */}
                     <li className="nav-links">Home</li>
                 </Link>
-
-                {/* <Link to='/signUp' className="nav-links" >
-                   
-                    <li className="nav-links">SignUp</li>
-                </Link> */}
                 <Link to='/allCategory' className="nav-links" >
                     {/* <AddCircleOutlineIcon></AddCircleOutlineIcon> */}
                     <li className="nav-links">AllProducts</li>
                 </Link>
-
                 <Link to='/logIn' className="nav-links" id="nav-logIn">
                     {/* <AddCircleOutlineIcon></AddCircleOutlineIcon> */}
                     <li className="nav-links" >LogIn</li>
