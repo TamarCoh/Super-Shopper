@@ -39,6 +39,7 @@ async function getCategories() {
     categoriesList = res.data.toList();
   } catch {
     categoriesList = [];
+    console.log("categories catch");
   }
   return categoriesList;
   // return mockupCategoriesList;
@@ -53,6 +54,7 @@ async function getProductsByCategory(category: Category) {
     productList = res.data as ProductByCategory[];
   } catch {
     productList = [];
+    console.log("catchhhhhhh");
   }
   return productList;
   // return [mockupProductList[category.id - 1]]; 
@@ -63,22 +65,25 @@ export default function CategoriesNavigation() {
   const [category, setCategory] = React.useState<Category>({ id: 1, title: "Sales" });
   const ref = React.useRef<HTMLDivElement>(null);
   const [productList, setProductList] = React.useState<ProductByCategory[]>();
-  const [categoryList, setCategoryList] = React.useState<Category[]>();
+  const [categoryList, setCategoryList] = React.useState<Category[]>([]);
 
-  React.useEffect(() => {
+ React.useEffect(() => {
     (ref.current as HTMLDivElement).ownerDocument.body.scrollTop = 0;
-    async function anyNameFunction() {
-      const tempProducts = await getProductsByCategory(category);
-      setProductList(tempProducts);
-    }
+
     async function anyNameFunction2() {
       const tempCategoryList = await getCategories();
       setCategoryList(tempCategoryList);
     }
     anyNameFunction2();
+
+  }, []);
+  React.useEffect(() => {
+    async function anyNameFunction() {
+      const tempProducts = await getProductsByCategory(category);
+      setProductList(tempProducts);
+    }
     anyNameFunction();
   }, [category]);
-
 
   return (
 
@@ -92,7 +97,7 @@ export default function CategoriesNavigation() {
             setCategory(newValue);
           }}
         >
-          {categoryList==null ? <span> no categories</span> : categoryList.map((category: Category) => (
+          {categoryList == null ? <span> no categories</span> : categoryList.map((category: Category) => (
             <BottomNavigationAction
               value={category}
               label={category.title}

@@ -4,7 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import { JsxElement } from "typescript";
 import LogIn from './Components/LogIn';
-import { PurchaseList } from './Components/PurchaseList';
+import PurchaseList from './Components/PurchaseList';
 import { lookup } from 'dns';
 import SignUp from './Components/SignUp';
 import Enter from './Components/Enter';
