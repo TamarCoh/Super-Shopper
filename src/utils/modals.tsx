@@ -1,3 +1,9 @@
+import {
+    randomCreatedDate,
+    randomTraderName,
+    randomUpdatedDate,
+    randomId,
+} from '@mui/x-data-grid-generator';
 export interface User {
     firstName: string,
     lastName: string,
@@ -22,6 +28,7 @@ export interface ProductByCategory {
 }
 
 export interface ProductByMount {
+    idrow:typeof randomId,
     id: number,
     name: string,
     category: number,

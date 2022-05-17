@@ -1,54 +1,3 @@
-// import { TableBody, TableCell, TableContainer, TableHead, TableRow, Table, TextField } from "@material-ui/core";
-// import Paper from '@mui/material/Paper';
-// import { useForm, } from "react-hook-form";
-// import axios from "axios";
-// import { StyledComponentProps } from "@material-ui/core";
-// import { } from "@material-ui/core";
-// import { Component, useState, useEffect } from "react";
-// import { JsxElement } from "typescript";
-// import "./PurchaseList.css"
-// import Product from "./ProductByBuy";
-// import { connect } from "react-redux";
-// import { ProductByMount } from "../utils/modals";
-
-// import { LicenseInfo } from '@mui/x-data-grid-pro';
-
-// // LicenseInfo.setLicenseKey(
-// //     'x0jTPl0USVkVZV0SsMjM1kDNyADM5cjM2ETPZJVSQhVRsIDN0YTM6IVREJ1T0b9586ef25c9853decfa7709eee27a1e',
-// // );
-// //-----------------------------
-
-// import * as React from 'react';
-// import Box from '@mui/material/Box';
-// import Button from '@mui/material/Button';
-// import AddIcon from '@mui/icons-material/Add';
-// import EditIcon from '@mui/icons-material/Edit';
-// import DeleteIcon from '@mui/icons-material/DeleteOutlined';
-// import SaveIcon from '@mui/icons-material/Save';
-// import CancelIcon from '@mui/icons-material/Close';
-// import {
-//     GridRowsProp,
-//     useGridApiRef,
-//     DataGridPro,
-//     GridApi,
-//     GridColumns,
-//     GridRowParams,
-//     MuiEvent,
-//     GridToolbarContainer,
-//     GridActionsCellItem,
-//     GridEventListener,
-//     GridEvents,
-//     GridRowId,
-//     GridRowModel,
-// } from '@mui/x-data-grid-pro';
-// // import {
-// //     randomCreatedDate,
-// //     randomTraderName,
-// //     randomUpdatedDate,
-// //     randomId,
-// // } from '@mui/x-data-grid-generator';
-
-
 // export function PurchaseList(props: any) {
 
 //     // const [person, setPerson] = useState<User>();
@@ -60,54 +9,13 @@
 //     //     });
 //     // }, []);
 
-//     const apiRef = useGridApiRef();
-//     const handleDeleteClick = (id: GridRowId) => (event: React.MouseEvent) => {
-//         event.stopPropagation();
-//         apiRef.current.updateRows([{ id, _action: 'delete' }]);
-//     };
-//     return <div>
-//         <div id="wrap">
 //             {/* {props.myArr == null ? <span>wait...</span> : */}
 
-//             <TableContainer component={Paper}>
-//                 <Table >
-//                     <TableHead>
-//                         <TableRow>
-//                             <TableCell align="center">Purchase code</TableCell>
-//                             <TableCell align="center">Product</TableCell>
-//                             <TableCell align="center">amount</TableCell>
-
-//                             {/* <TableCell align="right">דוא"ל</TableCell> */}
-
-//                         </TableRow>
-//                     </TableHead>
-//                     <TableBody>
 //                         {props.myArr?.map((row: ProductByMount) => (
 //                             <TableRow key={row.PurchasePrognosisId}   >
-//                                 {/* <TableCell component="th" scope="row">
-//                                         {row.CustomerId}
-//                                     </TableCell> */}
-
 //                                 <TableCell align="center">{row.PurchasesHistoryId}</TableCell>
 //                                 <TableCell align="center">{row.id}</TableCell>
 //                                 <TableCell align="center"><TextField id="standard-number" type="number" value={row.amount} >   </TextField> </TableCell>
-//                                 <GridActionsCellItem
-//                                     icon={<DeleteIcon />}
-//                                     label="Delete"
-//                                     onClick={handleDeleteClick(row.id)}
-//                                     color="inherit"
-//                                 />,
-//                                 {/* <TableCell align="right">{row.Email}</TableCell> */}
-//                             </TableRow>
-//                         ))}
-//                     </TableBody>
-//                 </Table>
-//             </TableContainer>
-//             {/* } */}
-//         </div>
-
-//     </div>
-
 
 // }
 // const mapStateToProps = (st: any) => {
@@ -155,39 +63,44 @@ import {
     randomId,
 } from '@mui/x-data-grid-generator';
 import { useNavigate } from "react-router-dom";
+import { decreaseProductInList, removeProductFromList } from "../store/Actions/ProductInList";
+import { AllProducts } from "./AllProducts";
+import { ProductByMount } from "../utils/modals";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { productInListReducer } from "../store/Reducers/ProductInList";
+import { IstatePro } from '../store/Reducers/ProductInList'
+// const rows: GridRowModel = [
+//     {
+//         id: randomId(),
+//         name: randomTraderName(),
+//         amount: 25,
 
-const rows: GridRowsProp = [
-    {
-        id: randomId(),
-        name: randomTraderName(),
-        amount: 25,
+//     },
+//     {
+//         id: randomId(),
+//         name: randomTraderName(),
+//         amount: 36,
 
-    },
-    {
-        id: randomId(),
-        name: randomTraderName(),
-        amount: 36,
+//     },
+//     {
+//         id: randomId(),
+//         name: randomTraderName(),
+//         amount: 19,
 
-    },
-    {
-        id: randomId(),
-        name: randomTraderName(),
-        amount: 19,
+//     },
+//     {
+//         id: randomId(),
+//         name: randomTraderName(),
+//         amount: 28,
 
-    },
-    {
-        id: randomId(),
-        name: randomTraderName(),
-        amount: 28,
+//     },
+//     {
+//         id: randomId(),
+//         name: randomTraderName(),
+//         amount: 23,
 
-    },
-    {
-        id: randomId(),
-        name: randomTraderName(),
-        amount: 23,
-
-    },
-];
+//     },
+// ];
 
 
 interface EditToolbarProps {
@@ -213,15 +126,17 @@ function EditToolbar(props: EditToolbarProps) {
     return (
         <GridToolbarContainer>
             <Button color="primary" startIcon={<AddIcon />} onClick={() => { navigate('/allCategory'); }}>
-                Add record
+                Add Products
             </Button>
         </GridToolbarContainer>
     );
 }
 
-
-export default function PurchaseList() {
+export default function PurchaseList(): JSX.Element {
     const apiRef = useGridApiRef();
+    const rows = useSelector<IstatePro, ProductByMount[]>(state => state.productsList);
+
+    const dispatch = useDispatch();
 
     const handleRowEditStart = (
         params: GridRowParams,
@@ -238,16 +153,21 @@ export default function PurchaseList() {
     };
 
 
-
+    //update state in every action
     const handleDeleteClick = (id: GridRowId) => (event: React.MouseEvent) => {
         event.stopPropagation();
         apiRef.current.updateRows([{ id, _action: 'delete' }]);
+
     };
     const handleAddClick = (id: GridRowId) => (event: React.MouseEvent) => {
+        // dispatch(decreaseProductInList(rows.find((item: ProductByMount) =>  item.idrow === id?: null): null));
+
+
         rows.map((row: GridRowModel) => (row.id === id ? row.amount += 1 : row));
 
     };
     const handleReductionClick = (id: GridRowId) => (event: React.MouseEvent) => {
+
         rows.map((row: GridRowModel) => (row.id === id ? row.amount -= 1 : row));
 
     };
@@ -286,7 +206,7 @@ export default function PurchaseList() {
                 ];
             },
         },
-        { field: 'amount', headerName: 'Amunt', type: 'number', editable: true },
+        { field: 'amount', headerName: 'Amount', type: 'number', editable: true },
         {
             field: 'reduction',
             type: 'actions',
@@ -318,6 +238,11 @@ export default function PurchaseList() {
                         icon={<DeleteIcon />}
                         label="Delete"
                         onClick={handleDeleteClick(id)}
+                        //         () => {
+
+                        //         //  removeProductFromList(id);
+                        //     }
+                        // }
                         color="inherit"
                     />,
                 ];
@@ -354,6 +279,17 @@ export default function PurchaseList() {
                 }}
                 experimentalFeatures={{ newEditingApi: true }}
             />
+            <button onClick={() => { }}>SAVE</button>
+            {/* //update DB by state */}
         </Box>
+
     );
+
 }
+
+function productByBuy(productByBuy: any): {
+    type: string; payload: ProductByMount; //                                 <TableCell align="center">{row.id}</TableCell>
+} {
+    throw new Error("Function not implemented.");
+}
+

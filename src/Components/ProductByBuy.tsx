@@ -16,12 +16,12 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import IconButton from "@mui/material/IconButton";
 import { ProductByMount, ProductByCategory } from "../utils/modals";
-import { increaseProductInList } from "../store/Actions/ProductInList";
 import { connect } from "tls";
 import "./CommonColor.css";
 import "./AllProducts.css";
 import { margin } from "@mui/system";
 import { useDispatch } from "react-redux";
+import { increaseProductInList } from "../store/Actions/ProductInList";
 
 function AddProductBuy(
   product: ProductByCategory,
