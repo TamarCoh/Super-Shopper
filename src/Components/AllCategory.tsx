@@ -36,10 +36,11 @@ async function getCategories() {
   let categoriesList: Category[] = [];
   try {
     const res = await axios.get("https://localhost:44378/api/Category");
-    categoriesList = res.data.toList();
-  } catch {
+    debugger
+    categoriesList = res.data
+  } catch (err) {
     categoriesList = [];
-    console.log("categories catch");
+    console.log("categories catch: " + err);
   }
   return categoriesList;
   // return mockupCategoriesList;
@@ -52,9 +53,9 @@ async function getProductsByCategory(category: Category) {
       `https://localhost:44378/api/Products?category=${category}`
     );
     productList = res.data as ProductByCategory[];
-  } catch {
+  } catch (err) {
     productList = [];
-    console.log("catchhhhhhh");
+    console.log("catchhhhhhh: " + err);
   }
   return productList;
   // return [mockupProductList[category.id - 1]]; 
@@ -67,7 +68,7 @@ export default function CategoriesNavigation() {
   const [productList, setProductList] = React.useState<ProductByCategory[]>();
   const [categoryList, setCategoryList] = React.useState<Category[]>([]);
 
- React.useEffect(() => {
+  React.useEffect(() => {
     (ref.current as HTMLDivElement).ownerDocument.body.scrollTop = 0;
 
     async function anyNameFunction2() {
