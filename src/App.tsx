@@ -14,6 +14,7 @@ import Nav from './Components/Nav';
 import CategoriesNavigation from './Components/AllCategory';
 import { AllProducts } from './Components/AllProducts';
 import AllCategory from './Components/AllCategory';
+import PreviosPurchases from './Components/PreviousPurchases';
 
 
 function App() {
@@ -24,14 +25,14 @@ function App() {
       <Router>
         <Nav />
         <Routes>
-          <Route path="/" element={<Enter />} />
-          <Route path="" element={<Enter />} />
-          <Route path="/homePage" element={<Enter />} />
+          <Route path="/" element={<Enter open={false} />} />
+          <Route path="" element={<Enter open={false} />} />
+          <Route path="/homePage" element={<Enter open={false} />} />
           <Route path="/signUp" element={<SignUp />} />
-          <Route path="/logIn" element={<LogIn />} />
+          <Route path="/logIn" element={<Enter open={true} />} />
           <Route path="/allProducts" element={<AllProducts />} />
           <Route path="/allCategory" element={<CategoriesNavigation />} />
-          {/* <Route path="/allCategory" element={<AllCategory />} /> */}
+          <Route path="/previous purchaises" element={<PreviosPurchases />} />
           <Route path="/purchaseList" element={<PurchaseList />} />
           {/* <Route path="/fullFeaturedCrudGrid" element={<FullFeaturedCrudGrid />} /> */}
         </Routes>

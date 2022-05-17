@@ -17,6 +17,7 @@ import { Category, ProductByCategory } from "../utils/modals";
 import { JsxElement } from "typescript";
 import { AllProducts } from "./AllProducts";
 import { Container } from "@material-ui/core";
+import './AllCategory.css'
 // import { Category } from "@mui/icons-material";
 // const mockupCategoriesList: Category[] = [
 //   { id: 1, title: "Sales" },
@@ -36,7 +37,7 @@ async function getCategories() {
   let categoriesList: Category[] = [];
   try {
     const res = await axios.get("https://localhost:44378/api/Category");
-    debugger
+    // debugger
     categoriesList = res.data
   } catch (err) {
     categoriesList = [];
@@ -90,7 +91,7 @@ export default function CategoriesNavigation() {
 
     <Box sx={{ pb: 1000 }} ref={ref}>
       <CssBaseline />
-      <Paper sx={{ position: "relative", top: 0, right: 0 }} elevation={3}>
+      <Paper id="box_paper" sx={{ position: "sticky", top: 0, right: 0 }} elevation={1}>
         <BottomNavigation
           showLabels
           value={category}
@@ -98,18 +99,20 @@ export default function CategoriesNavigation() {
             setCategory(newValue);
           }}
         >
-          {categoryList == null ? <span> no categories</span> : categoryList.map((category: Category) => (
-            <BottomNavigationAction
-              value={category}
-              label={category.title}
-              icon={<RestoreIcon />}
-            />
+          {categoryList == null ? <span> no categories</span> : categoryList.map((category: Category) =>
+          (
+            <>
+              < BottomNavigationAction
+                value={category}
+                label={category.title}
+              //  icon={<RestoreIcon />}
+              />
+              category.title
+            </>
           ))}
         </BottomNavigation>
       </Paper>
       <AllProducts productList={productList} catgory={category}></AllProducts>
     </Box>
-
-
   );
 }
