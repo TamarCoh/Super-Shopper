@@ -1,5 +1,5 @@
 import "./Nav.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 // import SettingsIcon from '@mui/icons-material/Settings';
 // import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -12,6 +12,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 // import connect from "react-redux/es/components/connect";
 import { connect } from "react-redux";
 import { count } from "console";
+import Enter from "./Enter";
 
 const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -32,7 +33,8 @@ function CustomizedBadges(props: any) {
         </IconButton>
     );
 }
-function Nav(props:any): JSX.Element {
+function Nav(props: any): JSX.Element {
+    const navigate = useNavigate();
     return (
         <div className="Nav" >
             <ul>
@@ -50,11 +52,14 @@ function Nav(props:any): JSX.Element {
                     {/* <AddCircleOutlineIcon></AddCircleOutlineIcon> */}
                     <li className="nav-links">AllProducts</li>
                 </Link>
-                <Link to='/logIn' className="nav-links" id="nav-logIn">
+                {/* <Link to='/logIn' className="nav-links" id="nav-logIn">
                     {/* <AddCircleOutlineIcon></AddCircleOutlineIcon> */}
+
+                {/* </Link> */}
+                <button className="nav-links" id="nav-logIn" onClick={() => navigate('/logIn')}>
                     <li className="nav-links" >LogIn</li>
-                </Link>
-            </ul>
+                </button>
+            </ul >
         </div >
     );
 }
@@ -63,7 +68,7 @@ const mapStateToProps = (st: any) => {
     //מתןך הסטייט הכללי
     return {
         //  myArr: st.pro.productsList,
-         count: st.pro.amountProducts
+        count: st.pro.amountProducts
         // myArr:[]=[{d: 123,
         //     name: "name",
         //     category: 1,

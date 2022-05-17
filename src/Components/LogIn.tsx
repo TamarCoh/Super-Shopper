@@ -94,7 +94,10 @@ export function LogIn(): JSX.Element {
 
                 <Button variant="contained" type='submit'
                     color="secondary"
-                    endIcon={<SendIcon />}>
+                    endIcon={<SendIcon />}
+                    onClick={() => { navigate('/') }}>
+                    {/* //check if existing */}
+                    {/* //update state with cuurrent user */}
                     Send
                 </Button>
 

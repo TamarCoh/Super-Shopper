@@ -12,7 +12,9 @@ import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import { animated, useSpring } from 'react-spring';
 import { useNavigate } from 'react-router-dom';
-
+interface IMyProps {
+    open: boolean,
+}
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -63,15 +65,15 @@ function ChildModal() {
     );
 }
 
-export function Enter() {
-    const [open, setOpen] = React.useState(false);
+export function Enter(props: IMyProps) {
+    const [open, setOpen] = React.useState(props.open);
     const handleOpen = () => {
         setOpen(true);
     };
     const handleClose = () => {
         setOpen(false);
     };
-    const navigate=useNavigate();
+    const navigate = useNavigate();
     return (
         <div>
             <Logo />
@@ -89,10 +91,10 @@ export function Enter() {
                 </div>
 
             </Modal>
-            
+
             <Stack direction="row" >
-                <div id="left" ><IconButton ><ArrowBackTwoToneIcon />My Previous Purchases </IconButton></div>
-                <div id="right" onClick={()=>navigate('./purchaseList')}><IconButton >Make me a purchase <ArrowForwardIcon /></IconButton></div>
+                <div id="left" onClick={() => navigate('./PreviousPurchases')}><IconButton ><ArrowBackTwoToneIcon />My Previous Purchases </IconButton></div>
+                <div id="right" onClick={() => navigate('./purchaseList')}><IconButton >Make me a purchase <ArrowForwardIcon /></IconButton></div>
             </Stack >
 
         </div >
@@ -102,7 +104,7 @@ export function Enter() {
 //     const [styles, api] = useSpring(() => ({
 //       from: { x: -50, opacity: 1 },
 //     }))
-  
+
 //     React.useEffect(() => {
 //       api({
 //         x: 50,
@@ -110,7 +112,7 @@ export function Enter() {
 //         loop: { reverse: true },
 //       })
 //     }, [])
-  
+
 //     return (
 //       <animated.div
 //         style={{
