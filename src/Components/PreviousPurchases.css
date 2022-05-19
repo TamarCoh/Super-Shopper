@@ -1,0 +1,17 @@
+.previosToProducts {
+    position: fixed;
+    bottom: -50vh;
+    right: -36vw;
+}
+
+.previoustoPurchase {
+    position: fixed;
+    bottom: -50vh;
+    right: 0vw;
+}
+#wrap{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    }

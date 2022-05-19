@@ -28,7 +28,7 @@ export interface ProductByCategory {
 }
 
 export interface ProductByMount {
-    idrow:typeof randomId,
+    idrow:string,
     id: number,
     name: string,
     category: number,
