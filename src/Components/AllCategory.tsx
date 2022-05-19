@@ -18,6 +18,9 @@ import { JsxElement } from "typescript";
 import { AllProducts } from "./AllProducts";
 import { Container } from "@material-ui/core";
 import './AllCategory.css'
+import { Button } from "@mui/material";
+import ReplyRoundedIcon from '@mui/icons-material/ReplyRounded';
+import { useNavigate } from "react-router-dom";
 // import { Category } from "@mui/icons-material";
 // const mockupCategoriesList: Category[] = [
 //   { id: 1, title: "Sales" },
@@ -86,7 +89,7 @@ export default function CategoriesNavigation() {
     }
     anyNameFunction();
   }, [category]);
-
+  const navigate = useNavigate();
   return (
 
     <Box sx={{ pb: 1000 }} ref={ref}>
@@ -113,6 +116,8 @@ export default function CategoriesNavigation() {
         </BottomNavigation>
       </Paper>
       <AllProducts productList={productList} catgory={category}></AllProducts>
+      <Button className="categoriesToProducts" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/previousPurchases') }}>Previos Purchases</Button>
+      <Button className="productstoPurchase" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/purchaseList') }}>Purchase List</Button>
     </Box>
   );
 }

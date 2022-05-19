@@ -1,3 +1,9 @@
-#box_paper{
-  
+.categoriesToProducts {
+    bottom: -65vh;
+    right: -34vw;
+}
+
+.productstoPurchase {
+    bottom: -65vh;
+    right: -35vw;
 }

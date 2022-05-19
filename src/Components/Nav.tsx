@@ -57,7 +57,7 @@ function Nav(props: any): JSX.Element {
 
                 {/* </Link> */}
                 <button className="nav-links" id="nav-logIn" onClick={() => navigate('/logIn')}>
-                    <li className="nav-links" >LogIn</li>
+                    <li className="nav-links" id="nav-logIn" >LogIn</li>
                 </button>
             </ul >
         </div >

@@ -30,9 +30,9 @@ function App() {
           <Route path="/homePage" element={<Enter open={false} />} />
           <Route path="/signUp" element={<SignUp />} />
           <Route path="/logIn" element={<Enter open={true} />} />
-          <Route path="/allProducts" element={<AllProducts />} />
+          <Route path="/allProducts" element={<CategoriesNavigation />} />
           <Route path="/allCategory" element={<CategoriesNavigation />} />
-          <Route path="/previous purchaises" element={<PreviosPurchases />} />
+          <Route path="/PreviousPurchases" element={<PreviosPurchases />} />
           <Route path="/purchaseList" element={<PurchaseList />} />
           {/* <Route path="/fullFeaturedCrudGrid" element={<FullFeaturedCrudGrid />} /> */}
         </Routes>

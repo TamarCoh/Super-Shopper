@@ -63,12 +63,13 @@ import {
     randomId,
 } from '@mui/x-data-grid-generator';
 import { useNavigate } from "react-router-dom";
-import { decreaseProductInList, removeProductFromList } from "../store/Actions/ProductInList";
+import { decreaseProductInList, increaseProductInList, removeProductFromList } from "../store/Actions/ProductInList";
 import { AllProducts } from "./AllProducts";
 import { ProductByMount } from "../utils/modals";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { productInListReducer } from "../store/Reducers/ProductInList";
 import { IstatePro } from '../store/Reducers/ProductInList'
+import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
 // const rows: GridRowModel = [
 //     {
 //         id: randomId(),
@@ -128,6 +129,9 @@ function EditToolbar(props: EditToolbarProps) {
             <Button color="primary" startIcon={<AddIcon />} onClick={() => { navigate('/allCategory'); }}>
                 Add Products
             </Button>
+            <Button color="primary" startIcon={<ExitToAppRoundedIcon />} onClick={() => { navigate('/PreviousPurchases'); }}>
+                My Previous Purchases
+            </Button>
         </GridToolbarContainer>
     );
 }
@@ -160,7 +164,7 @@ export default function PurchaseList(): JSX.Element {
 
     };
     const handleAddClick = (id: GridRowId) => (event: React.MouseEvent) => {
-        // dispatch(decreaseProductInList(rows.find((item: ProductByMount) =>  item.idrow === id?: null): null));
+        // dispatch(increaseProductInList((rows.filter((item: ProductByMount) => item.idrow == id.toString()).at(0))));
 
 
         rows.map((row: GridRowModel) => (row.id === id ? row.amount += 1 : row));
@@ -279,17 +283,10 @@ export default function PurchaseList(): JSX.Element {
                 }}
                 experimentalFeatures={{ newEditingApi: true }}
             />
-            <button onClick={() => { }}>SAVE</button>
+            <Button onClick={() => { }}>SAVE</Button>
             {/* //update DB by state */}
         </Box>
 
     );
 
 }
-
-function productByBuy(productByBuy: any): {
-    type: string; payload: ProductByMount; //                                 <TableCell align="center">{row.id}</TableCell>
-} {
-    throw new Error("Function not implemented.");
-}
-

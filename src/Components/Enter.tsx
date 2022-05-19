@@ -77,7 +77,7 @@ export function Enter(props: IMyProps) {
     return (
         <div>
             <Logo />
-            <Button onClick={handleOpen}>Enter</Button>
+            <Button id='eneter' onClick={handleOpen}>Enter</Button>
             <Modal
                 open={open}
                 onClose={handleClose}
