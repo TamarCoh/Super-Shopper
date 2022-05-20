@@ -9,6 +9,13 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { ProductByMount, ProductByCategory } from "../utils/modals";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 interface IpreviosPurchase {
     orderName: string;
@@ -19,7 +26,7 @@ interface IpreviosPurchase {
 }
 export default function PreviosPurchases() {
     const navigate = useNavigate();
-  const ref = React.useRef<HTMLDivElement>(null);
+    const ref = React.useRef<HTMLDivElement>(null);
 
     const arr: IpreviosPurchase[] = [
         {
@@ -81,18 +88,53 @@ export function BasicCard(props: IpreviosPurchase) {
                     {/* {props.orderDate.toDateString()} */}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    {props.orderMail}
+                    {props.orderDate.getHours()}{":" + props.orderDate.getMinutes()}
                 </Typography>
-                {/* <Typography variant="body2">
-                    well meaning and kindly.
+                <Typography variant="body2">
+                    {/* {props.orderDate.getDate()} */}
+                    {props.orderMail}
                     <br />
-                    {'"a benevolent smile"'}
-                </Typography> */}
+                </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small">show order products</Button>
+                <Button size="small" onClick={() => { <OrderDetails {...props.orderProducts} /> }}>show order products</Button>
             </CardActions>
         </Card>
     );
 }
+
+export function OrderDetails(props: ProductByMount[]) {
+
+    return (
+        <>
+            <TableContainer component={Paper}>
+                <Table sx={{ maxWidth: 650 }} size="small" aria-label="a dense table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Nmae</TableCell>
+                            <TableCell align="right">Amount</TableCell>
+                            <TableCell align="right">product id</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {props.map((row: ProductByMount) => (
+                            <TableRow
+                                key={row.name}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell component="th" scope="row">
+                                    {row.name}
+                                </TableCell>
+                                <TableCell align="right">{row.amount}</TableCell>
+                                <TableCell align="right">{row.id}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </>
+    )
+}
+
+
 

@@ -15,12 +15,16 @@ import Avatar from "@mui/material/Avatar";
 import axios from "axios";
 import { Category, ProductByCategory } from "../utils/modals";
 import { JsxElement } from "typescript";
-import { AllProducts } from "./AllProducts";
 import { Container } from "@material-ui/core";
-import './AllCategory.css'
+import AllProducts from "../Components/AllProducts";
+import './AllCategory.css';
 import { Button } from "@mui/material";
 import ReplyRoundedIcon from '@mui/icons-material/ReplyRounded';
 import { useNavigate } from "react-router-dom";
+// import AllProducts from "./AllProducts";
+
+
+
 // import { Category } from "@mui/icons-material";
 // const mockupCategoriesList: Category[] = [
 //   { id: 1, title: "Sales" },
