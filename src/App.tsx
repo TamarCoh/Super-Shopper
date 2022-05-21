@@ -12,7 +12,6 @@ import Logo from './Components/Logo';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Nav from './Components/Nav';
 import CategoriesNavigation from './Components/AllCategory';
-import { AllProducts } from './Components/AllProducts';
 import AllCategory from './Components/AllCategory';
 import PreviosPurchases from './Components/PreviousPurchases';
 

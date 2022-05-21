@@ -1,9 +1,12 @@
-.categoriesToProducts {
-    bottom: -65vh;
-    right: -34vw;
+.categoriesToPrevios {
+    position: fixed;
+    bottom: 0;
+    left: 45vw;
+
 }
 
-.productstoPurchase {
-    bottom: -65vh;
-    right: -35vw;
+.categoriestoPurchase {
+    position: fixed;
+    bottom: 0;
+    left: 20vw;
 }

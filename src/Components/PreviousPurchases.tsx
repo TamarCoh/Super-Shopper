@@ -53,16 +53,191 @@ export default function PreviosPurchases() {
                     amount: 3
                 }
             ]
-        }
+        },
+        {
+            orderName: "second",
+            orderDate: new Date(),
+            orderMail: "orabenesh@gmail.com",
+            orderProducts: [
+                {
+                    idrow: "dgsa",
+                    id: 123,
+                    name: "bread",
+                    category: 1,
+                    PurchasesHistoryId: "45",
+                    PurchasePrognosisId: "63",
+                    amount: 1
+                },
+                {
+                    idrow: "bhj",
+                    id: 122,
+                    name: "milk",
+                    category: 2,
+                    PurchasesHistoryId: "45",
+                    PurchasePrognosisId: "63",
+                    amount: 3
+                }
+            ]
+        }, {
+            orderName: "third",
+            orderDate: new Date(),
+            orderMail: "orabenesh@gmail.com",
+            orderProducts: [
+                {
+                    idrow: "dgsa",
+                    id: 123,
+                    name: "bread",
+                    category: 1,
+                    PurchasesHistoryId: "45",
+                    PurchasePrognosisId: "63",
+                    amount: 1
+                },
+                {
+                    idrow: "bhj",
+                    id: 122,
+                    name: "milk",
+                    category: 2,
+                    PurchasesHistoryId: "45",
+                    PurchasePrognosisId: "63",
+                    amount: 3
+                }
+            ]
+        }, {
+            orderName: "fourth",
+            orderDate: new Date(),
+            orderMail: "orabenesh@gmail.com",
+            orderProducts: [
+                {
+                    idrow: "dgsa",
+                    id: 123,
+                    name: "bread",
+                    category: 1,
+                    PurchasesHistoryId: "45",
+                    PurchasePrognosisId: "63",
+                    amount: 1
+                },
+                {
+                    idrow: "bhj",
+                    id: 122,
+                    name: "milk",
+                    category: 2,
+                    PurchasesHistoryId: "45",
+                    PurchasePrognosisId: "63",
+                    amount: 3
+                }
+            ]
+        }, {
+            orderName: "fifth",
+            orderDate: new Date(),
+            orderMail: "orabenesh@gmail.com",
+            orderProducts: [
+                {
+                    idrow: "dgsa",
+                    id: 123,
+                    name: "bread",
+                    category: 1,
+                    PurchasesHistoryId: "45",
+                    PurchasePrognosisId: "63",
+                    amount: 1
+                },
+                {
+                    idrow: "bhj",
+                    id: 122,
+                    name: "milk",
+                    category: 2,
+                    PurchasesHistoryId: "45",
+                    PurchasePrognosisId: "63",
+                    amount: 3
+                }
+            ]
+        }, {
+            orderName: "six",
+            orderDate: new Date(),
+            orderMail: "orabenesh@gmail.com",
+            orderProducts: [
+                {
+                    idrow: "dgsa",
+                    id: 123,
+                    name: "bread",
+                    category: 1,
+                    PurchasesHistoryId: "45",
+                    PurchasePrognosisId: "63",
+                    amount: 1
+                },
+                {
+                    idrow: "bhj",
+                    id: 122,
+                    name: "milk",
+                    category: 2,
+                    PurchasesHistoryId: "45",
+                    PurchasePrognosisId: "63",
+                    amount: 3
+                }
+            ]
+        }, {
+            orderName: "seven",
+            orderDate: new Date(),
+            orderMail: "orabenesh@gmail.com",
+            orderProducts: [
+                {
+                    idrow: "dgsa",
+                    id: 123,
+                    name: "bread",
+                    category: 1,
+                    PurchasesHistoryId: "45",
+                    PurchasePrognosisId: "63",
+                    amount: 1
+                },
+                {
+                    idrow: "bhj",
+                    id: 122,
+                    name: "milk",
+                    category: 2,
+                    PurchasesHistoryId: "45",
+                    PurchasePrognosisId: "63",
+                    amount: 3
+                }
+            ]
+        }, {
+            orderName: "eight",
+            orderDate: new Date(),
+            orderMail: "orabenesh@gmail.com",
+            orderProducts: [
+                {
+                    idrow: "dgsa",
+                    id: 123,
+                    name: "bread",
+                    category: 1,
+                    PurchasesHistoryId: "45",
+                    PurchasePrognosisId: "63",
+                    amount: 1
+                },
+                {
+                    idrow: "bhj",
+                    id: 122,
+                    name: "milk",
+                    category: 2,
+                    PurchasesHistoryId: "45",
+                    PurchasePrognosisId: "63",
+                    amount: 3
+                }
+            ]
+        },
     ];
     return (
         <>
             <div id="wrap">
-                {arr.map((item: IpreviosPurchase) => <BasicCard {...item} />)}
-                <Button className="previosToProducts" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/allCategory') }}>Products</Button>
-                <Button className="previoustoPurchase" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/purchaseList') }}>Purchase List</Button>
+                {arr == null ? <span> no purchases found ...</span> : arr.map((item: IpreviosPurchase) => (
+                    <div className='basicCard'>
+                        <BasicCard  {...item} />
+                    </div>
+                ))}
             </div>
+
+            <Button className="previosToProducts" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/allCategory') }}>Products</Button>
+            <Button className="previoustoPurchase" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/purchaseList') }}>Purchase List</Button>
         </>
+
     )
 }
 
