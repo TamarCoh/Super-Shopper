@@ -1,17 +1,26 @@
 .previosToProducts {
     position: fixed;
-    bottom: -50vh;
-    right: -36vw;
+    bottom: 0;
+    /* right: -15vw; */
+    left: 50vw;
 }
 
 .previoustoPurchase {
     position: fixed;
-    bottom: -50vh;
-    right: 0vw;
+    bottom: 0;
+    left: 30vw;
 }
-#wrap{
+
+#wrap {
     display: flex;
-    width: 100%;
+    /* width: 100%; */
     flex-wrap: wrap;
     justify-content: space-evenly;
-    }
+    justify-items: space-around;
+    align-content: space-around;
+}
+
+.basicCard {
+    margin: 1vh;
+    align-self: center;
+}

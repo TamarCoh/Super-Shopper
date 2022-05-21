@@ -12,7 +12,7 @@ import "./AllProducts.css"
 // import ProdInCategory from "./ProdInCategory";
 import { ProductByCategory } from "../utils/modals";
 import Product from "./ProductByBuy";
-import "./AllProducts.css";
+
 
 export default function AllProducts(props: any) {
 

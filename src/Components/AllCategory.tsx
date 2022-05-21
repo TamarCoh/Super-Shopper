@@ -120,8 +120,8 @@ export default function CategoriesNavigation() {
         </BottomNavigation>
       </Paper>
       <AllProducts productList={productList} catgory={category}></AllProducts>
-      <Button className="categoriesToProducts" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/previousPurchases') }}>Previos Purchases</Button>
-      <Button className="productstoPurchase" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/purchaseList') }}>Purchase List</Button>
+      <Button className="categoriesToPrevios" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/previousPurchases') }}>Previos Purchases</Button>
+      <Button className="categoriestoPurchase" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/purchaseList') }}>Purchase List</Button>
     </Box>
   );
 }
