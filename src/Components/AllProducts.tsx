@@ -6,7 +6,6 @@ import { StyledComponentProps } from "@material-ui/core";
 import { } from "@material-ui/core";
 import { Component, useState, useEffect } from "react";
 import { JsxElement } from "typescript";
-import "./PurchaseList.css"
 import "./AllProducts.css"
 // import Category from "./Category";
 // import ProdInCategory from "./ProdInCategory";

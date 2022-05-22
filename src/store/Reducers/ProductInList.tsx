@@ -17,7 +17,7 @@ export interface IstatePro {
 }
 const initialState: IstatePro = {
     productsList: [] = Ex(),
-    amountProducts: 0
+    amountProducts:0
 }
 
 export const productInListReducer = (state = initialState, action: any) => {
