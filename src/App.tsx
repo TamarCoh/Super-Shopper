@@ -15,7 +15,6 @@ import CategoriesNavigation from './Components/AllCategory';
 import AllCategory from './Components/AllCategory';
 import PreviosPurchases from './Components/PreviousPurchases';
 
-
 function App() {
 
   return (

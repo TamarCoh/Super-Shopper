@@ -58,7 +58,8 @@ async function getProductsByCategory(category: Category) {
   let productList: ProductByCategory[] = [];
   try {
     const res = await axios.get(
-      `https://localhost:44378/api/Products?category=${category}`
+      `https://localhost:44378/api/GetProductsByCategoryId/${category.id}`
+      
     );
     productList = res.data as ProductByCategory[];
   } catch (err) {
@@ -98,10 +99,10 @@ export default function CategoriesNavigation() {
 
     <Box sx={{ pb: 1000 }} ref={ref}>
       <CssBaseline />
-      <Paper id="box_paper" sx={{ position: "sticky", top: 0, right: 0 }} elevation={1}>
+      <Paper id="box_paper" sx={{ position: "sticky", top: 0, right: 0 }} >
         <BottomNavigation
           showLabels
-          value={category}
+          value={category.title}
           onChange={(event, newValue) => {
             setCategory(newValue);
           }}
@@ -112,9 +113,11 @@ export default function CategoriesNavigation() {
               < BottomNavigationAction
                 value={category}
                 label={category.title}
-              //  icon={<RestoreIcon />}
+                icon={<RestoreIcon></RestoreIcon >}
+                
               />
-              category.title
+              {category.title}
+              {/* //why is the category.title undefined????????? */}
             </>
           ))}
         </BottomNavigation>
