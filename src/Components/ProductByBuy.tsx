@@ -114,7 +114,7 @@ export default function Product(props: any) {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {props.product.name}
+          {props.product.Name}
         </Typography>
       </CardContent>
       <CardActions>

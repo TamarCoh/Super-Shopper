@@ -25,6 +25,12 @@
     padding: 0.5%;
     background-color: white;
     color: #213f65;
-    
     border: none;
+}
+
+#currentUser {
+    float: right;
+    width: auto;
+    padding: 0.5%;
+    color: white;
 }

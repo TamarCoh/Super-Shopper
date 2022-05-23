@@ -1,25 +1,28 @@
 import { User } from "../../utils/modals"
 const initialState = {
     currentUser: null,
-    usersList: [] = []
+    // usersList: [] = []
 }
+// interface IuserState{
+//     current:User;
+// }
 export const userReducer = (state = initialState, action: any) => {
     switch (action.type) {
 
         case "logIn":
             return {
-                ...state,
+                // ...state,
                 currentUser: action.payload
             }
         case "logOut":
             return {
-                ...state,
+                // ...state,
                 currentUser: null
             }
         case "SignUp":
             return {
                 currentUser: action.payload,
-                usersList: [...state.usersList, action.payload]
+                // usersList: [...state.usersList, action.payload]
             }
     }
 

@@ -7,8 +7,9 @@ import {
 export interface User {
     firstName: string,
     lastName: string,
+    id: string,
     password: string,
-    email:string
+    email: string
 }
 
 export const enum categories {
@@ -22,13 +23,14 @@ export interface Category {
 }
 
 export interface ProductByCategory {
-    id: number,
     name: string,
+    id: number,
+
     category: number
 }
 
 export interface ProductByMount {
-    idrow:string,
+    idrow: string,
     id: number,
     name: string,
     category: number,

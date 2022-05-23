@@ -7,20 +7,20 @@ import axios from "axios";
 
 const Ex = () => {
     // const [prognosis, setPrognosis] = React.useState<ProductByMount[]>([]);
-    let prognosis: ProductByMount[] = [];
-    axios.get("https://localhost:44378/api/PurchasePrognosis").then((response) => { prognosis = response.data; })
+    let prognosis: IstatePro = {} as IstatePro;
+    prognosis.amountProducts = 0;
+    prognosis.productsList = [];
+    axios.get(`https://localhost:44378/api/GetPurchaseOffer/${786235}`).then((response) => { prognosis.productsList = response.data; prognosis.amountProducts = response.data.size ? response.data.size : 0; })
     return prognosis;
 }
 export interface IstatePro {
     productsList: ProductByMount[],
     amountProducts: number
 }
-const initialState: IstatePro = {
-    productsList: [] = Ex(),
-    amountProducts:0
-}
+const initialState: IstatePro = Ex();
 
 export const productInListReducer = (state = initialState, action: any) => {
+    debugger
     switch (action.type) {
 
         case Action_Types.REMOVE_PRODUCT:
@@ -37,16 +37,17 @@ export const productInListReducer = (state = initialState, action: any) => {
 
             }
         case Action_Types.INCREAES_PRODUCT:
-            if (state.productsList.find((i: ProductByMount) => i == action.payload))
+            debugger
+            if (state.productsList.find((i: ProductByMount) => i == action.payload) != undefined)
                 return {
                     ...state,
                     productsList: [...state.productsList.map((i: ProductByMount) => i == action.payload ? i.amount += action.payload.amount : i)],
-                    amountProducts: state.amountProducts + action.payload.amount
+
                 }
             else return {
                 ...state,
                 productsList: [...state.productsList, action.payload],
-                amountProducts: state.amountProducts + action.payload.amount
+                amountProducts: state.amountProducts + 1
             }
     }
 
