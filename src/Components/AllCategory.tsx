@@ -58,11 +58,22 @@ async function getProductsByCategory(category: Category) {
   let productList: ProductByCategory[] = [];
   try {
     const res = await axios.get(
-      `https://localhost:44378/api/GetProductsByCategoryId/${category.id}`
-      
-    );
-    productList = res.data as ProductByCategory[];
-  } catch (err) {
+      `https://localhost:44378/api/GetProductsByCategoryId/${category.id}`);
+
+    // debugger
+    // productList 
+    //= res.data as ProductByCategory[]
+    productList = res.data.map((p: any) => {
+      let product: ProductByCategory
+      product = {
+        name: p.Name,
+        id: p.ProductId,
+        category: p.ProductCategoryId
+      }
+      //   p = product
+    });
+  }
+  catch (err) {
     productList = [];
     console.log("catchhhhhhh: " + err);
   }
@@ -74,7 +85,7 @@ async function getProductsByCategory(category: Category) {
 export default function CategoriesNavigation() {
   const [category, setCategory] = React.useState<Category>({ id: 1, title: "Sales" });
   const ref = React.useRef<HTMLDivElement>(null);
-  const [productList, setProductList] = React.useState<ProductByCategory[]>();
+  const [productList, setProductList] = React.useState<ProductByCategory[]>([{ name: "sc", id: 123, category: 345 }]);
   const [categoryList, setCategoryList] = React.useState<Category[]>([]);
 
   React.useEffect(() => {
@@ -90,6 +101,7 @@ export default function CategoriesNavigation() {
   React.useEffect(() => {
     async function anyNameFunction() {
       const tempProducts = await getProductsByCategory(category);
+      debugger
       setProductList(tempProducts);
     }
     anyNameFunction();
@@ -104,6 +116,7 @@ export default function CategoriesNavigation() {
           showLabels
           value={category.title}
           onChange={(event, newValue) => {
+            debugger
             setCategory(newValue);
           }}
         >
@@ -114,7 +127,10 @@ export default function CategoriesNavigation() {
                 value={category}
                 label={category.title}
                 icon={<RestoreIcon></RestoreIcon >}
-                
+                onClick={() => {
+                  setCategory(category);
+                }}
+
               />
               {category.title}
               {/* //why is the category.title undefined????????? */}

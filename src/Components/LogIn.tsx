@@ -27,27 +27,40 @@ import Stack from '@mui/material/Stack';
 import { User } from "../utils/modals";
 import { useNavigate } from "react-router-dom";
 import { SsidChart } from "@mui/icons-material";
+import { useDispatch } from "react-redux";
+import { logIn } from "../store/Actions/User";
 
 
 export function LogIn(): JSX.Element {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const { register, handleSubmit, formState: { errors } } = useForm<User>();
     const addCustomer = async (data: User) => {
         console.log("start")
         console.log(data);
         let customerPromise = axios.get("https://localhost:44378/api/GetSpecific/" + data.password + "/" + data.firstName + "/" + data.lastName);
         let response = await customerPromise;
+        let user: User
+        user = {
+          firstName: response.data.FirstName,
+          lastName: response.data.LastName,
+          id: response.data.CustomerId,
+          password: response.data.Password,
+          email:response.data.Email
+        }
         if (response.data === null) {
             console.log("customer not found!!")
             navigate('/SignUp');
         }
-        else {
+        else {         
             <Stack sx={{ width: '100%' }} spacing={2}>
                 <Alert variant="filled" severity="success">
                     This is a success alert — check it out!
                 </Alert>
-            </Stack>
+            </Stack>         
+         dispatch(logIn(user));
+            navigate('./purchaseList')
         }
 
     }

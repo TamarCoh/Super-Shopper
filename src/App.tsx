@@ -14,9 +14,13 @@ import Nav from './Components/Nav';
 import CategoriesNavigation from './Components/AllCategory';
 import AllCategory from './Components/AllCategory';
 import PreviosPurchases from './Components/PreviousPurchases';
+import { useDispatch, useSelector } from 'react-redux';
+import { User } from './utils/modals';
 
 function App() {
-
+const dispatch =useDispatch ();
+//  dispatch(increaseProductInList((rows.filter((item: ProductByMount) => item.idrow == id.toString()).at(0))));
+//  const rows = useSelector((Use:User) => Use.currentUser);
   return (
     <div className="App">
 

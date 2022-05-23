@@ -164,7 +164,7 @@ export default function PurchaseList(): JSX.Element {
 
     };
     const handleAddClick = (id: GridRowId) => (event: React.MouseEvent) => {
-        // dispatch(increaseProductInList((rows.filter((item: ProductByMount) => item.idrow == id.toString()).at(0))));
+        //  dispatch(increaseProductInList((rows.filter((item: ProductByMount) => item.idrow == id.toString()).at(0))));
 
 
         rows.map((row: GridRowModel) => (row.id === id ? row.amount += 1 : row));

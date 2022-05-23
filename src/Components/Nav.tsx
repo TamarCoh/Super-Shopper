@@ -13,6 +13,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { connect } from "react-redux";
 import { count } from "console";
 import Enter from "./Enter";
+import { userInfo } from "os";
 
 const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -56,6 +57,7 @@ function Nav(props: any): JSX.Element {
                     {/* <AddCircleOutlineIcon></AddCircleOutlineIcon> */}
 
                 {/* </Link> */}
+                <li className="nav-links" id="currentUser">|{props.user}</li>
                 <button className="nav-links" id="nav-logIn" onClick={() => navigate('/logIn')}>
                     <li className="nav-links" id="nav-logIn" >LogIn</li>
                 </button>
@@ -68,7 +70,8 @@ const mapStateToProps = (st: any) => {
     //מתןך הסטייט הכללי
     return {
         //  myArr: st.pro.productsList,
-        count: st.pro.amountProducts
+        count: st.pro.amountProducts,
+        user: st.Use.currentUser.firstName
         // myArr:[]=[{d: 123,
         //     name: "name",
         //     category: 1,

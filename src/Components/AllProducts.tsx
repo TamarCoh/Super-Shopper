@@ -9,11 +9,14 @@ import { JsxElement } from "typescript";
 import "./AllProducts.css"
 // import Category from "./Category";
 // import ProdInCategory from "./ProdInCategory";
-import { ProductByCategory } from "../utils/modals";
+import { Category, ProductByCategory } from "../utils/modals";
 import Product from "./ProductByBuy";
 
-
-export default function AllProducts(props: any) {
+interface Prop{
+    catgory:Category,
+    productList:ProductByCategory[]
+}
+export default function AllProducts(props:Prop) {
 
     // const [category, setCategory] = useState<Category[]>();
     // const [products, setProduct] = useState<ProdInCategory[]>();
@@ -33,6 +36,7 @@ export default function AllProducts(props: any) {
         {props.catgory == null ? <span>please wait...</span> :
             <div id="wrap">
                 {props.productList == null ? <span> no products found suitable...</span> : props.productList.map((row: ProductByCategory) => (
+  
 
                     <Product product={row} key={row.id} />
 
