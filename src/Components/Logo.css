@@ -1,5 +1,12 @@
-.logo
-{
-   height:30%;
+.logo {
+   height: 30%;
    width: 30%;
+}
+
+.logo-small {
+   height: 18vh;
+   width: 10vw;
+   position: fixed;
+   left: 1vw;
+   bottom: 3vh;
 }

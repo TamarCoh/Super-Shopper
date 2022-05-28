@@ -83,37 +83,37 @@ export function LogIn(): JSX.Element {
 
 
         <div className="card">
-            <h1>Log In</h1>
+            <h1>התחברות</h1>
             <form onSubmit={handleSubmit(addCustomer)}>
 
 
                 <span className="op">
-                    <TextField id="standard-basic" variant="standard" type="text" label="FirstName"   {...register('firstName', { required: true, minLength: 2, maxLength: 10 })}
+                    <TextField id="standard-basic" variant="standard" type="text" label="שם פרטי"   {...register('firstName', { required: true, minLength: 2, maxLength: 10 })}
                     // InputProps={{ startAdornment: (<InputAdornment position="start">  <AccountCircleIcon /> </InputAdornment>), }}
                     />
-                    {errors.firstName?.type === "required" && <span>FirstName is Missing</span>}
-                    {errors.firstName?.type === "minLength" && <span>FirstName is too short</span>}
-                    {errors.firstName?.type === "maxLength" && <span>FirstName is too long</span>}
+                    {errors.firstName?.type === "required" && <span>חסר שם פרטי</span>}
+                    {errors.firstName?.type === "minLength" && <span>שם פרטי קצר מדי</span>}
+                    {errors.firstName?.type === "maxLength" && <span>שם פרטי ארוך מדי</span>}
                 </span><br />
 
                 <span className="op">
-                    <TextField id="standard-basic" variant="standard" type="text" label="LastName"  {...register('lastName', { required: true, minLength: 2, maxLength: 10 })}
+                    <TextField id="standard-basic" variant="standard" type="text" label="שם משפחה"  {...register('lastName', { required: true, minLength: 2, maxLength: 10 })}
                     // InputProps={{ startAdornment: (<InputAdornment position="start">  <AccountCircleIcon /> </InputAdornment>), }}
                     />
-                    {errors.lastName?.type === "minLength" && <span>LastName is too short</span>}
-                    {errors.lastName?.type === "maxLength" && <span>LastName is too long</span>}
-                    {errors.lastName?.type === "required" && <span>LastName is Missing</span>}
+                    {errors.lastName?.type === "minLength" && <span>שם משפחה קצר מדי</span>}
+                    {errors.lastName?.type === "maxLength" && <span>שם משפחה ארוך מדי</span>}
+                    {errors.lastName?.type === "required" && <span>חסר שם משפחה</span>}
                 </span><br />
 
 
 
                 <span className="op">
-                    <TextField id="standard-basic" variant="standard" type="password" label="Password"  {...register('password', { required: true, minLength: 6, maxLength: 8 })}
+                    <TextField id="standard-basic" variant="standard" type="password" label="סיסמה"  {...register('password', { required: true, minLength: 6, maxLength: 8 })}
                     // InputProps={{ startAdornment: (<InputAdornment position="start" > <IconButton ><VisibilityIcon /></IconButton> </InputAdornment>), }}
                     />
-                    {errors.password?.type === "required" && <span>Password is Missing</span>}
-                    {errors.password?.type === "minLength" && <span>Password is too short</span>}
-                    {errors.password?.type === "maxLength" && <span>Password is too long</span>}
+                    {errors.password?.type === "required" && <span>חסרה סיסמה</span>}
+                    {errors.password?.type === "minLength" && <span>סיסמה קצרה מדי</span>}
+                    {errors.password?.type === "maxLength" && <span>סיסמה ארוכה מדי</span>}
                 </span><br />
 
 
@@ -125,7 +125,7 @@ export function LogIn(): JSX.Element {
                 >
                     {/* //check if existing */}
                     {/* //update state with cuurrent user */}
-                    Send
+                    שלח
                 </Button>
 
 

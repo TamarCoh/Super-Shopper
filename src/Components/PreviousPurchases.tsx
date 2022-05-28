@@ -18,6 +18,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { JsxElement } from 'typescript';
 import axios from 'axios';
+import Logo from './Logo';
 
 interface IpreviosPurchase {
     orderId: string;
@@ -257,15 +258,16 @@ export default function PreviosPurchases() {
     return (
         <>
             <div id="wrap">
-                {arr == null ? <span> no purchases found ...</span> : arr.map((item: IpreviosPurchase) => (
+                {arr == null ? <span> לא נמצאו קניות קודמות...</span> : arr.map((item: IpreviosPurchase) => (
                     <div className='basicCard'>
                         <BasicCard  {...item} />
                     </div>
                 ))}
             </div>
 
-            <Button className="previosToProducts" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/allCategory') }}>Products</Button>
-            <Button className="previoustoPurchase" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/purchaseList') }}>Purchase List</Button>
+            <Button className="previosToProducts" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/allCategory') }}>מוצרים</Button>
+            <Button className="previoustoPurchase" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/purchaseList') }}>רשימת מוצרים</Button>
+            <Logo class_name={"logo-small"} />
         </>
 
     )
@@ -283,6 +285,7 @@ const bull = (
 interface INavigateProps {
     orderProducts: ProductByMount[]
 }
+
 export function BasicCard(props: IpreviosPurchase) {
     const navigate = useNavigate();
     return (
@@ -297,10 +300,10 @@ export function BasicCard(props: IpreviosPurchase) {
                 </Typography>
                 <Typography variant="h5" component="div">
                     {/* {props.orderDate.getDay()*/}{/*bull*/}{/*props.orderDate.getMonth()*/}{/*bull*/}{/*props.orderDate.getFullYear()} */}
-                    {props.orderDate.getDate()}
+                    {new Date(props.orderDate).getDate()}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    {props.orderDate.getHours()}{":" + props.orderDate.getMinutes()}
+                    {new Date(props.orderDate).getHours()}{":" + new Date(props.orderDate).getMinutes()}
                 </Typography>
                 <Typography variant="body2">
                     {/* {props.orderDate.getDate()} */}
@@ -328,9 +331,9 @@ export function OrderDetails() {
                 <Table sx={{ maxWidth: 650 }} size="small" aria-label="a dense table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Name</TableCell>
-                            <TableCell align="right">Amount</TableCell>
-                            <TableCell align="right">product id</TableCell>
+                            <TableCell>שם</TableCell>
+                            <TableCell align="right">כמות</TableCell>
+                            <TableCell align="right">קוד מוצר</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -349,6 +352,7 @@ export function OrderDetails() {
                     </TableBody>
                 </Table>
             </TableContainer>
+
         </>
     )
 }

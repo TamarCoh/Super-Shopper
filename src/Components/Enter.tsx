@@ -43,8 +43,10 @@ function ChildModal() {
         <React.Fragment>
             <>
                 {!open && <div>
-                    <>Don't have an account?</>
-                    <Button id="lin" onClick={handleOpen}>sign up</Button></div>}
+                    <Button id="lin" onClick={handleOpen}>רישום</Button>
+                    <>?משתמש חדש    </>
+                    </div>
+                }
                 <Modal
                     hideBackdrop
                     open={open}
@@ -54,8 +56,8 @@ function ChildModal() {
                 >
                     <>
                         <SignUp />
-                        <>A registered user?</>
-                        <Button id="lin" onClick={handleClose} >log in</Button>
+                        <Button id="lin" onClick={handleClose} >התחברות</Button>
+                        <>?רשום כבר   </>
 
                     </>
 
@@ -76,8 +78,8 @@ export function Enter(props: IMyProps) {
     const navigate = useNavigate();
     return (
         <div>
-            <Logo />
-            <Button id='eneter' onClick={handleOpen}>Enter</Button>
+            <Logo class_name={"logo"} />
+            <Button id='eneter' onClick={handleOpen}>כניסה</Button>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -93,8 +95,8 @@ export function Enter(props: IMyProps) {
             </Modal>
 
             <Stack direction="row" >
-                <div id="left" onClick={() => navigate('./PreviousPurchases')}><IconButton ><ArrowBackTwoToneIcon />My Previous Purchases </IconButton></div>
-                <div id="right" onClick={() => navigate('./purchaseList')}><IconButton >Make me a purchase <ArrowForwardIcon /></IconButton></div>
+                <div id="left" onClick={() => navigate('./PreviousPurchases')}><IconButton ><ArrowBackTwoToneIcon />קניות קודמות שלי </IconButton></div>
+                <div id="right" onClick={() => navigate('./purchaseList')}><IconButton >הכן לי רשימת קניות <ArrowForwardIcon /></IconButton></div>
             </Stack >
 
         </div >

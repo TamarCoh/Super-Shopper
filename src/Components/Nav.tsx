@@ -47,11 +47,11 @@ function Nav(props: any): JSX.Element {
                 </Link>
                 <Link to='/' className="nav-links" >
                     {/* <HomeRoundedIcon></HomeRoundedIcon> */}
-                    <li className="nav-links">Home</li>
+                    <li className="nav-links">כניסה</li>
                 </Link>
                 <Link to='/allCategory' className="nav-links" >
                     {/* <AddCircleOutlineIcon></AddCircleOutlineIcon> */}
-                    <li className="nav-links">AllProducts</li>
+                    <li className="nav-links">מוצרים</li>
                 </Link>
                 {/* <Link to='/logIn' className="nav-links" id="nav-logIn">
                     {/* <AddCircleOutlineIcon></AddCircleOutlineIcon> */}
@@ -59,7 +59,7 @@ function Nav(props: any): JSX.Element {
                 {/* </Link> */}
                 <li className="nav-links" id="currentUser">|{props.user}</li>
                 <button className="nav-links" id="nav-logIn" onClick={() => navigate('/logIn')}>
-                    <li className="nav-links" id="nav-logIn" >LogIn</li>
+                    <li className="nav-links" id="nav-logIn" >התחברות</li>
                 </button>
             </ul >
         </div >
