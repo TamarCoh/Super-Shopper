@@ -22,6 +22,7 @@ import "./AllProducts.css";
 import { margin } from "@mui/system";
 import { useDispatch } from "react-redux";
 import { increaseProductInList } from "../store/Actions/ProductInList";
+import { randomId } from "@mui/x-data-grid-generator";
 
 function AddProductBuy(
   product: ProductByCategory,
@@ -29,6 +30,7 @@ function AddProductBuy(
   dispatch: any
 ) {
   let productByBuy: ProductByMount = {} as ProductByMount;
+  productByBuy.idrow=randomId()
   productByBuy.name = product.name;
   productByBuy.id = product.id;
   productByBuy.amount = amount;
@@ -114,7 +116,7 @@ export default function Product(props: any) {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {props.product.Name}
+          {props.product.name}
         </Typography>
       </CardContent>
       <CardActions>

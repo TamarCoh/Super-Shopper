@@ -135,11 +135,19 @@ function EditToolbar(props: EditToolbarProps) {
         </GridToolbarContainer>
     );
 }
-
-export default function PurchaseList(): JSX.Element {
-    const apiRef = useGridApiRef();
-    const rows = useSelector<IstatePro, ProductByMount[]>(state => state.productsList);
-
+const mapStateToProps = (st: any) => {
+    //הפונקציה תחזיר אובייקט ובו כל השדות שאנו רוצים שייכנסו לפרופס של הקומםוננטה שלנו
+    //מתןך הסטייט הכללי
+    debugger
+    return {
+        productList:st.pro.productsList
+    };
+}
+export default connect(mapStateToProps)(function PurchaseList(props:any): JSX.Element {
+    // const apiRef = useGridApiRef();
+    const rows=props.productList
+    // const rows = useSelector<IstatePro, ProductByMount[]>(state => state.productsList);
+   
     const dispatch = useDispatch();
 
     const handleRowEditStart = (
@@ -160,29 +168,35 @@ export default function PurchaseList(): JSX.Element {
     //update state in every action
     const handleDeleteClick = (id: GridRowId) => (event: React.MouseEvent) => {
         event.stopPropagation();
-        apiRef.current.updateRows([{ id, _action: 'delete' }]);
+        // apiRef.current.updateRows([{ id, _action: 'delete' }]);
 
     };
     const handleAddClick = (id: GridRowId) => (event: React.MouseEvent) => {
-        //  dispatch(increaseProductInList((rows.filter((item: ProductByMount) => item.idrow == id.toString()).at(0))));
+debugger
+        let p=rows.find((item: ProductByMount) => item.id == id) as ProductByMount
+        // if(p)
+        // == undefined ? {} as ProductByMount : rows.find((item: ProductByMount) => item.idrow == id)
+         dispatch(increaseProductInList(p));
 
-
-        rows.map((row: GridRowModel) => (row.id === id ? row.amount += 1 : row));
+        // rows.map((row: GridRowModel) => {if(row.id === id) row.amount += 1 ;return row});
 
     };
     const handleReductionClick = (id: GridRowId) => (event: React.MouseEvent) => {
+        let p=rows.find((item: ProductByMount) => item.id == id) as ProductByMount
+        // if(p)
+        // == undefined ? {} as ProductByMount : rows.find((item: ProductByMount) => item.idrow == id)
+         dispatch(decreaseProductInList(p));
 
-        rows.map((row: GridRowModel) => (row.id === id ? row.amount -= 1 : row));
 
     };
     const handleCancelClick = (id: GridRowId) => async (event: React.MouseEvent) => {
         event.stopPropagation();
-        await apiRef.current.stopRowEditMode({ id, ignoreModifications: true });
+        // await apiRef.current.stopRowEditMode({ id, ignoreModifications: true });
 
-        const row = apiRef.current.getRow(id);
-        if (row!.isNew) {
-            apiRef.current.updateRows([{ id, _action: 'delete' }]);
-        }
+        // const row = apiRef.current.getRow(id);
+        // if (row!.isNew) {
+        //     apiRef.current.updateRows([{ id, _action: 'delete' }]);
+        // }
     };
 
     const processRowUpdate = async (newRow: GridRowModel) => {
@@ -270,7 +284,7 @@ export default function PurchaseList(): JSX.Element {
             <DataGridPro
                 rows={rows}
                 columns={columns}
-                apiRef={apiRef}
+                // apiRef={apiRef}
                 editMode="row"
                 onRowEditStart={handleRowEditStart}
                 onRowEditStop={handleRowEditStop}
@@ -278,9 +292,9 @@ export default function PurchaseList(): JSX.Element {
                 components={{
                     Toolbar: EditToolbar,
                 }}
-                componentsProps={{
-                    toolbar: { apiRef },
-                }}
+                // componentsProps={{
+                //     toolbar: { apiRef },
+                // }}
                 experimentalFeatures={{ newEditingApi: true }}
             />
             <Button onClick={() => { }}>SAVE</Button>
@@ -289,4 +303,4 @@ export default function PurchaseList(): JSX.Element {
 
     );
 
-}
+}) 

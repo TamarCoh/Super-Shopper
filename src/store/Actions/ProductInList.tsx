@@ -1,4 +1,4 @@
-import { ProductByMount } from "../../utils/modals";
+import { ProductByMount, User } from "../../utils/modals";
 import *  as Action_Types from "../actionsTypes";
 // export const addProductToList = (product: ProductByMount) => {
 //     return {
@@ -22,5 +22,11 @@ export const decreaseProductInList = (product: ProductByMount) => {
     return {
         type: Action_Types.DECREASE_PRODUCT,
         payload: product
+    }
+}
+export const getPurchaseList = (user:User) => {
+    return {
+        type: Action_Types.GET_PURCHASE_LIST,
+        payload: user
     }
 }

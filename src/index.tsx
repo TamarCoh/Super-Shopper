@@ -19,7 +19,7 @@ declare global {
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = legacy_createStore(
+ const store = legacy_createStore(
   combineReducers({ pro: productInListReducer,Use:userReducer }),
   composeEnhancers()
 );

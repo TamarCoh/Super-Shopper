@@ -1,6 +1,6 @@
 import ReplyRoundedIcon from '@mui/icons-material/ReplyRounded';
 import { Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate, useLocation, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import "./PreviousPurchases.css";
 import * as React from 'react';
 import Box from '@mui/material/Box';
@@ -16,214 +16,244 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { JsxElement } from 'typescript';
+import axios from 'axios';
 
 interface IpreviosPurchase {
-    orderName: string;
+    orderId: string;
     orderDate: Date;
-    orderMail: String;
-    orderProducts: ProductByMount[];
+    orderDescription: String;
+    // orderProducts: ProductByMount[];
 
+}
+async function getPreviouses() {
+    let previosesList: IpreviosPurchase[] = [];
+    try {
+        const res = await axios.get(`https://localhost:44378/api/PurchasesHistory/${5}`);
+        debugger
+        previosesList = res.data.map((item: any) => {
+            let previous: IpreviosPurchase
+            previous = {
+                orderId: item.PurchasesHistoryId,
+                orderDate: item.PurchaseDate,
+                orderDescription: item.Description,
+                // OrderDetails: item. ;
+            }
+            return previous as IpreviosPurchase
+        })
+    } catch (err) {
+        previosesList = [];
+        console.log("previouses catch: " + err);
+    }
+    return previosesList;
+    // return mockupCategoriesList;
 }
 export default function PreviosPurchases() {
     const navigate = useNavigate();
+    const [arr, setArr] = React.useState<IpreviosPurchase[]>();
     const ref = React.useRef<HTMLDivElement>(null);
-
-    const arr: IpreviosPurchase[] = [
-        {
-            orderName: "first",
-            orderDate: new Date(),
-            orderMail: "orabenesh@gmail.com",
-            orderProducts: [
-                {
-                    idrow: "dgsa",
-                    id: 123,
-                    name: "bread",
-                    category: 1,
-                    PurchasesHistoryId: "45",
-                    PurchasePrognosisId: "63",
-                    amount: 1
-                },
-                {
-                    idrow: "bhj",
-                    id: 122,
-                    name: "milk",
-                    category: 2,
-                    PurchasesHistoryId: "45",
-                    PurchasePrognosisId: "63",
-                    amount: 3
-                }
-            ]
-        },
-        {
-            orderName: "second",
-            orderDate: new Date(),
-            orderMail: "orabenesh@gmail.com",
-            orderProducts: [
-                {
-                    idrow: "dgsa",
-                    id: 123,
-                    name: "bread",
-                    category: 1,
-                    PurchasesHistoryId: "45",
-                    PurchasePrognosisId: "63",
-                    amount: 1
-                },
-                {
-                    idrow: "bhj",
-                    id: 122,
-                    name: "milk",
-                    category: 2,
-                    PurchasesHistoryId: "45",
-                    PurchasePrognosisId: "63",
-                    amount: 3
-                }
-            ]
-        }, {
-            orderName: "third",
-            orderDate: new Date(),
-            orderMail: "orabenesh@gmail.com",
-            orderProducts: [
-                {
-                    idrow: "dgsa",
-                    id: 123,
-                    name: "bread",
-                    category: 1,
-                    PurchasesHistoryId: "45",
-                    PurchasePrognosisId: "63",
-                    amount: 1
-                },
-                {
-                    idrow: "bhj",
-                    id: 122,
-                    name: "milk",
-                    category: 2,
-                    PurchasesHistoryId: "45",
-                    PurchasePrognosisId: "63",
-                    amount: 3
-                }
-            ]
-        }, {
-            orderName: "fourth",
-            orderDate: new Date(),
-            orderMail: "orabenesh@gmail.com",
-            orderProducts: [
-                {
-                    idrow: "dgsa",
-                    id: 123,
-                    name: "bread",
-                    category: 1,
-                    PurchasesHistoryId: "45",
-                    PurchasePrognosisId: "63",
-                    amount: 1
-                },
-                {
-                    idrow: "bhj",
-                    id: 122,
-                    name: "milk",
-                    category: 2,
-                    PurchasesHistoryId: "45",
-                    PurchasePrognosisId: "63",
-                    amount: 3
-                }
-            ]
-        }, {
-            orderName: "fifth",
-            orderDate: new Date(),
-            orderMail: "orabenesh@gmail.com",
-            orderProducts: [
-                {
-                    idrow: "dgsa",
-                    id: 123,
-                    name: "bread",
-                    category: 1,
-                    PurchasesHistoryId: "45",
-                    PurchasePrognosisId: "63",
-                    amount: 1
-                },
-                {
-                    idrow: "bhj",
-                    id: 122,
-                    name: "milk",
-                    category: 2,
-                    PurchasesHistoryId: "45",
-                    PurchasePrognosisId: "63",
-                    amount: 3
-                }
-            ]
-        }, {
-            orderName: "six",
-            orderDate: new Date(),
-            orderMail: "orabenesh@gmail.com",
-            orderProducts: [
-                {
-                    idrow: "dgsa",
-                    id: 123,
-                    name: "bread",
-                    category: 1,
-                    PurchasesHistoryId: "45",
-                    PurchasePrognosisId: "63",
-                    amount: 1
-                },
-                {
-                    idrow: "bhj",
-                    id: 122,
-                    name: "milk",
-                    category: 2,
-                    PurchasesHistoryId: "45",
-                    PurchasePrognosisId: "63",
-                    amount: 3
-                }
-            ]
-        }, {
-            orderName: "seven",
-            orderDate: new Date(),
-            orderMail: "orabenesh@gmail.com",
-            orderProducts: [
-                {
-                    idrow: "dgsa",
-                    id: 123,
-                    name: "bread",
-                    category: 1,
-                    PurchasesHistoryId: "45",
-                    PurchasePrognosisId: "63",
-                    amount: 1
-                },
-                {
-                    idrow: "bhj",
-                    id: 122,
-                    name: "milk",
-                    category: 2,
-                    PurchasesHistoryId: "45",
-                    PurchasePrognosisId: "63",
-                    amount: 3
-                }
-            ]
-        }, {
-            orderName: "eight",
-            orderDate: new Date(),
-            orderMail: "orabenesh@gmail.com",
-            orderProducts: [
-                {
-                    idrow: "dgsa",
-                    id: 123,
-                    name: "bread",
-                    category: 1,
-                    PurchasesHistoryId: "45",
-                    PurchasePrognosisId: "63",
-                    amount: 1
-                },
-                {
-                    idrow: "bhj",
-                    id: 122,
-                    name: "milk",
-                    category: 2,
-                    PurchasesHistoryId: "45",
-                    PurchasePrognosisId: "63",
-                    amount: 3
-                }
-            ]
-        },
-    ];
+    async function anyNameFunction() {
+        const tempPreviouses = await getPreviouses();
+        debugger
+        setArr(tempPreviouses);
+    }
+    anyNameFunction();
+    // = [
+    //     {
+    //         orderName: "first",
+    //         orderDate: new Date(),
+    //         orderMail: "orabenesh@gmail.com",
+    //         orderProducts: [
+    //             {
+    //                 idrow: "dgsa",
+    //                 id: 123,
+    //                 name: "bread",
+    //                 category: 1,
+    //                 PurchasesHistoryId: "45",
+    //                 PurchasePrognosisId: "63",
+    //                 amount: 1
+    //             },
+    //             {
+    //                 idrow: "bhj",
+    //                 id: 122,
+    //                 name: "milk",
+    //                 category: 2,
+    //                 PurchasesHistoryId: "45",
+    //                 PurchasePrognosisId: "63",
+    //                 amount: 3
+    //             }
+    //         ]
+    //     },
+    //     {
+    //         orderName: "second",
+    //         orderDate: new Date(),
+    //         orderMail: "orabenesh@gmail.com",
+    //         orderProducts: [
+    //             {
+    //                 idrow: "dgsa",
+    //                 id: 123,
+    //                 name: "bread",
+    //                 category: 1,
+    //                 PurchasesHistoryId: "45",
+    //                 PurchasePrognosisId: "63",
+    //                 amount: 1
+    //             },
+    //             {
+    //                 idrow: "bhj",
+    //                 id: 122,
+    //                 name: "milk",
+    //                 category: 2,
+    //                 PurchasesHistoryId: "45",
+    //                 PurchasePrognosisId: "63",
+    //                 amount: 3
+    //             }
+    //         ]
+    //     }, {
+    //         orderName: "third",
+    //         orderDate: new Date(),
+    //         orderMail: "orabenesh@gmail.com",
+    //         orderProducts: [
+    //             {
+    //                 idrow: "dgsa",
+    //                 id: 123,
+    //                 name: "bread",
+    //                 category: 1,
+    //                 PurchasesHistoryId: "45",
+    //                 PurchasePrognosisId: "63",
+    //                 amount: 1
+    //             },
+    //             {
+    //                 idrow: "bhj",
+    //                 id: 122,
+    //                 name: "milk",
+    //                 category: 2,
+    //                 PurchasesHistoryId: "45",
+    //                 PurchasePrognosisId: "63",
+    //                 amount: 3
+    //             }
+    //         ]
+    //     }, {
+    //         orderName: "fourth",
+    //         orderDate: new Date(),
+    //         orderMail: "orabenesh@gmail.com",
+    //         orderProducts: [
+    //             {
+    //                 idrow: "dgsa",
+    //                 id: 123,
+    //                 name: "bread",
+    //                 category: 1,
+    //                 PurchasesHistoryId: "45",
+    //                 PurchasePrognosisId: "63",
+    //                 amount: 1
+    //             },
+    //             {
+    //                 idrow: "bhj",
+    //                 id: 122,
+    //                 name: "milk",
+    //                 category: 2,
+    //                 PurchasesHistoryId: "45",
+    //                 PurchasePrognosisId: "63",
+    //                 amount: 3
+    //             }
+    //         ]
+    //     }, {
+    //         orderName: "fifth",
+    //         orderDate: new Date(),
+    //         orderMail: "orabenesh@gmail.com",
+    //         orderProducts: [
+    //             {
+    //                 idrow: "dgsa",
+    //                 id: 123,
+    //                 name: "bread",
+    //                 category: 1,
+    //                 PurchasesHistoryId: "45",
+    //                 PurchasePrognosisId: "63",
+    //                 amount: 1
+    //             },
+    //             {
+    //                 idrow: "bhj",
+    //                 id: 122,
+    //                 name: "milk",
+    //                 category: 2,
+    //                 PurchasesHistoryId: "45",
+    //                 PurchasePrognosisId: "63",
+    //                 amount: 3
+    //             }
+    //         ]
+    //     }, {
+    //         orderName: "six",
+    //         orderDate: new Date(),
+    //         orderMail: "orabenesh@gmail.com",
+    //         orderProducts: [
+    //             {
+    //                 idrow: "dgsa",
+    //                 id: 123,
+    //                 name: "bread",
+    //                 category: 1,
+    //                 PurchasesHistoryId: "45",
+    //                 PurchasePrognosisId: "63",
+    //                 amount: 1
+    //             },
+    //             {
+    //                 idrow: "bhj",
+    //                 id: 122,
+    //                 name: "milk",
+    //                 category: 2,
+    //                 PurchasesHistoryId: "45",
+    //                 PurchasePrognosisId: "63",
+    //                 amount: 3
+    //             }
+    //         ]
+    //     }, {
+    //         orderName: "seven",
+    //         orderDate: new Date(),
+    //         orderMail: "orabenesh@gmail.com",
+    //         orderProducts: [
+    //             {
+    //                 idrow: "dgsa",
+    //                 id: 123,
+    //                 name: "bread",
+    //                 category: 1,
+    //                 PurchasesHistoryId: "45",
+    //                 PurchasePrognosisId: "63",
+    //                 amount: 1
+    //             },
+    //             {
+    //                 idrow: "bhj",
+    //                 id: 122,
+    //                 name: "milk",
+    //                 category: 2,
+    //                 PurchasesHistoryId: "45",
+    //                 PurchasePrognosisId: "63",
+    //                 amount: 3
+    //             }
+    //         ]
+    //     }, {
+    //         orderName: "eight",
+    //         orderDate: new Date(),
+    //         orderMail: "orabenesh@gmail.com",
+    //         orderProducts: [
+    //             {
+    //                 idrow: "dgsa",
+    //                 id: 123,
+    //                 name: "bread",
+    //                 category: 1,
+    //                 PurchasesHistoryId: "45",
+    //                 PurchasePrognosisId: "63",
+    //                 amount: 1
+    //             },
+    //             {
+    //                 idrow: "bhj",
+    //                 id: 122,
+    //                 name: "milk",
+    //                 category: 2,
+    //                 PurchasesHistoryId: "45",
+    //                 PurchasePrognosisId: "63",
+    //                 amount: 3
+    //             }
+    //         ]
+    //     },
+    // ];
     return (
         <>
             <div id="wrap">
@@ -250,49 +280,61 @@ const bull = (
         •
     </Box>
 );
-
+interface INavigateProps {
+    orderProducts: ProductByMount[]
+}
 export function BasicCard(props: IpreviosPurchase) {
+    const navigate = useNavigate();
     return (
+        // <Router>
+        //     <Routes>
+        //         <Route path="/basicCard" element={<BasicCard {...props}/>} />
+        //         <Route path="/orderDetails" element={<OrderDetails {...props.productsList}/>} />
         <Card sx={{ maxWidth: 275 }}>
             <CardContent>
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                    {props.orderName}
+                    {props.orderId}
                 </Typography>
                 <Typography variant="h5" component="div">
-                    {props.orderDate.getDay()}{bull}{props.orderDate.getMonth()}{bull}{props.orderDate.getFullYear()}
-                    {/* {props.orderDate.toDateString()} */}
+                    {/* {props.orderDate.getDay()*/}{/*bull*/}{/*props.orderDate.getMonth()*/}{/*bull*/}{/*props.orderDate.getFullYear()} */}
+                    {props.orderDate.getDate()}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
                     {props.orderDate.getHours()}{":" + props.orderDate.getMinutes()}
                 </Typography>
                 <Typography variant="body2">
                     {/* {props.orderDate.getDate()} */}
-                    {props.orderMail}
+                    {props.orderDescription}
                     <br />
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small" onClick={() => { <OrderDetails {...props.orderProducts} /> }}>show order products</Button>
+                {/* <Button size="small" onClick={() => { navigate('./orderDetails', { state: { orderProducts: props.orderProducts } as INavigateProps }) }}>show order products</Button> */}
             </CardActions>
         </Card>
+        //     </Routes>
+        // </Router>
     );
 }
 
-export function OrderDetails(props: ProductByMount[]) {
+export function OrderDetails() {
+    const location = useLocation()
+    const from = location.state as INavigateProps
 
+    debugger
     return (
         <>
             <TableContainer component={Paper}>
                 <Table sx={{ maxWidth: 650 }} size="small" aria-label="a dense table">
                     <TableHead>
                         <TableRow>
-                            <TableCell>Nmae</TableCell>
+                            <TableCell>Name</TableCell>
                             <TableCell align="right">Amount</TableCell>
                             <TableCell align="right">product id</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {props.map((row: ProductByMount) => (
+                        {from.orderProducts.map((row: ProductByMount) => (
                             <TableRow
                                 key={row.name}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
