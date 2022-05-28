@@ -70,6 +70,7 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import { productInListReducer } from "../store/Reducers/ProductInList";
 import { IstatePro } from '../store/Reducers/ProductInList'
 import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
+import Logo from "./Logo";
 // const rows: GridRowModel = [
 //     {
 //         id: randomId(),
@@ -127,10 +128,10 @@ function EditToolbar(props: EditToolbarProps) {
     return (
         <GridToolbarContainer>
             <Button color="primary" startIcon={<AddIcon />} onClick={() => { navigate('/allCategory'); }}>
-                Add Products
+                הוספת מוצרים
             </Button>
             <Button color="primary" startIcon={<ExitToAppRoundedIcon />} onClick={() => { navigate('/PreviousPurchases'); }}>
-                My Previous Purchases
+                קניות קודמות שלי
             </Button>
         </GridToolbarContainer>
     );
@@ -140,14 +141,14 @@ const mapStateToProps = (st: any) => {
     //מתןך הסטייט הכללי
     debugger
     return {
-        productList:st.pro.productsList
+        productList: st.pro.productsList
     };
 }
-export default connect(mapStateToProps)(function PurchaseList(props:any): JSX.Element {
+export default connect(mapStateToProps)(function PurchaseList(props: any): JSX.Element {
     // const apiRef = useGridApiRef();
-    const rows=props.productList
+    const rows = props.productList
     // const rows = useSelector<IstatePro, ProductByMount[]>(state => state.productsList);
-   
+
     const dispatch = useDispatch();
 
     const handleRowEditStart = (
@@ -172,20 +173,20 @@ export default connect(mapStateToProps)(function PurchaseList(props:any): JSX.El
 
     };
     const handleAddClick = (id: GridRowId) => (event: React.MouseEvent) => {
-debugger
-        let p=rows.find((item: ProductByMount) => item.id == id) as ProductByMount
+        debugger
+        let p = rows.find((item: ProductByMount) => item.id == id) as ProductByMount
         // if(p)
         // == undefined ? {} as ProductByMount : rows.find((item: ProductByMount) => item.idrow == id)
-         dispatch(increaseProductInList(p));
+        dispatch(increaseProductInList(p));
 
         // rows.map((row: GridRowModel) => {if(row.id === id) row.amount += 1 ;return row});
 
     };
     const handleReductionClick = (id: GridRowId) => (event: React.MouseEvent) => {
-        let p=rows.find((item: ProductByMount) => item.id == id) as ProductByMount
+        let p = rows.find((item: ProductByMount) => item.id == id) as ProductByMount
         // if(p)
         // == undefined ? {} as ProductByMount : rows.find((item: ProductByMount) => item.idrow == id)
-         dispatch(decreaseProductInList(p));
+        dispatch(decreaseProductInList(p));
 
 
     };
@@ -204,12 +205,12 @@ debugger
     };
 
     const columns: GridColumns = [
-        { field: 'name', headerName: 'Name', width: 180, editable: true },
+        { field: 'name', headerName: 'שם', width: 180, editable: true },
 
         {
             field: 'add',
             type: 'actions',
-            headerName: 'Add',
+            headerName: '+',
             width: 100,
             cellClassName: 'add',
             getActions: ({ id }) => {
@@ -217,18 +218,18 @@ debugger
 
                     <GridActionsCellItem
                         icon={<AddIcon />}
-                        label="Delete"
+                        label="מחיקה"
                         onClick={handleAddClick(id)}
                         color="inherit"
                     />,
                 ];
             },
         },
-        { field: 'amount', headerName: 'Amount', type: 'number', editable: true },
+        { field: 'amount', headerName: 'כמות', type: 'number', editable: true },
         {
             field: 'reduction',
             type: 'actions',
-            headerName: 'reduction',
+            headerName: '-',
             width: 100,
             cellClassName: 'reduction',
             getActions: ({ id }) => {
@@ -236,7 +237,7 @@ debugger
 
                     <GridActionsCellItem
                         icon={<RemoveIcon />}
-                        label="Delete"
+                        label="מחיקה"
                         onClick={handleReductionClick(id)}
                         color="inherit"
                     />,
@@ -246,7 +247,7 @@ debugger
         {
             field: 'Delete',
             type: 'actions',
-            headerName: 'Delete',
+            headerName: 'מחיקה',
             width: 100,
             cellClassName: 'Delete',
             getActions: ({ id }) => {
@@ -254,7 +255,7 @@ debugger
 
                     <GridActionsCellItem
                         icon={<DeleteIcon />}
-                        label="Delete"
+                        label="מחיקה"
                         onClick={handleDeleteClick(id)}
                         //         () => {
 
@@ -269,38 +270,40 @@ debugger
     ];
 
     return (
-        <Box
-            sx={{
-                height: 500,
-                width: '100%',
-                '& .actions': {
-                    color: 'text.secondary',
-                },
-                '& .textPrimary': {
-                    color: 'text.primary',
-                },
-            }}
-        >
-            <DataGridPro
-                rows={rows}
-                columns={columns}
-                // apiRef={apiRef}
-                editMode="row"
-                onRowEditStart={handleRowEditStart}
-                onRowEditStop={handleRowEditStop}
-                processRowUpdate={processRowUpdate}
-                components={{
-                    Toolbar: EditToolbar,
+        <>
+            <Box
+                sx={{
+                    height: 500,
+                    width: '100%',
+                    '& .actions': {
+                        color: 'text.secondary',
+                    },
+                    '& .textPrimary': {
+                        color: 'text.primary',
+                    },
                 }}
-                // componentsProps={{
-                //     toolbar: { apiRef },
-                // }}
-                experimentalFeatures={{ newEditingApi: true }}
-            />
-            <Button onClick={() => { }}>SAVE</Button>
-            {/* //update DB by state */}
-        </Box>
-
+            >
+                <DataGridPro
+                    rows={rows}
+                    columns={columns}
+                    // apiRef={apiRef}
+                    editMode="row"
+                    onRowEditStart={handleRowEditStart}
+                    onRowEditStop={handleRowEditStop}
+                    processRowUpdate={processRowUpdate}
+                    components={{
+                        Toolbar: EditToolbar,
+                    }}
+                    // componentsProps={{
+                    //     toolbar: { apiRef },
+                    // }}
+                    experimentalFeatures={{ newEditingApi: true }}
+                />
+                <Button onClick={() => { }}>שמור</Button>
+                {/* //update DB by state */}
+            </Box>
+            <Logo class_name={"logo-small"} />
+        </>
     );
 
 }) 

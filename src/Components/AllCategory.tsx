@@ -21,6 +21,8 @@ import './AllCategory.css';
 import { Button } from "@mui/material";
 import ReplyRoundedIcon from '@mui/icons-material/ReplyRounded';
 import { useNavigate } from "react-router-dom";
+import Logo from "./Logo";
+import './Logo.css'
 // import AllProducts from "./AllProducts";
 
 
@@ -45,13 +47,13 @@ async function getCategories() {
   try {
     const res = await axios.get("https://localhost:44378/api/Category");
     // debugger
-    categoriesList = res.data.map((item:any)=>{
+    categoriesList = res.data.map((item: any) => {
       let category: Category
       category = {
         id: item.ProductCategoryId,
         title: item.Name
       }
-       return category as Category
+      return category as Category
     })
   } catch (err) {
     categoriesList = [];
@@ -67,7 +69,7 @@ async function getProductsByCategory(category: Category) {
     const res = await axios.get(
       `https://localhost:44378/api/GetProductsByCategoryId/${category.id}`);
 
-     debugger
+    debugger
     // productList 
     //= res.data as ProductByCategory[]
     productList = res.data.map((p: any) => {
@@ -77,7 +79,7 @@ async function getProductsByCategory(category: Category) {
         id: p.ProductId,
         category: p.ProductCategoryId
       }
-       return product as ProductByCategory
+      return product as ProductByCategory
     });
   }
   catch (err) {
@@ -127,11 +129,11 @@ export default function CategoriesNavigation() {
             setCategory(newValue);
           }}
         >
-          {categoryList == null ? <span> no categories</span> : categoryList.map((category: Category) =>
+          {categoryList == null ? <span> רשימת הקטגוריות ריקה</span> : categoryList.map((category: Category) =>
           (
             <>
               < BottomNavigationAction
-              className="bottomNavigationAction"
+                className="bottomNavigationAction"
                 value={category}
                 label={category.title}
                 // icon={<RestoreIcon></RestoreIcon >}
@@ -147,8 +149,9 @@ export default function CategoriesNavigation() {
         </BottomNavigation>
       </Paper>
       <AllProducts productList={productList} catgory={category}></AllProducts>
-      <Button className="categoriesToPrevios" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/previousPurchases') }}>Previos Purchases</Button>
-      <Button className="categoriestoPurchase" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/purchaseList') }}>Purchase List</Button>
+      <Button className="categoriesToPrevios" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/previousPurchases') }}>קניות קודמות שלי</Button>
+      <Button className="categoriestoPurchase" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/purchaseList') }}>רשימת קניות</Button>
+      <Logo class_name={"logo-small"} />
     </Box>
   );
 }

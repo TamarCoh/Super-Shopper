@@ -33,9 +33,9 @@ export default function AllProducts(props:Prop) {
     //     });
     // }, []);
     return (<>
-        {props.catgory == null ? <span>please wait...</span> :
+        {props.catgory == null ? <span>אנא המתן...</span> :
             <div id="wrap">
-                {props.productList == null ? <span> no products found suitable...</span> : props.productList.map((row: ProductByCategory) => (
+                {props.productList == null ? <span> לא נמצאו מוצרים תואמים...</span> : props.productList.map((row: ProductByCategory) => (
   
 
                     <Product product={row} key={row.id} />
