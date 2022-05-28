@@ -71,7 +71,7 @@ const mapStateToProps = (st: any) => {
     return {
         //  myArr: st.pro.productsList,
         count: st.pro.amountProducts,
-        user: st.Use.currentUser.firstName
+        user: st.Use.currentUser
         // myArr:[]=[{d: 123,
         //     name: "name",
         //     category: 1,

@@ -33,7 +33,7 @@ export interface ProductByMount {
     idrow: string,
     id: number,
     name: string,
-    category: number,
+   // category: number,
     PurchasesHistoryId: string,
     PurchasePrognosisId: string,
     amount: number

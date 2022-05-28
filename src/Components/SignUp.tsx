@@ -21,13 +21,15 @@ export function SignUp(): JSX.Element {
     // const url = "https://localhost:44378/";
     const { register, handleSubmit, formState: { errors } } = useForm<User>();
     const addCustomer = async (data: User) => {
-
+        debugger
         console.log("start")
         console.log(data);
         let customerPromise = axios.post("https://localhost:44378/api/Customer", data);
+        debugger
         let response = await customerPromise;
         console.log(response.data);
-        navigate('/PurchaseList')
+        debugger
+        navigate('/purchaseList')
     }
     return <div >
 

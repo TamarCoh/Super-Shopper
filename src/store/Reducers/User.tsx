@@ -1,8 +1,16 @@
 import { User } from "../../utils/modals"
-const initialState = {
-    currentUser: null,
+const initialState: User = {
+    // currentUser: {
+    //     firstName: "יהודה",
+    //     lastName: "כהן",
+    //     id: 123,
+    //     password: 876235,
+    //     email: "YC458@gmail.com"
+    // },
+
+
     // usersList: [] = []
-}
+} as User
 // interface IuserState{
 //     current:User;
 // }
@@ -10,18 +18,20 @@ export const userReducer = (state = initialState, action: any) => {
     switch (action.type) {
 
         case "logIn":
+            debugger;
             return {
-                // ...state,
-                currentUser: action.payload
+
+                state: action.payload
+
             }
         case "logOut":
             return {
                 // ...state,
-                currentUser: null
+                state: null
             }
         case "SignUp":
             return {
-                currentUser: action.payload,
+                state: action.payload,
                 // usersList: [...state.usersList, action.payload]
             }
     }

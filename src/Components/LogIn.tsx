@@ -29,6 +29,7 @@ import { useNavigate } from "react-router-dom";
 import { SsidChart } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { logIn } from "../store/Actions/User";
+import { getPurchaseList } from "../store/Actions/ProductInList";
 
 
 export function LogIn(): JSX.Element {
@@ -37,31 +38,43 @@ export function LogIn(): JSX.Element {
     const dispatch = useDispatch();
     const { register, handleSubmit, formState: { errors } } = useForm<User>();
     const addCustomer = async (data: User) => {
-        console.log("start")
-        console.log(data);
-        let customerPromise = axios.get("https://localhost:44378/api/GetSpecific/" + data.password + "/" + data.firstName + "/" + data.lastName);
-        let response = await customerPromise;
-        let user: User
-        user = {
-          firstName: response.data.FirstName,
-          lastName: response.data.LastName,
-          id: response.data.CustomerId,
-          password: response.data.Password,
-          email:response.data.Email
+        try {
+            debugger
+            console.log("start")
+            console.log(data);
+            let customerPromise = await axios.get(`https://localhost:44378/api/GetSpecific/${data.password}/${data.firstName}/${data.lastName}`).then(response => {
+                if (response.data == null) {
+                    console.log("customer not found!!")
+                    navigate('/SignUp');
+                }
+                let user: User
+                user = {
+                    firstName: response.data.FirstName,
+                    lastName: response.data.LastName,
+                    id: response.data.CustomerId,
+                    password: response.data.Password,
+                    email: response.data.Email
+                }
+                console.log("user :   " + {user});
+                dispatch(getPurchaseList(user))
+                dispatch(logIn(user));
+                navigate('./purchaseList')
+            })
         }
-        if (response.data === null) {
-            console.log("customer not found!!")
-            navigate('/SignUp');
+        catch {
+            console.log(errors)
         }
-        else {         
-            <Stack sx={{ width: '100%' }} spacing={2}>
-                <Alert variant="filled" severity="success">
-                    This is a success alert — check it out!
-                </Alert>
-            </Stack>         
-         dispatch(logIn(user));
-            navigate('./purchaseList')
-        }
+        // <Stack sx={{ width: '100%' }} spacing={2}>
+        //     <Alert variant="filled" severity="success">
+        //         This is a success alert — check it out!
+        //     </Alert>
+        // </Stack>
+        // if (response.data === null) {
+        //    
+        // }
+        // else {
+
+        // }
 
     }
 
@@ -108,7 +121,8 @@ export function LogIn(): JSX.Element {
                 <Button variant="contained" type='submit'
                     color="secondary"
                     endIcon={<SendIcon />}
-                    onClick={() => { navigate('/') }}>
+                // onClick={() => { navigate('/') }}
+                >
                     {/* //check if existing */}
                     {/* //update state with cuurrent user */}
                     Send

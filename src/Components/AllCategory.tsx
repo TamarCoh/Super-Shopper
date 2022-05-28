@@ -45,7 +45,14 @@ async function getCategories() {
   try {
     const res = await axios.get("https://localhost:44378/api/Category");
     // debugger
-    categoriesList = res.data
+    categoriesList = res.data.map((item:any)=>{
+      let category: Category
+      category = {
+        id: item.ProductCategoryId,
+        title: item.Name
+      }
+       return category as Category
+    })
   } catch (err) {
     categoriesList = [];
     console.log("categories catch: " + err);
@@ -60,7 +67,7 @@ async function getProductsByCategory(category: Category) {
     const res = await axios.get(
       `https://localhost:44378/api/GetProductsByCategoryId/${category.id}`);
 
-    // debugger
+     debugger
     // productList 
     //= res.data as ProductByCategory[]
     productList = res.data.map((p: any) => {
@@ -70,7 +77,7 @@ async function getProductsByCategory(category: Category) {
         id: p.ProductId,
         category: p.ProductCategoryId
       }
-      //   p = product
+       return product as ProductByCategory
     });
   }
   catch (err) {
@@ -83,9 +90,9 @@ async function getProductsByCategory(category: Category) {
 }
 
 export default function CategoriesNavigation() {
-  const [category, setCategory] = React.useState<Category>({ id: 1, title: "Sales" });
+  const [category, setCategory] = React.useState<Category>({ id: 1, title: "drinks" });
   const ref = React.useRef<HTMLDivElement>(null);
-  const [productList, setProductList] = React.useState<ProductByCategory[]>([{ name: "sc", id: 123, category: 345 }]);
+  const [productList, setProductList] = React.useState<ProductByCategory[]>([]);
   const [categoryList, setCategoryList] = React.useState<Category[]>([]);
 
   React.useEffect(() => {
@@ -124,15 +131,16 @@ export default function CategoriesNavigation() {
           (
             <>
               < BottomNavigationAction
+              className="bottomNavigationAction"
                 value={category}
                 label={category.title}
-                icon={<RestoreIcon></RestoreIcon >}
+                // icon={<RestoreIcon></RestoreIcon >}
                 onClick={() => {
                   setCategory(category);
                 }}
 
               />
-              {category.title}
+              {/* {category.title} */}
               {/* //why is the category.title undefined????????? */}
             </>
           ))}
