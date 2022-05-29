@@ -14,3 +14,7 @@
 .css-1gh6k7f-MuiBottomNavigationAction-label{
     opacity: 1 !important;
 }
+.navigation{
+    position: sticky;
+    top: 0;
+}
