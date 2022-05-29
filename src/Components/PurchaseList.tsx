@@ -1,37 +1,3 @@
-// export function PurchaseList(props: any) {
-
-//     // const [person, setPerson] = useState<User>();
-//     // const [data, setData] = useState<ProductByMount[]>([]);
-//     // useEffect(() => {
-//     //     var peoplePromise = axios.get("https://localhost:44378/api/PurchasePrognosis").then((response) => {
-//     //         setData(response.data);
-//     //         console.log("hhhh")
-//     //     });
-//     // }, []);
-
-//             {/* {props.myArr == null ? <span>wait...</span> : */}
-
-//                         {props.myArr?.map((row: ProductByMount) => (
-//                             <TableRow key={row.PurchasePrognosisId}   >
-//                                 <TableCell align="center">{row.PurchasesHistoryId}</TableCell>
-//                                 <TableCell align="center">{row.id}</TableCell>
-//                                 <TableCell align="center"><TextField id="standard-number" type="number" value={row.amount} >   </TextField> </TableCell>
-
-// }
-// const mapStateToProps = (st: any) => {
-//     //הפונקציה תחזיר אובייקט ובו כל השדות שאנו רוצים שייכנסו לפרופס של הקומםוננטה שלנו
-//     //מתןך הסטייט הכללי
-//     return {
-//         myArr: st.pro.productsList,
-//         // myArr:[]=[{d: 123,
-//         //     name: "name",
-//         //     category: 1,
-//         //     PurchasesHistoryId: "123",
-//         //     PurchasePrognosisId: "fgvhj",
-//         //     amount: 3}]
-//     };
-// }
-// export default connect(mapStateToProps)(PurchaseList);
 import * as React from "react"
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -71,39 +37,6 @@ import { productInListReducer } from "../store/Reducers/ProductInList";
 import { IstatePro } from '../store/Reducers/ProductInList'
 import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
 import Logo from "./Logo";
-// const rows: GridRowModel = [
-//     {
-//         id: randomId(),
-//         name: randomTraderName(),
-//         amount: 25,
-
-//     },
-//     {
-//         id: randomId(),
-//         name: randomTraderName(),
-//         amount: 36,
-
-//     },
-//     {
-//         id: randomId(),
-//         name: randomTraderName(),
-//         amount: 19,
-
-//     },
-//     {
-//         id: randomId(),
-//         name: randomTraderName(),
-//         amount: 28,
-
-//     },
-//     {
-//         id: randomId(),
-//         name: randomTraderName(),
-//         amount: 23,
-
-//     },
-// ];
-
 
 interface EditToolbarProps {
     apiRef: React.MutableRefObject<GridApi>;
