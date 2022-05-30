@@ -24,13 +24,39 @@ import axios from "axios";
 import SignUp from "./SignUp";
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
-import { User } from "../utils/modals";
+import { ProductByMount, User } from "../utils/modals";
 import { useNavigate } from "react-router-dom";
 import { SsidChart } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { logIn } from "../store/Actions/User";
 import { getPurchaseList } from "../store/Actions/ProductInList";
+import { IstatePro } from "../store/Reducers/ProductInList";
+import { randomId } from "@mui/x-data-grid-generator";
 
+export async function getList(payload:User){
+    let prognosis: IstatePro = {} as IstatePro;
+    prognosis.amountProducts = 0;
+    prognosis.productsList = [];
+    await axios.get(`https://localhost:44378/api/GetPurchaseOffer/${payload.id}`).then((response) => {
+        debugger
+        prognosis.productsList = response.data.map((p: any) => {
+            let product: ProductByMount
+            product = {
+                idrow: randomId(),
+                id: p.ProductId,
+                name: p.Name,
+                PurchasesHistoryId: p.PurchasesHistoryId,
+                PurchasePrognosisId: p.PurchasePrognosisId,
+                amount: p.Amount
+            }
+            return product as ProductByMount
+        });
+         prognosis.amountProducts = response.data.length ? response.data.length : 0;
+     } )
+    
+
+     return prognosis
+}
 
 export function LogIn(): JSX.Element {
 
@@ -42,7 +68,7 @@ export function LogIn(): JSX.Element {
             debugger
             console.log("start")
             console.log(data);
-            let customerPromise = await axios.get(`https://localhost:44378/api/GetSpecific/${data.password}/${data.firstName}/${data.lastName}`).then(response => {
+            let customerPromise = await axios.get(`https://localhost:44378/api/GetSpecific/${data.password}/${data.firstName}/${data.lastName}`).then(async response => {
                 if (response.data == null) {
                     console.log("customer not found!!")
                     navigate('/SignUp');
@@ -56,8 +82,9 @@ export function LogIn(): JSX.Element {
                     email: response.data.Email
                 }
                 console.log("user :   " + {user});
-                dispatch(getPurchaseList(user))
-                dispatch(logIn(user));
+                dispatch(logIn(user))
+                const list:IstatePro= await getList(user)as IstatePro
+                dispatch(getPurchaseList(list));
                 navigate('./purchaseList')
             })
         }
