@@ -5,10 +5,10 @@ export const logIn = (person: User) => {
         payload: person
     }
 }
-export const logOut = (person: User) => {
+export const logOut = () => {
     return {
         type: "logOut",
-        payload: person
+        
     }
 }
 export const SignUp = (person: User) => {
