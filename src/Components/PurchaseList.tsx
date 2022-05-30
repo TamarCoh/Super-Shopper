@@ -39,6 +39,7 @@ import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
 import Logo from "./Logo";
 import { DataGrid } from "@mui/x-data-grid";
 import useEnhancedEffect from "@mui/material/utils/useEnhancedEffect";
+import { PropaneSharp } from "@mui/icons-material";
 
 interface EditToolbarProps {
     apiRef: React.MutableRefObject<GridApi>;
@@ -77,15 +78,19 @@ const mapStateToProps = (st: any) => {
     debugger
     console.log(st.pro.productsList)
     return {
-        productList: st.pro.productsList
+        productList: st.pro.productsList,
+        user:st.Use.state
     };
 }
 export default function PurchaseList(): JSX.Element {
     // const apiRef = useGridApiRef();
     debugger
     const productList = useSelector((st: any) => st.pro.productsList)
+    const user = useSelector((st: any) => st.Use.state)
 
-    let rows: ProductByMount[] =  [];
+
+    let rows: ProductByMount[] = [];
+    //useEffect?->
     rows = productList.filter((i: ProductByMount) => i.amount > 0)
 
     // const rows = useSelector<IstatePro, ProductByMount[]>(state => state.productsList);
@@ -120,7 +125,8 @@ export default function PurchaseList(): JSX.Element {
     const handleAddClick = (id: GridRowId) => (event: React.MouseEvent) => {
         debugger
         let p: ProductByMount = rows.find((item: ProductByMount) => item.id == id) as ProductByMount
-        const temp={    idrow:p.idrow,
+        const temp = {
+            idrow: p.idrow,
             id: p.id,
             name: p.name,
             PurchasesHistoryId: p.PurchasesHistoryId,
@@ -160,7 +166,7 @@ export default function PurchaseList(): JSX.Element {
         {
             field: 'add',
             type: 'actions',
-            headerName: '+',
+            headerName: 'הוספה',
             width: 100,
             cellClassName: 'add',
             getActions: ({ id }) => {
@@ -179,7 +185,7 @@ export default function PurchaseList(): JSX.Element {
         {
             field: 'reduction',
             type: 'actions',
-            headerName: '-',
+            headerName: 'הפחתה',
             width: 100,
             cellClassName: 'reduction',
             getActions: ({ id }) => {
@@ -221,38 +227,48 @@ export default function PurchaseList(): JSX.Element {
 
     return (
         <>
-            <Box
-                sx={{
-                    height: 500,
-                    width: '100%',
-                    '& .actions': {
-                        color: 'text.secondary',
-                    },
-                    '& .textPrimary': {
-                        color: 'text.primary',
-                    },
-                }}
-            >
-                <DataGrid
-                    rows={rows}
-                    columns={columns}
-                    // apiRef={apiRef}
-                    editMode="row"
-                    onRowEditStart={handleRowEditStart}
-                    onRowEditStop={handleRowEditStop}
-                    processRowUpdate={processRowUpdate}
-                    components={{
-                        Toolbar: EditToolbar,
-                    }}
-                    // componentsProps={{
-                    //     toolbar: { apiRef },
-                    // }}
-                    experimentalFeatures={{ newEditingApi: true }}
-                />
-                <Button onClick={() => { }}>שמור</Button>
-                {/* //update DB by state */}
-            </Box>
-            <Logo class_name={"logo-small"} />
+            {(user==null||user==undefined)?<span>ספר לנו מי אתה ונכין לך רשימת קניות</span>:
+                <>
+                    <h3>:הצעת הקניות שלנו עבורך היא</h3>
+                    <Box
+                        sx={{
+                            height: 500,
+                            width: '100%',
+                            '& .actions': {
+                                color: 'text.secondary',
+                            },
+                            '& .textPrimary': {
+                                color: 'text.primary',
+                            },
+                        }}
+                    >
+                        {rows.length <2 && <span> משתמש יקר, הנך חדש במערכת</span>}
+                        <DataGrid
+                            rows={rows}
+                            columns={columns}
+                            // apiRef={apiRef}
+                            editMode="row"
+                            onRowEditStart={handleRowEditStart}
+                            onRowEditStop={handleRowEditStop}
+                            processRowUpdate={processRowUpdate}
+                            components={{
+                                Toolbar: EditToolbar,
+                            }}
+                            // componentsProps={{
+                            //     toolbar: { apiRef },
+                            // }}
+                            experimentalFeatures={{ newEditingApi: true }}
+                        />
+
+                        {/* //update DB by state */}
+                    </Box>
+                    <Button onClick={() => { }}>שמור</Button>
+                    <Logo class_name={"logo-small"} />
+                    <h4>!משתמש יקר  </h4>
+                    <h5>באם הצעת הקניות שלנו לא מספיק טובה עבורך בשל ארוע קרב/ זמן מיוחד באפשרותך לשנות כמויות ו/או מוצרים והמערכת תלמד את שינוייך לפעמים הבאות </h5>
+
+                </>
+            }
         </>
     );
 

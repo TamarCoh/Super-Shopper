@@ -37,7 +37,7 @@ function App() {
           <Route path="/previousPurchases" element={<PreviosPurchases />} />
           <Route path="/purchaseList" element={<PurchaseList />} />
           <Route path="/orderDetails" element={<OrderDetails />} />
-          {/* <Route path="/fullFeaturedCrudGrid" element={<FullFeaturedCrudGrid />} /> */}
+          <Route path="/previousPurchases/orderDetails" element={<OrderDetails />} />
         </Routes>
       </Router>
 

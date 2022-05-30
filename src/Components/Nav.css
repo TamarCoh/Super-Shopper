@@ -34,5 +34,6 @@
     float: right;
     width: auto;
     padding: 0.5%;
-    color: white;
+    background-color: white;
+    color: #213f65;
 }

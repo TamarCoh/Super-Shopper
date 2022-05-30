@@ -20,19 +20,16 @@ export const userReducer = (state = initialState, action: any) => {
         case "logIn":
             debugger;
             return {
-
                 state: action.payload
 
             }
         case "logOut":
             return {
-                // ...state,
                 state: null
             }
         case "SignUp":
             return {
                 state: action.payload,
-                // usersList: [...state.usersList, action.payload]
             }
     }
 
