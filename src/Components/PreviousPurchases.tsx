@@ -19,6 +19,7 @@ import Paper from '@mui/material/Paper';
 import { JsxElement } from 'typescript';
 import axios from 'axios';
 import Logo from './Logo';
+import { useSelector } from 'react-redux';
 
 interface IpreviosPurchase {
     orderId: string;
@@ -27,29 +28,31 @@ interface IpreviosPurchase {
     // orderProducts: ProductByMount[];
 
 }
-async function getPreviouses() {
-    let previosesList: IpreviosPurchase[] = [];
-    try {
-        const res = await axios.get(`https://localhost:44378/api/PurchasesHistory/${5}`);
-        debugger
-        previosesList = res.data.map((item: any) => {
-            let previous: IpreviosPurchase
-            previous = {
-                orderId: item.PurchasesHistoryId,
-                orderDate: item.PurchaseDate,
-                orderDescription: item.Description,
-                // OrderDetails: item. ;
-            }
-            return previous as IpreviosPurchase
-        })
-    } catch (err) {
-        previosesList = [];
-        console.log("previouses catch: " + err);
-    }
-    return previosesList;
-    // return mockupCategoriesList;
-}
+
 export default function PreviosPurchases() {
+    const user = useSelector((st: any) => st.Use.state)
+    async function getPreviouses() {
+        let previosesList: IpreviosPurchase[] = [];
+        try {
+            const res = await axios.get(`https://localhost:44378/api/PurchasesHistory/${user.id}`);
+            debugger
+            previosesList = res.data.map((item: any) => {
+                let previous: IpreviosPurchase
+                previous = {
+                    orderId: item.PurchasesHistoryId,
+                    orderDate: item.PurchaseDate,
+                    orderDescription: item.Description,
+                    // OrderDetails: item. ;
+                }
+                return previous as IpreviosPurchase
+            })
+        } catch (err) {
+            previosesList = [];
+            console.log("previouses catch: " + err);
+        }
+        return previosesList;
+        // return mockupCategoriesList;
+    }
     const navigate = useNavigate();
     const [arr, setArr] = React.useState<IpreviosPurchase[]>();
     const ref = React.useRef<HTMLDivElement>(null);
@@ -59,202 +62,7 @@ export default function PreviosPurchases() {
         setArr(tempPreviouses);
     }
     anyNameFunction();
-    // = [
-    //     {
-    //         orderName: "first",
-    //         orderDate: new Date(),
-    //         orderMail: "orabenesh@gmail.com",
-    //         orderProducts: [
-    //             {
-    //                 idrow: "dgsa",
-    //                 id: 123,
-    //                 name: "bread",
-    //                 category: 1,
-    //                 PurchasesHistoryId: "45",
-    //                 PurchasePrognosisId: "63",
-    //                 amount: 1
-    //             },
-    //             {
-    //                 idrow: "bhj",
-    //                 id: 122,
-    //                 name: "milk",
-    //                 category: 2,
-    //                 PurchasesHistoryId: "45",
-    //                 PurchasePrognosisId: "63",
-    //                 amount: 3
-    //             }
-    //         ]
-    //     },
-    //     {
-    //         orderName: "second",
-    //         orderDate: new Date(),
-    //         orderMail: "orabenesh@gmail.com",
-    //         orderProducts: [
-    //             {
-    //                 idrow: "dgsa",
-    //                 id: 123,
-    //                 name: "bread",
-    //                 category: 1,
-    //                 PurchasesHistoryId: "45",
-    //                 PurchasePrognosisId: "63",
-    //                 amount: 1
-    //             },
-    //             {
-    //                 idrow: "bhj",
-    //                 id: 122,
-    //                 name: "milk",
-    //                 category: 2,
-    //                 PurchasesHistoryId: "45",
-    //                 PurchasePrognosisId: "63",
-    //                 amount: 3
-    //             }
-    //         ]
-    //     }, {
-    //         orderName: "third",
-    //         orderDate: new Date(),
-    //         orderMail: "orabenesh@gmail.com",
-    //         orderProducts: [
-    //             {
-    //                 idrow: "dgsa",
-    //                 id: 123,
-    //                 name: "bread",
-    //                 category: 1,
-    //                 PurchasesHistoryId: "45",
-    //                 PurchasePrognosisId: "63",
-    //                 amount: 1
-    //             },
-    //             {
-    //                 idrow: "bhj",
-    //                 id: 122,
-    //                 name: "milk",
-    //                 category: 2,
-    //                 PurchasesHistoryId: "45",
-    //                 PurchasePrognosisId: "63",
-    //                 amount: 3
-    //             }
-    //         ]
-    //     }, {
-    //         orderName: "fourth",
-    //         orderDate: new Date(),
-    //         orderMail: "orabenesh@gmail.com",
-    //         orderProducts: [
-    //             {
-    //                 idrow: "dgsa",
-    //                 id: 123,
-    //                 name: "bread",
-    //                 category: 1,
-    //                 PurchasesHistoryId: "45",
-    //                 PurchasePrognosisId: "63",
-    //                 amount: 1
-    //             },
-    //             {
-    //                 idrow: "bhj",
-    //                 id: 122,
-    //                 name: "milk",
-    //                 category: 2,
-    //                 PurchasesHistoryId: "45",
-    //                 PurchasePrognosisId: "63",
-    //                 amount: 3
-    //             }
-    //         ]
-    //     }, {
-    //         orderName: "fifth",
-    //         orderDate: new Date(),
-    //         orderMail: "orabenesh@gmail.com",
-    //         orderProducts: [
-    //             {
-    //                 idrow: "dgsa",
-    //                 id: 123,
-    //                 name: "bread",
-    //                 category: 1,
-    //                 PurchasesHistoryId: "45",
-    //                 PurchasePrognosisId: "63",
-    //                 amount: 1
-    //             },
-    //             {
-    //                 idrow: "bhj",
-    //                 id: 122,
-    //                 name: "milk",
-    //                 category: 2,
-    //                 PurchasesHistoryId: "45",
-    //                 PurchasePrognosisId: "63",
-    //                 amount: 3
-    //             }
-    //         ]
-    //     }, {
-    //         orderName: "six",
-    //         orderDate: new Date(),
-    //         orderMail: "orabenesh@gmail.com",
-    //         orderProducts: [
-    //             {
-    //                 idrow: "dgsa",
-    //                 id: 123,
-    //                 name: "bread",
-    //                 category: 1,
-    //                 PurchasesHistoryId: "45",
-    //                 PurchasePrognosisId: "63",
-    //                 amount: 1
-    //             },
-    //             {
-    //                 idrow: "bhj",
-    //                 id: 122,
-    //                 name: "milk",
-    //                 category: 2,
-    //                 PurchasesHistoryId: "45",
-    //                 PurchasePrognosisId: "63",
-    //                 amount: 3
-    //             }
-    //         ]
-    //     }, {
-    //         orderName: "seven",
-    //         orderDate: new Date(),
-    //         orderMail: "orabenesh@gmail.com",
-    //         orderProducts: [
-    //             {
-    //                 idrow: "dgsa",
-    //                 id: 123,
-    //                 name: "bread",
-    //                 category: 1,
-    //                 PurchasesHistoryId: "45",
-    //                 PurchasePrognosisId: "63",
-    //                 amount: 1
-    //             },
-    //             {
-    //                 idrow: "bhj",
-    //                 id: 122,
-    //                 name: "milk",
-    //                 category: 2,
-    //                 PurchasesHistoryId: "45",
-    //                 PurchasePrognosisId: "63",
-    //                 amount: 3
-    //             }
-    //         ]
-    //     }, {
-    //         orderName: "eight",
-    //         orderDate: new Date(),
-    //         orderMail: "orabenesh@gmail.com",
-    //         orderProducts: [
-    //             {
-    //                 idrow: "dgsa",
-    //                 id: 123,
-    //                 name: "bread",
-    //                 category: 1,
-    //                 PurchasesHistoryId: "45",
-    //                 PurchasePrognosisId: "63",
-    //                 amount: 1
-    //             },
-    //             {
-    //                 idrow: "bhj",
-    //                 id: 122,
-    //                 name: "milk",
-    //                 category: 2,
-    //                 PurchasesHistoryId: "45",
-    //                 PurchasePrognosisId: "63",
-    //                 amount: 3
-    //             }
-    //         ]
-    //     },
-    // ];
+
     return (
         <>
             <div id="wrap">
@@ -283,13 +91,13 @@ const bull = (
     </Box>
 );
 interface INavigateProps {
-    orderProducts: ProductByMount[]
+    orderId: number
 }
 
 export function BasicCard(props: IpreviosPurchase) {
     const navigate = useNavigate();
     return (
-        // <Router>
+        // <Router> 
         //     <Routes>
         //         <Route path="/basicCard" element={<BasicCard {...props}/>} />
         //         <Route path="/orderDetails" element={<OrderDetails {...props.productsList}/>} />
@@ -312,7 +120,7 @@ export function BasicCard(props: IpreviosPurchase) {
                 </Typography>
             </CardContent>
             <CardActions>
-                {/* <Button size="small" onClick={() => { navigate('./orderDetails', { state: { orderProducts: props.orderProducts } as INavigateProps }) }}>show order products</Button> */}
+                <Button size="small" onClick={() => { navigate('./orderDetails', { state: { orderId: props.orderId } }) }}>show order products</Button>
             </CardActions>
         </Card>
         //     </Routes>
@@ -321,8 +129,28 @@ export function BasicCard(props: IpreviosPurchase) {
 }
 
 export function OrderDetails() {
+
     const location = useLocation()
     const from = location.state as INavigateProps
+const [List,setList]=React.useState<ProductByMount[]>([]);
+    async function getProducts() {
+        const res = await axios.get(`api/GetActuallyPurchasesByPurchaseHistoryId/${from.orderId}`);
+        debugger
+        const list:ProductByMount[]= res.data.map((item: any) => {
+            let product: ProductByMount
+            product = {
+                idrow: "",
+                id: item.id,
+                name: item.name,
+                // category: number,
+                PurchasesHistoryId: "",
+                PurchasePrognosisId: "",
+                amount: item.amount
+                // OrderDetails: item. ;
+            }
+            setList(list)
+        })
+    }
 
     debugger
     return (
@@ -337,7 +165,7 @@ export function OrderDetails() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {from.orderProducts.map((row: ProductByMount) => (
+                        {List.map((row: ProductByMount) => (
                             <TableRow
                                 key={row.name}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}

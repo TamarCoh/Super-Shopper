@@ -1,5 +1,6 @@
 import { ProductByMount, User } from "../../utils/modals";
 import *  as Action_Types from "../actionsTypes";
+import { IstatePro } from "../Reducers/ProductInList";
 // export const addProductToList = (product: ProductByMount) => {
 //     return {
 //         type: Action_Types.ADD_PRODUCT,
@@ -24,9 +25,9 @@ export const decreaseProductInList = (product: ProductByMount) => {
         payload: product
     }
 }
-export const getPurchaseList = (user:User) => {
+export const getPurchaseList = (list:IstatePro) => {
     return {
         type: Action_Types.GET_PURCHASE_LIST,
-        payload: user
+        payload: list
     }
 }

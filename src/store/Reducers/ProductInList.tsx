@@ -18,29 +18,32 @@ export interface IstatePro {
     productsList: ProductByMount[],
     amountProducts: number
 }
-const initialState: IstatePro = {} as IstatePro;
+const initialState: IstatePro = {
 
-export const productInListReducer = async (state = initialState, action: any) => {
+} as IstatePro
+
+export const productInListReducer = (state = initialState, action: any) => {
     debugger
     switch (action.type) {
         case Action_Types.GET_PURCHASE_LIST:
-            state=action.payload;
             return {
-                ...state
+                productsList: action.payload.productsList,
+                amountProducts: action.payload.amountProducts
+                // state:action.payload
             }
         case Action_Types.REMOVE_PRODUCT:
             debugger
 
             return {
                 ...state,
-                productsList: [...state.productsList.map((i: ProductByMount) => {if (i.id == action.payload.id) { i.amount =0; } return i })],
+                productsList: [...state.productsList.map((i: ProductByMount) => { if (i.id == action.payload.id) { i.amount = 0; } return i })],
                 amountProducts: state.amountProducts - 1
             }
         case Action_Types.DECREASE_PRODUCT:
             debugger
-            state.productsList = state.productsList.map((i: ProductByMount) => { if (i.id == action.payload.id) { i.amount -= 1; if(i.amount=0)  state.amountProducts= state.amountProducts - 1} return i })
             return {
                 ...state,
+                productsList:state.productsList.map((i: ProductByMount) => { if (i.id == action.payload.id) { i.amount -= 1; if (i.amount == 0) state.amountProducts = state.amountProducts - 1 } return i })
 
             }
         case Action_Types.INCREAES_PRODUCT:
@@ -49,8 +52,11 @@ export const productInListReducer = async (state = initialState, action: any) =>
                 return {
                     ...state,
                     productsList: [...state.productsList.map((i: ProductByMount) => {
-                        if (i.id == action.payload.id)
-                            i.amount += action.payload.amount
+                        if (i.id == action.payload.id){
+                            console.log(i.amount,action.payload.amount)
+                            i.amount =i.amount+ action.payload.amount;
+                        console.log(i)
+                        }
                         return i
                     })],
 
