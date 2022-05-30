@@ -10,10 +10,11 @@ import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 // import connect from "react-redux/es/components/connect";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { count } from "console";
 import Enter from "./Enter";
 import { userInfo } from "os";
+import { logOut } from "../store/Actions/User";
 
 const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
     '& .MuiBadge-badge': {
@@ -36,6 +37,7 @@ function CustomizedBadges(props: any) {
 }
 function Nav(props: any): JSX.Element {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     return (
         <div className="Nav" >
             <ul>
@@ -58,6 +60,13 @@ function Nav(props: any): JSX.Element {
 
                 {/* </Link> */}
                 <li className="nav-links" id="currentUser">{props.user!=null?props.user.firstName+' '+props.user.lastName:''}</li>
+                {props.user!=null?
+                <>
+                 <button className="nav-links" id="nav-logIn" onClick={() => dispatch(logOut())}>
+                 <li className="nav-links" id="nav-logIn" >התנתקות</li>
+                 </button>
+                 </>
+                 :''}
                 {/* <button className="nav-links" id="nav-logIn" onClick={() => navigate('/logIn')}>
                     <li className="nav-links" id="nav-logIn" >התחברות</li>
                 </button> */}
