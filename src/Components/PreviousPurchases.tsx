@@ -42,7 +42,6 @@ export default function PreviosPurchases() {
                     orderId: item.PurchasesHistoryId,
                     orderDate: item.PurchaseDate,
                     orderDescription: item.Description,
-                    // OrderDetails: item. ;
                 }
                 return previous as IpreviosPurchase
             })
@@ -51,7 +50,6 @@ export default function PreviosPurchases() {
             console.log("previouses catch: " + err);
         }
         return previosesList;
-        // return mockupCategoriesList;
     }
     const navigate = useNavigate();
     const [arr, setArr] = React.useState<IpreviosPurchase[]>();
@@ -97,10 +95,7 @@ interface INavigateProps {
 export function BasicCard(props: IpreviosPurchase) {
     const navigate = useNavigate();
     return (
-        // <Router> 
-        //     <Routes>
-        //         <Route path="/basicCard" element={<BasicCard {...props}/>} />
-        //         <Route path="/orderDetails" element={<OrderDetails {...props.productsList}/>} />
+
         <Card sx={{ maxWidth: 275 }}>
             <CardContent>
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -123,8 +118,7 @@ export function BasicCard(props: IpreviosPurchase) {
                 <Button size="small" onClick={() => { navigate('./orderDetails', { state: { orderId: props.orderId } }) }}>show order products</Button>
             </CardActions>
         </Card>
-        //     </Routes>
-        // </Router>
+ 
     );
 }
 
@@ -146,12 +140,11 @@ const [List,setList]=React.useState<ProductByMount[]>([]);
                 PurchasesHistoryId: "",
                 PurchasePrognosisId: "",
                 amount: item.amount
-                // OrderDetails: item. ;
             }
             setList(list)
         })
     }
-
+const navigate=useNavigate();
     debugger
     return (
         <>
@@ -180,6 +173,7 @@ const [List,setList]=React.useState<ProductByMount[]>([]);
                     </TableBody>
                 </Table>
             </TableContainer>
+            <Button className="detailsToPreviouses" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/previousPurchases') }}>חזרה</Button>
 
         </>
     )

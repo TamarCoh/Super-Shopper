@@ -57,10 +57,10 @@ function Nav(props: any): JSX.Element {
                     {/* <AddCircleOutlineIcon></AddCircleOutlineIcon> */}
 
                 {/* </Link> */}
-                <li className="nav-links" id="currentUser">|{props.user!=null?props.user.firstName:''}</li>
-                <button className="nav-links" id="nav-logIn" onClick={() => navigate('/logIn')}>
+                <li className="nav-links" id="currentUser">{props.user!=null?props.user.firstName+' '+props.user.lastName:''}</li>
+                {/* <button className="nav-links" id="nav-logIn" onClick={() => navigate('/logIn')}>
                     <li className="nav-links" id="nav-logIn" >התחברות</li>
-                </button>
+                </button> */}
             </ul >
         </div >
     );
