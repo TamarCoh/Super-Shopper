@@ -68,12 +68,13 @@ function ChildModal() {
 }
 
 export function Enter(props: IMyProps) {
-    const [open, setOpen] = React.useState(props.open);
+    const [openM, setOpenM] = React.useState(props.open);
+    debugger
     const handleOpen = () => {
-        setOpen(true);
+        setOpenM(true);
     };
     const handleClose = () => {
-        setOpen(false);
+        setOpenM(false);
     };
     const navigate = useNavigate();
     return (
@@ -81,7 +82,7 @@ export function Enter(props: IMyProps) {
             <Logo class_name={"logo"} />
             <Button id='eneter' onClick={handleOpen}>כניסה</Button>
             <Modal
-                open={open}
+                open={openM}
                 onClose={handleClose}
                 aria-labelledby="parent-modal-title"
                 aria-describedby="parent-modal-description"

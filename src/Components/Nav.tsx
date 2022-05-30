@@ -57,7 +57,7 @@ function Nav(props: any): JSX.Element {
                     {/* <AddCircleOutlineIcon></AddCircleOutlineIcon> */}
 
                 {/* </Link> */}
-                <li className="nav-links" id="currentUser">|{props.user}</li>
+                <li className="nav-links" id="currentUser">|{props.user!=null?props.user.firstName:''}</li>
                 <button className="nav-links" id="nav-logIn" onClick={() => navigate('/logIn')}>
                     <li className="nav-links" id="nav-logIn" >התחברות</li>
                 </button>
@@ -71,7 +71,7 @@ const mapStateToProps = (st: any) => {
     return {
         //  myArr: st.pro.productsList,
         count: st.pro.amountProducts,
-        user: st.Use.currentUser
+        user: st.Use.state
         // myArr:[]=[{d: 123,
         //     name: "name",
         //     category: 1,

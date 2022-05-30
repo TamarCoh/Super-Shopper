@@ -27,7 +27,7 @@ import Stack from '@mui/material/Stack';
 import { ProductByMount, User } from "../utils/modals";
 import { useNavigate } from "react-router-dom";
 import { SsidChart } from "@mui/icons-material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logIn } from "../store/Actions/User";
 import { getPurchaseList } from "../store/Actions/ProductInList";
 import { IstatePro } from "../store/Reducers/ProductInList";
@@ -84,9 +84,11 @@ export function LogIn(): JSX.Element {
                 console.log("user :   " + {user});
                 dispatch(logIn(user))
                 const list:IstatePro= await getList(user)as IstatePro
+            
+
                 dispatch(getPurchaseList(list));
-                navigate('./purchaseList')
-            })
+                
+            }).then(()=>navigate('./purchaseList'))
         }
         catch {
             console.log(errors)
