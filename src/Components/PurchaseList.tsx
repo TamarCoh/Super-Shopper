@@ -37,6 +37,7 @@ import { productInListReducer } from "../store/Reducers/ProductInList";
 import { IstatePro } from '../store/Reducers/ProductInList'
 import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
 import Logo from "./Logo";
+import { DataGrid } from "@mui/x-data-grid";
 
 interface EditToolbarProps {
     apiRef: React.MutableRefObject<GridApi>;
@@ -79,7 +80,7 @@ const mapStateToProps = (st: any) => {
 }
 export default connect(mapStateToProps)(function PurchaseList(props: any): JSX.Element {
     // const apiRef = useGridApiRef();
-    const rows = props.productList
+    const rows = props.productList.filter((i: ProductByMount) => i.amount > 0)
     // const rows = useSelector<IstatePro, ProductByMount[]>(state => state.productsList);
 
     const dispatch = useDispatch();
@@ -107,12 +108,11 @@ export default connect(mapStateToProps)(function PurchaseList(props: any): JSX.E
     };
     const handleAddClick = (id: GridRowId) => (event: React.MouseEvent) => {
         debugger
-        let p = rows.find((item: ProductByMount) => item.id == id) as ProductByMount
-        // if(p)
-        // == undefined ? {} as ProductByMount : rows.find((item: ProductByMount) => item.idrow == id)
+        let p:ProductByMount = rows.find((item: ProductByMount) => item.id == id) as ProductByMount
+    p.amount=1;
+    
         dispatch(increaseProductInList(p));
 
-        // rows.map((row: GridRowModel) => {if(row.id === id) row.amount += 1 ;return row});
 
     };
     const handleReductionClick = (id: GridRowId) => (event: React.MouseEvent) => {
@@ -216,7 +216,7 @@ export default connect(mapStateToProps)(function PurchaseList(props: any): JSX.E
                     },
                 }}
             >
-                <DataGridPro
+                <DataGrid
                     rows={rows}
                     columns={columns}
                     // apiRef={apiRef}
