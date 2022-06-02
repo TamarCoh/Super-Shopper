@@ -31,3 +31,9 @@ export const getPurchaseList = (list:IstatePro) => {
         payload: list
     }
 }
+export const clearPurchaseList = () => {
+    return {
+        type: "clearPurchaseList",
+        
+    }
+}

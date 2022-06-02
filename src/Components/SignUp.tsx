@@ -15,28 +15,47 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logIn, signUp } from "../store/Actions/User";
+import { IstatePro } from "../store/Reducers/ProductInList";
+import { getPurchaseList } from "../store/Actions/ProductInList";
+import { getList } from "./LogIn";
 
 export function SignUp(): JSX.Element {
     const navigate = useNavigate();
-    // const url = "https://localhost:44378/";
+    const dispatch = useDispatch();
     const { register, handleSubmit, formState: { errors } } = useForm<User>();
     const addCustomer = async (data: User) => {
         debugger
         console.log("start")
         console.log(data);
-        let customerPromise = axios.post("https://localhost:44378/api/Customer", data);
-        debugger
-        let response = await customerPromise;
-        console.log(response.data);
-        debugger
-        navigate('/purchaseList')
+        let customerPromise = axios.post("https://localhost:44378/api/Customer", data).then(async response => {
+            debugger
+            //  let response = await customerPromise;
+            console.log(response.data);
+            debugger
+            let user: User
+            user = {
+                firstName: response.data.FirstName,
+                lastName: response.data.LastName,
+                id: response.data.CustomerId,
+                password: response.data.Password,
+                email: response.data.Email
+            }
+            localStorage.setItem('user', JSON.stringify(user))
+            console.log("user :   " + { user });
+            dispatch(signUp(user))
+            const list: IstatePro = await getList(user) as IstatePro
+            localStorage.setItem('productList', JSON.stringify(list))
+            dispatch(getPurchaseList(list));
+        }).then(() => navigate('/homePage'))
     }
     return <div >
 
         <div className="card">
-            <h1>הרשמות</h1>
+            <h1>הרשמה</h1>
 
-            <form onSubmit={handleSubmit(addCustomer)}>
+            <form id="sinUpForm" onSubmit={handleSubmit(addCustomer)}>
 
                 <span className="op">
                     <TextField id="standard-basic" variant="standard" type="text" label="שם פרטי"   {...register('firstName', { required: true, minLength: 2, maxLength: 10 })}
@@ -77,7 +96,7 @@ export function SignUp(): JSX.Element {
                 </span>
 
                 <Button type="submit" variant="contained"
-                    color="secondary"
+                    color="primary"
                     endIcon={<SendIcon />}>
                     הרשם
                 </Button>

@@ -43,7 +43,7 @@ export const productInListReducer = (state = initialState, action: any) => {
             debugger
             return {
                 ...state,
-                productsList:state.productsList.map((i: ProductByMount) => { if (i.id == action.payload.id) { i.amount -= 1; if (i.amount == 0) state.amountProducts = state.amountProducts - 1 } return i })
+                productsList: state.productsList.map((i: ProductByMount) => { if (i.id == action.payload.id) { i.amount -= 1; if (i.amount == 0) state.amountProducts = state.amountProducts - 1 } return i })
 
             }
         case Action_Types.INCREAES_PRODUCT:
@@ -52,10 +52,10 @@ export const productInListReducer = (state = initialState, action: any) => {
                 return {
                     ...state,
                     productsList: [...state.productsList.map((i: ProductByMount) => {
-                        if (i.id == action.payload.id){
-                            console.log(i.amount,action.payload.amount)
-                            i.amount =i.amount+ action.payload.amount;
-                        console.log(i)
+                        if (i.id == action.payload.id) {
+                            console.log(i.amount, action.payload.amount)
+                            i.amount = i.amount + action.payload.amount;
+                            console.log(i)
                         }
                         return i
                     })],
@@ -65,6 +65,12 @@ export const productInListReducer = (state = initialState, action: any) => {
                 ...state,
                 productsList: [...state.productsList, action.payload],
                 amountProducts: state.amountProducts + 1
+            }
+        case "clearPurchaseList":
+            debugger
+            return {
+                productsList: [],
+                amountProducts:0
             }
     }
 

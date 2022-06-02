@@ -25,7 +25,7 @@ export interface Category {
 export interface ProductByCategory {
     name: string,
     id: number,
-
+    img: string,
     category: number
 }
 
@@ -33,8 +33,16 @@ export interface ProductByMount {
     idrow: string,
     id: number,
     name: string,
-   // category: number,
+    // category: number,
     PurchasesHistoryId: string,
     PurchasePrognosisId: string,
     amount: number
+}
+
+export interface ActuallyPurchase {
+    PurchasesHistoryId: number,
+    ProductId: number,
+    Name: string,
+    Amount: number,
+    PurchasePrognosisId: number,
 }

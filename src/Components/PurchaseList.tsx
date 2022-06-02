@@ -31,7 +31,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { decreaseProductInList, increaseProductInList, removeProductFromList } from "../store/Actions/ProductInList";
 // import { AllProducts } from "./AllProducts";
-import { ProductByMount } from "../utils/modals";
+import { ProductByMount, ActuallyPurchase } from "../utils/modals";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { productInListReducer } from "../store/Reducers/ProductInList";
 import { IstatePro } from '../store/Reducers/ProductInList'
@@ -40,6 +40,7 @@ import Logo from "./Logo";
 import { DataGrid } from "@mui/x-data-grid";
 import useEnhancedEffect from "@mui/material/utils/useEnhancedEffect";
 import { PropaneSharp } from "@mui/icons-material";
+import axios from "axios";
 
 interface EditToolbarProps {
     apiRef: React.MutableRefObject<GridApi>;
@@ -79,19 +80,26 @@ const mapStateToProps = (st: any) => {
     console.log(st.pro.productsList)
     return {
         productList: st.pro.productsList,
-        user:st.Use.state
+        user: st.Use.state
     };
 }
 export default function PurchaseList(): JSX.Element {
     // const apiRef = useGridApiRef();
     debugger
     const productList = useSelector((st: any) => st.pro.productsList)
+    const productState = useSelector((st: any) => st.pro)
+
     const user = useSelector((st: any) => st.Use.state)
 
 
     let rows: ProductByMount[] = [];
     //useEffect?->
     rows = productList.filter((i: ProductByMount) => i.amount > 0)
+    React.useEffect(() => {
+        debugger
+        localStorage.setItem('productList', JSON.stringify(productState))
+
+    }, [productList])
 
     // const rows = useSelector<IstatePro, ProductByMount[]>(state => state.productsList);
     const dispatch = useDispatch();
@@ -227,7 +235,7 @@ export default function PurchaseList(): JSX.Element {
 
     return (
         <>
-            {(user==null||user==undefined)?<span>ספר לנו מי אתה ונכין לך רשימת קניות</span>:
+            {(user == null || user == undefined) ? <span>ספר לנו מי אתה ונכין לך רשימת קניות</span> :
                 <>
                     <h3>:הצעת הקניות שלנו עבורך היא</h3>
                     <Box
@@ -242,7 +250,7 @@ export default function PurchaseList(): JSX.Element {
                             },
                         }}
                     >
-                        {rows.length <2 && <span> משתמש יקר, הנך חדש במערכת</span>}
+                        {rows.length < 2 && <span>הנך חדש במערכת, בצע קניות והמערכת תלמד את הרגליך לעתיד</span>}
                         <DataGrid
                             rows={rows}
                             columns={columns}
@@ -260,9 +268,27 @@ export default function PurchaseList(): JSX.Element {
                             experimentalFeatures={{ newEditingApi: true }}
                         />
 
-                        {/* //update DB by state */}
+
                     </Box>
-                    <Button onClick={() => { }}>שמור</Button>
+                    <Button
+                        // {/* //update DB by state */}
+                        onClick={() => {
+                            debugger
+                            let l: ActuallyPurchase[]
+                            l = productList.map((item: ProductByMount) => {
+                                let product: ActuallyPurchase = {
+                                    PurchasesHistoryId: parseInt(item.PurchasesHistoryId),
+                                    ProductId: item.id,
+                                    Name: item.name,
+                                    Amount: item.amount,
+                                    PurchasePrognosisId: parseInt(item.PurchasePrognosisId),
+                                } as ActuallyPurchase
+                                return product
+                            })
+                            axios.post(`https://localhost:44378/api/BasketBuilder/AddActPur/${user.id}`, l)
+                                .then(res => console.log(res))
+                                .catch(err => console.log(err))
+                        }}>שמור</Button>
                     <Logo class_name={"logo-small"} />
                     <h4>!משתמש יקר  </h4>
                     <h5>באם הצעת הקניות שלנו לא מספיק טובה עבורך בשל ארוע קרב/ זמן מיוחד באפשרותך לשנות כמויות ו/או מוצרים והמערכת תלמד את שינוייך לפעמים הבאות </h5>

@@ -27,7 +27,7 @@ export const userReducer = (state = initialState, action: any) => {
             return {
                 state: null
             }
-        case "SignUp":
+        case "signUp":
             return {
                 state: action.payload,
             }

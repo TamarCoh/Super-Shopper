@@ -16,9 +16,20 @@ import AllCategory from './Components/AllCategory';
 import PreviosPurchases, { OrderDetails } from './Components/PreviousPurchases';
 import { useDispatch, useSelector } from 'react-redux';
 import { User } from './utils/modals';
+import { logIn } from './store/Actions/User';
+import { getPurchaseList } from './store/Actions/ProductInList';
+import {IstatePro} from './store/Reducers/ProductInList'
 
 function App() {
   const dispatch = useDispatch();
+  if (localStorage.getItem('user') != null) {
+    let user = JSON.parse(localStorage.getItem('user') || '') as User;
+    dispatch(logIn(user))
+  }
+  if (localStorage.getItem('productList') != null) {
+    let list = JSON.parse(localStorage.getItem('productList') || '') as IstatePro;
+    dispatch(getPurchaseList(list));
+  }
   //  dispatch(increaseProductInList((rows.filter((item: ProductByMount) => item.idrow == id.toString()).at(0))));
   //  const rows = useSelector((Use:User) => Use.currentUser);
   return (
@@ -27,11 +38,11 @@ function App() {
       <Router>
         <Nav />
         <Routes>
-          <Route path="/" element={<Enter open={false} />} />
-          <Route path="" element={<Enter open={false} />} />
-          <Route path="/homePage" element={<Enter open={false} />} />
-          <Route path="/signUp" element={<SignUp />} />
-          <Route path="/logIn" element={<Enter open={true} />} />
+          <Route path="/" element={<Enter />} />
+          <Route path="" element={<Enter />} />
+          <Route path="/homePage" element={<Enter />} />
+          <Route path="/signUp" element={<Enter />} />
+          <Route path="/logIn" element={<Enter/>} />
           <Route path="/allProducts" element={<CategoriesNavigation />} />
           <Route path="/allCategory" element={<CategoriesNavigation />} />
           <Route path="/previousPurchases" element={<PreviosPurchases />} />

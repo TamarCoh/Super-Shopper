@@ -10,7 +10,6 @@ import { legacy_createStore, compose } from "redux";
 import { productInListReducer } from "./store/Reducers/ProductInList"
 import { userReducer } from './store/Reducers/User';
 
-
 declare global {
   interface Window {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
