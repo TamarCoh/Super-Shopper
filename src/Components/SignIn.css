@@ -19,8 +19,14 @@ form{
     align-items:center;
      justify-items:center;
 }
+form button{
+   background-color: #4c6a92;
+}
 .op
 {
    margin: 0.5em;
     
+}
+#sinUpForm{
+margin-bottom: 5vh;
 }

@@ -11,7 +11,8 @@ import ArrowBackTwoToneIcon from '@mui/icons-material/ArrowBackTwoTone';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import { animated, useSpring } from 'react-spring';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { connect, useSelector } from 'react-redux';
 interface IMyProps {
     open: boolean,
 }
@@ -47,6 +48,8 @@ function ChildModal() {
                     <>?משתמש חדש    </>
                     </div>
                 }
+                
+                
                 <Modal
                     hideBackdrop
                     open={open}
@@ -67,16 +70,20 @@ function ChildModal() {
     );
 }
 
-export function Enter(props: IMyProps) {
-    const [openM, setOpenM] = React.useState(props.open);
-    debugger
+export function Enter() {
+    const location = useLocation()
+    const from = location.state as boolean
+    const [openM, setOpenM] = React.useState<boolean>(from);
+    // const [userIn, setUserIn] = React.useState(false);
+    const navigate = useNavigate();
+    const user = useSelector((st: any) => st.Use.state)
+
     const handleOpen = () => {
         setOpenM(true);
     };
-    const handleClose = () => {
+   const handleClose = () => {
         setOpenM(false);
     };
-    const navigate = useNavigate();
     return (
         <div>
             <Logo class_name={"logo"} />
@@ -94,12 +101,12 @@ export function Enter(props: IMyProps) {
                 </div>
 
             </Modal>
-
+{user&&
             <Stack direction="row" >
                 <div id="left" onClick={() => navigate('./PreviousPurchases')}><IconButton ><ArrowBackTwoToneIcon />קניות קודמות שלי </IconButton></div>
                 <div id="right" onClick={() => navigate('./purchaseList')}><IconButton >הכן לי רשימת קניות <ArrowForwardIcon /></IconButton></div>
             </Stack >
-
+}
         </div >
     );
 }
@@ -129,3 +136,19 @@ export function Enter(props: IMyProps) {
 //     )
 //   }
 export default Enter;
+// const mapStateToProps = (st: any) => {
+//     //הפונקציה תחזיר אובייקט ובו כל השדות שאנו רוצים שייכנסו לפרופס של הקומםוננטה שלנו
+//     //מתןך הסטייט הכללי
+//     return {
+//         //  myArr: st.pro.productsList,
+//         count: st.pro.amountProducts,
+//         user: st.Use.state
+//         // myArr:[]=[{d: 123,
+//         //     name: "name",
+//         //     category: 1,
+//         //     PurchasesHistoryId: "123",
+//         //     PurchasePrognosisId: "fgvhj",
+//         //     amount: 3}]
+//     };
+// }
+// export default connect(mapStateToProps)(Enter);

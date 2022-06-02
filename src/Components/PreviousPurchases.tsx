@@ -71,8 +71,8 @@ export default function PreviosPurchases() {
                 ))}
             </div>
 
-            <Button className="previosToProducts" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/allCategory') }}>מוצרים</Button>
-            <Button className="previoustoPurchase" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/purchaseList') }}>רשימת מוצרים</Button>
+            <Button className="previosToProducts" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/allCategory') }}>למוצרים</Button>
+            <Button className="previoustoPurchase" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/purchaseList') }}>להצעת קניה</Button>
             <Logo class_name={"logo-small"} />
         </>
 

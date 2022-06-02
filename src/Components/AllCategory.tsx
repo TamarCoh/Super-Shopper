@@ -42,7 +42,6 @@ import ThumbDown from '@material-ui/icons/ThumbDown';
 import ThumbUp from '@material-ui/icons/ThumbUp';
 import Typography from '@material-ui/core/Typography';
 
-
 function TabPanel(props: any) {
   const { children, value, index, ...other } = props;
 
@@ -104,6 +103,21 @@ async function getCategories() {
   return categoriesList;
   // return mockupCategoriesList;
 }
+interface keyValue{
+  key:string,
+  value:string
+}
+type tplotOptions = {
+  [key: string]: string
+}
+function importAll(r:any) {
+  let images:tplotOptions = {};
+  r.keys().map((item:any, index:any) => { images[item.replace('./', '')]= r(item); });
+  console.log('images',images)
+  return images;
+}
+
+const images = importAll(require.context('../images', false, /\.(png|jpe?g|svg)$/));
 
 async function getProductsByCategory(category: Category) {
   let productList: ProductByCategory[] = [];
@@ -114,13 +128,19 @@ async function getProductsByCategory(category: Category) {
     debugger
     // productList 
     //= res.data as ProductByCategory[]
+    let arrImg:keyValue[]=[]
     productList = res.data.map((p: any) => {
       let product: ProductByCategory
+      // arrImg.push({key:p.Image,value:}as keyValue)
       product = {
         name: p.Name,
         id: p.ProductId,
-        category: p.ProductCategoryId
+        category: p.ProductCategoryId,
+        img:images['logo.png']
+        // img:images[p.Image]
+
       }
+      console.log(product.img)
       return product as ProductByCategory
     });
   }

@@ -23,6 +23,7 @@ import { margin } from "@mui/system";
 import { useDispatch } from "react-redux";
 import { increaseProductInList } from "../store/Actions/ProductInList";
 import { randomId } from "@mui/x-data-grid-generator";
+import img1 from '../images/bedroom.jpg';
 
 function AddProductBuy(
   product: ProductByCategory,
@@ -107,11 +108,11 @@ export const BadgeVisibility: React.FunctionComponent<BadgeVisibilityModal> = ({
 
 export default function Product(props: any) {
   return (
-    <Card sx={{ maxWidth: 345, margin: 4 }}>
+    <Card sx={{ width: 230, margin: 4 }}>
       <CardMedia
         component="img"
         height="140"
-        image="/static/images/cards/contemplative-reptile.jpg"
+        src={props.product.img}
         alt=""
       />
       <CardContent>

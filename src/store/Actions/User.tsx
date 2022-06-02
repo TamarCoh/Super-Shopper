@@ -11,9 +11,9 @@ export const logOut = () => {
         
     }
 }
-export const SignUp = (person: User) => {
+export const signUp = (person: User) => {
     return {
-        type: "SignUp",
+        type: "signUp",
         payload: person
     }
 }

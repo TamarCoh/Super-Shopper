@@ -33,7 +33,28 @@ import { getPurchaseList } from "../store/Actions/ProductInList";
 import { IstatePro } from "../store/Reducers/ProductInList";
 import { randomId } from "@mui/x-data-grid-generator";
 
-export async function getList(payload:User){
+
+// import { createTheme } from '@mui/material/styles';
+
+
+// const theme = createTheme({
+//     palette: {
+//         primary: {
+//             light: '#757ce8',
+//             main: '#f8bbd0',
+//             dark: '#002884',
+//             contrastText: '#fff',
+//         },
+//         secondary: {
+//             light: '#ff7961',
+//             main: '#f44336',
+//             dark: '#ba000d',
+//             contrastText: '#000',
+//         },
+//     },
+// });
+
+export async function getList(payload: User) {
     let prognosis: IstatePro = {} as IstatePro;
     prognosis.amountProducts = 0;
     prognosis.productsList = [];
@@ -51,11 +72,11 @@ export async function getList(payload:User){
             }
             return product as ProductByMount
         });
-         prognosis.amountProducts = response.data.length ? response.data.length : 0;
-     } )
-    
+        prognosis.amountProducts = response.data.length ? response.data.length : 0;
+    })
 
-     return prognosis
+
+    return prognosis
 }
 
 export function LogIn(): JSX.Element {
@@ -68,7 +89,7 @@ export function LogIn(): JSX.Element {
             debugger
             console.log("start")
             console.log(data);
-            let customerPromise = await axios.get(`https://localhost:44378/api/GetSpecific/${data.password}/${data.firstName}/${data.lastName}`).then(async response => {
+            let customerPromise = await axios.get(`https://localhost:44378/api/GetCustomerByPassswordName/${data.password}/${data.firstName}/${data.lastName}`).then(async response => {
                 if (response.data == null) {
                     console.log("customer not found!!")
                     navigate('/SignUp');
@@ -81,14 +102,15 @@ export function LogIn(): JSX.Element {
                     password: response.data.Password,
                     email: response.data.Email
                 }
-                console.log("user :   " + {user});
+                localStorage.setItem('user', JSON.stringify(user))
+                console.log("user :   " + { user });
                 dispatch(logIn(user))
-                const list:IstatePro= await getList(user)as IstatePro
-            
+                const list: IstatePro = await getList(user) as IstatePro
 
+                localStorage.setItem('productList', JSON.stringify(list))
                 dispatch(getPurchaseList(list));
-                
-            }).then(()=>navigate('./purchaseList'))
+
+            }).then(() => { navigate('', { state: { isOpen: false } }) })
         }
         catch {
             console.log(errors)
@@ -148,7 +170,7 @@ export function LogIn(): JSX.Element {
 
 
                 <Button variant="contained" type='submit'
-                    color="secondary"
+                    color="primary"
                     endIcon={<SendIcon />}
                 // onClick={() => { navigate('/') }}
                 >
