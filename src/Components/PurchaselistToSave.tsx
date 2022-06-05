@@ -144,7 +144,7 @@ let rows:GridRowsProp[]=stateRows.map((item: ProductByMount) => {
 id:item.id,
 amount:item.amount
   }
-  return row as GridRowsProp
+  return row as  GridRowsProp
 })
 
   return (
