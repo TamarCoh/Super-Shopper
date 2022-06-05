@@ -19,6 +19,7 @@ import { User } from './utils/modals';
 import { logIn } from './store/Actions/User';
 import { getPurchaseList } from './store/Actions/ProductInList';
 import {IstatePro} from './store/Reducers/ProductInList'
+import PurchaselistToSave from './Components/PurchaselistToSave';
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,8 @@ function App() {
           <Route path="/previousPurchases" element={<PreviosPurchases />} />
           <Route path="/purchaseList" element={<PurchaseList />} />
           <Route path="/orderDetails" element={<OrderDetails />} />
+          <Route path="/PurchaselistSave" element={<PurchaselistToSave />} />
+
           <Route path="/previousPurchases/orderDetails" element={<OrderDetails />} />
         </Routes>
       </Router>
