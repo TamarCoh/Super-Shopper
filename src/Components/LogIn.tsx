@@ -89,7 +89,7 @@ export function LogIn(): JSX.Element {
             debugger
             console.log("start")
             console.log(data);
-            let customerPromise = await axios.get(`https://localhost:44378/api/GetCustomerByPassswordName/${data.password}/${data.firstName}/${data.lastName}`).then(async response => {
+            let customerPromise = await axios.get(`https://localhost:44378/api/GetCustomerByPasswordName/${data.password}/${data.firstName}/${data.lastName}`).then(async response => {
                 if (response.data == null) {
                     console.log("customer not found!!")
                     navigate('/SignUp');

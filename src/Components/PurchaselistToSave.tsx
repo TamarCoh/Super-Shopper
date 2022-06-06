@@ -2,12 +2,14 @@ import * as React from 'react';
 import { ProductByMount } from "../utils/modals";
 
 import {
-  DataGridPremium,
+//   DataGrid,
   GridToolbarContainer,
   GridToolbarExport,
+  DataGrid,
+  GridColumns
  
-} from '@mui/x-data-grid-premium';
-import { DataGrid, GridColumns } from '@mui/x-data-grid';
+} from '@mui/x-data-grid';
+
 import { useSelector } from 'react-redux';
 export interface GridRowsProp{
 name:string,
