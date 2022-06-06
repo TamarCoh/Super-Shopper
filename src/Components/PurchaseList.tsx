@@ -285,7 +285,7 @@ export default function PurchaseList(): JSX.Element {
                                 } as ActuallyPurchase
                                 return product
                             })
-                            axios.post(`https://localhost:44378/api/BasketBuilder/AddActPur/${user.id}`, l)
+                            axios.post(`https://localhost:44378/api/AddActPur/${user.id}`, l)
                                 .then(res => console.log(res))
                                 .catch(err => console.log(err))
                         }}>שמור</Button>
