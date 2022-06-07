@@ -1,6 +1,6 @@
 import ReplyRoundedIcon from '@mui/icons-material/ReplyRounded';
 import { Button } from '@mui/material';
-import { Navigate, useNavigate, useLocation, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {  useNavigate, useLocation, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import "./PreviousPurchases.css";
 import * as React from 'react';
 import Box from '@mui/material/Box';
@@ -116,14 +116,14 @@ export function BasicCard(props: IpreviosPurchase) {
             </CardContent>
             <CardActions>
                 {/* <Button size="small" onClick={() => { navigate('./orderDetails', { state: { orderId: props.orderId } }) }}>show order products</Button> */}
-                 <Button size="small" onClick={() => { allOOrderDetails(props.orderId) }}>show order products</Button>
+                 <Button size="small" onClick={() => { AllOOrderDetails(props.orderId) }}>show order products</Button>
 
             </CardActions>
         </Card>
  
     );
 }
-function allOOrderDetails(orderId:string){
+function AllOOrderDetails(orderId:string){
     const navigate=useNavigate();
 
 const [List,setList]=React.useState<ProductByMount[]>([]);
