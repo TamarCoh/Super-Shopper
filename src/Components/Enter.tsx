@@ -11,7 +11,7 @@ import ArrowBackTwoToneIcon from '@mui/icons-material/ArrowBackTwoTone';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import { animated, useSpring } from 'react-spring';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
 interface IMyProps {
     open: boolean,
@@ -39,7 +39,7 @@ function ChildModal() {
     const handleClose = () => {
         setOpen(false);
     };
-
+const navigate=useNavigate();
     return (
         <React.Fragment>
             <>
@@ -59,8 +59,10 @@ function ChildModal() {
                 >
                     <>
                         <SignUp />
-                        <Button id="lin" onClick={handleClose} >התחברות</Button>
+                        
+                        <Button className='left' id="lin" onClick={handleClose} >התחברות</Button>
                         <>?רשום כבר   </>
+                        {/* <Button className='right' id="lin" onClick={()=>navigate("")} >יציאה</Button> */}
 
                     </>
 
