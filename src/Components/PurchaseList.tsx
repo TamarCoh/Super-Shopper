@@ -274,6 +274,7 @@ export default function PurchaseList(): JSX.Element {
                         // {/* //update DB by state */}
                         onClick={() => {
                             debugger
+                            const navigate=useNavigate();
                             let l: ActuallyPurchase[]
                             l = productList.map((item: ProductByMount) => {
                                 let product: ActuallyPurchase = {
@@ -286,7 +287,8 @@ export default function PurchaseList(): JSX.Element {
                                 return product
                             })
                             axios.post(`https://localhost:44378/api/BasketBuilder/AddActPur/${user.id}`, l)
-                                .then(res => console.log(res))
+                                .then(res =>{ console.log(res), navigate('./orderDetails', { state: productList })
+                            })
                                 .catch(err => console.log(err))
                         }}>שמור</Button>
                     <Logo class_name={"logo-small"} />
