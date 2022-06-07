@@ -112,7 +112,7 @@ export default function Product(props: any) {
       <CardMedia
         component="img"
         height="140"
-        src={props.product.img}
+        src={`./${props.product.img?.default}`}
         alt=""
       />
       <CardContent>
