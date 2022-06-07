@@ -34,7 +34,7 @@ export default function PreviosPurchases() {
         let previosesList: IpreviosPurchase[] = [];
         try {
             const res = await axios.get(`https://localhost:44378/api/GetAllPurchasesHistoryByCustomerId/${user.id}`);
-            debugger
+
             previosesList = res.data.map((item: any) => {
                 let previous: IpreviosPurchase
                 previous = {
@@ -56,7 +56,7 @@ export default function PreviosPurchases() {
     const ref = React.useRef<HTMLDivElement>(null);
     async function anyNameFunction() {
         const tempPreviouses = await getPreviouses();
-        debugger
+
         setArr(tempPreviouses);
     }
     anyNameFunction();
@@ -115,22 +115,27 @@ export function BasicCard(props: IpreviosPurchase) {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small" onClick={() => { navigate('./orderDetails', { state: { orderId: props.orderId } }) }}>show order products</Button>
+                
+                <Button size="small" onClick={() => {
+                    debugger
+                     navigate('/orderDetails', { state: { orderId: props.orderId } }) }}>show order products</Button>
             </CardActions>
         </Card>
- 
+
     );
 }
 
 export function OrderDetails() {
-
+debugger
     const location = useLocation()
     const from = location.state as INavigateProps
-const [List,setList]=React.useState<ProductByMount[]>([]);
+    const [List, setList] = React.useState<ProductByMount[]>([]);
+    debugger
     async function getProducts() {
         const res = await axios.get(`api/GetActuallyPurchasesByPurchasesHistoryId/${from.orderId}`);
-        debugger
-        const list:ProductByMount[]= res.data.map((item: any) => {
+        
+        // 
+        const list: ProductByMount[] = res.data.map((item: any) => {
             let product: ProductByMount
             product = {
                 idrow: "",
@@ -144,8 +149,8 @@ const [List,setList]=React.useState<ProductByMount[]>([]);
             setList(list)
         })
     }
-const navigate=useNavigate();
-    debugger
+    const navigate = useNavigate();
+
     return (
         <>
             <TableContainer component={Paper}>

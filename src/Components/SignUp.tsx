@@ -26,17 +26,17 @@ export function SignUp(): JSX.Element {
     const dispatch = useDispatch();
     const { register, handleSubmit, formState: { errors } } = useForm<User>();
     const addCustomer = async (data: User) => {
-        debugger
+
         console.log("start")
         console.log(data);
         let customerPromise = await axios.post("https://localhost:44378/api/Customer", data).
             then(async () => {
                 let customer = await axios.get(`https://localhost:44378/api/GetCustomerByPasswordName/${data.password}/${data.firstName}/${data.lastName}`).
                     then(async response => {
-                        debugger
+
                         //  let response = await customerPromise;
                         console.log(response.data);
-                        debugger
+
                         let user: User
                         user = {
                             firstName: response.data.FirstName,
@@ -51,7 +51,7 @@ export function SignUp(): JSX.Element {
                         const list: IstatePro = await getList(user) as IstatePro
                         localStorage.setItem('productList', JSON.stringify(list))
                         dispatch(getPurchaseList(list));
-                    }).then(() => { navigate('/allCategory')})
+                    }).then(() => { navigate('/allCategory') })
             })
     }
 

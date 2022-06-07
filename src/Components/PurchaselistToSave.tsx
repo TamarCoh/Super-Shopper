@@ -2,20 +2,21 @@ import * as React from 'react';
 import { ProductByMount } from "../utils/modals";
 
 import {
-//   DataGrid,
+  //   DataGrid,
   GridToolbarContainer,
   GridToolbarExport,
   DataGrid,
   GridColumns
- 
+
 } from '@mui/x-data-grid';
 
 import { useSelector } from 'react-redux';
-export interface GridRowsProp{
-name:string,
-//date:Date,
-id:Number,
-amount:Number
+import { useLocation } from 'react-router-dom';
+export interface GridRowsProp {
+  name: string,
+  //date:Date,
+  id: Number,
+  amount: Number
 }
 // const rows: GridRowsProp = [
 //   {
@@ -111,16 +112,16 @@ amount:Number
 // ];
 
 const columns: GridColumns = [
-  { field: 'Name', headerName: 'שם מוצר', type: 'string', width: 200 },
- 
+  { field: 'name', headerName: 'שם מוצר', type: 'string', width: 200 },
+
   {
     field: 'amount',
     headerName: 'כמות',
     type: 'Number',
-    
+
     width: 150,
   },
-   {
+  {
     field: 'recruitmentDate',
     headerName: 'תאריך קניה',
     type: 'date',
@@ -131,23 +132,28 @@ const columns: GridColumns = [
 function CustomToolbar() {
   return (
     <GridToolbarContainer>
-      <GridToolbarExport />
+      <GridToolbarExport
+       csvOptions={{
+        fileName: 'customerDataBase',
+        delimiter: ';',
+        utf8WithBom: true,
+      }} />
     </GridToolbarContainer>
   );
 }
 
 export default function PurchaselistToSave() {
-  const stateRows:ProductByMount[]=   useSelector((st: any) => st.pro.productsList)||[]
-let rows:GridRowsProp[]=stateRows.map((item: ProductByMount) => {
-  let row: GridRowsProp
-  row = {
-    name:item.name,
-//date:
-id:item.id,
-amount:item.amount
-  }
-  return row as  GridRowsProp
-})
+  const stateRows: ProductByMount[] = useSelector((st: any) => st.pro.productsList) || []
+  let rows: GridRowsProp[] = stateRows.map((item: ProductByMount) => {
+    let row: GridRowsProp
+    row = {
+      name: item.name,
+      //date:
+      id: item.id,
+      amount: item.amount
+    }
+    return row as GridRowsProp
+  })
 
   return (
     <div style={{ height: 300, width: '100%' }}>

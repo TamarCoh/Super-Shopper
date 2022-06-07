@@ -76,7 +76,7 @@ function EditToolbar(props: EditToolbarProps) {
 const mapStateToProps = (st: any) => {
     //הפונקציה תחזיר אובייקט ובו כל השדות שאנו רוצים שייכנסו לפרופס של הקומםוננטה שלנו
     //מתןך הסטייט הכללי
-    debugger
+    
     console.log(st.pro.productsList)
     return {
         productList: st.pro.productsList,
@@ -85,7 +85,7 @@ const mapStateToProps = (st: any) => {
 }
 export default function PurchaseList(): JSX.Element {
     // const apiRef = useGridApiRef();
-    debugger
+    
     const productList = useSelector((st: any) => st.pro.productsList)
     const productState = useSelector((st: any) => st.pro)
 
@@ -96,7 +96,7 @@ export default function PurchaseList(): JSX.Element {
     //useEffect?->
     rows = productList.filter((i: ProductByMount) => i.amount > 0)
     React.useEffect(() => {
-        debugger
+        
         localStorage.setItem('productList', JSON.stringify(productState))
 
     }, [productList])
@@ -121,7 +121,7 @@ export default function PurchaseList(): JSX.Element {
 
     //update state in every action
     const handleDeleteClick = (id: GridRowId) => (event: React.MouseEvent) => {
-        debugger
+        
         event.stopPropagation();
         let p: ProductByMount = rows.find((item: ProductByMount) => item.id == id) as ProductByMount
 
@@ -131,7 +131,7 @@ export default function PurchaseList(): JSX.Element {
 
     };
     const handleAddClick = (id: GridRowId) => (event: React.MouseEvent) => {
-        debugger
+        
         let p: ProductByMount = rows.find((item: ProductByMount) => item.id == id) as ProductByMount
         const temp = {
             idrow: p.idrow,
@@ -146,7 +146,7 @@ export default function PurchaseList(): JSX.Element {
 
     };
     const handleReductionClick = (id: GridRowId) => (event: React.MouseEvent) => {
-        debugger
+        
         let p = rows.find((item: ProductByMount) => item.id == id) as ProductByMount
         // if(p)
         // == undefined ? {} as ProductByMount : rows.find((item: ProductByMount) => item.idrow == id)
@@ -273,7 +273,7 @@ const navigate=useNavigate();
                     <Button
                         // {/* //update DB by state */}
                         onClick={async () => {
-                            debugger
+                            
                             let l: ActuallyPurchase[]
                             l = productList.map((item: ProductByMount) => {
                                 let product: ActuallyPurchase = {
@@ -287,7 +287,9 @@ const navigate=useNavigate();
                             })
                             await axios.post(`https://localhost:44378/api/AddActPur/${user.id}`, l).then(res =>{
                                     console.log(res)
-                                    navigate('./purchaselistToSave')}).catch(err => console.log(err))
+                                    navigate('purchaselistToSave')}).catch(
+                                        err =>{ console.log(err)
+                        }).finally(()=>navigate('purchaselistToSave'))
                         }}>שמור</Button>
                     <Logo class_name={"logo-small"} />
                     <h4>!משתמש יקר  </h4>

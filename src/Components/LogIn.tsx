@@ -59,7 +59,7 @@ export async function getList(payload: User) {
     prognosis.amountProducts = 0;
     prognosis.productsList = [];
     await axios.get(`https://localhost:44378/api/GetPurchaseOffer/${payload.id}`).then((response) => {
-        debugger
+
         prognosis.productsList = response.data.map((p: any) => {
             let product: ProductByMount
             product = {
@@ -86,39 +86,39 @@ export function LogIn(): JSX.Element {
     const { register, handleSubmit, formState: { errors } } = useForm<User>();
     const addCustomer = async (data: User) => {
         try {
-        debugger
-        console.log("start")
-        console.log(data);
-        // try {
-        let customerPromise = await axios.get(`https://localhost:44378/api/GetCustomerByPasswordName/${data.password}/${data.firstName}/${data.lastName}`)
 
-            .then(async response => {
-                if (response.data == null) {
-                    console.log("customer not found!!")
-                    navigate('/SignUp');
-                }
-                let user: User
-                user = {
-                    firstName: response.data.FirstName,
-                    lastName: response.data.LastName,
-                    id: response.data.CustomerId,
-                    password: response.data.Password,
-                    email: response.data.Email
-                }
-                localStorage.setItem('user', JSON.stringify(user))
-                console.log("user :   " + { user });
-                dispatch(logIn(user))
-                const list: IstatePro = await getList(user) as IstatePro
+            console.log("start")
+            console.log(data);
+            // try {
+            let customerPromise = await axios.get(`https://localhost:44378/api/GetCustomerByPasswordName/${data.password}/${data.firstName}/${data.lastName}`)
 
-                localStorage.setItem('productList', JSON.stringify(list))
-                dispatch(getPurchaseList(list));
+                .then(async response => {
+                    if (response.data == null) {
+                        console.log("customer not found!!")
+                        navigate('/SignUp');
+                    }
+                    let user: User
+                    user = {
+                        firstName: response.data.FirstName,
+                        lastName: response.data.LastName,
+                        id: response.data.CustomerId,
+                        password: response.data.Password,
+                        email: response.data.Email
+                    }
+                    localStorage.setItem('user', JSON.stringify(user))
+                    console.log("user :   " + { user });
+                    dispatch(logIn(user))
+                    const list: IstatePro = await getList(user) as IstatePro
 
-            })
-            // .catch(() => {
-            //     console.log("customer not found!!")
-            //     navigate('/SignUp');
-            // })
-            .then(() => { navigate('', { state: { isOpen: false } }) })
+                    localStorage.setItem('productList', JSON.stringify(list))
+                    dispatch(getPurchaseList(list));
+
+                })
+                // .catch(() => {
+                //     console.log("customer not found!!")
+                //     navigate('/SignUp');
+                // })
+                .then(() => { navigate('', { state: { isOpen: false } }) })
         }
         catch {
             console.log(errors)
