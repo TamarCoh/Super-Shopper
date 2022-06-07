@@ -272,7 +272,7 @@ const navigate=useNavigate();
                     </Box>
                     <Button
                         // {/* //update DB by state */}
-                        onClick={() => {
+                        onClick={async () => {
                             debugger
                             let l: ActuallyPurchase[]
                             l = productList.map((item: ProductByMount) => {
@@ -285,12 +285,9 @@ const navigate=useNavigate();
                                 } as ActuallyPurchase
                                 return product
                             })
-                            axios.post(`https://localhost:44378/api/AddActPur/${user.id}`, l)
-                                .then(res =>{
+                            await axios.post(`https://localhost:44378/api/AddActPur/${user.id}`, l).then(res =>{
                                     console.log(res)
-                                    navigate('./purchaselistToSave')
-                        })
-                                .catch(err => console.log(err))
+                                    navigate('./purchaselistToSave')}).catch(err => console.log(err))
                         }}>שמור</Button>
                     <Logo class_name={"logo-small"} />
                     <h4>!משתמש יקר  </h4>
