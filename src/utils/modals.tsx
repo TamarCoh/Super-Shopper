@@ -7,7 +7,7 @@ import {
 export interface User {
     firstName: string,
     lastName: string,
-    id: string,
+    id: number,
     password: string,
     email: string
 }
