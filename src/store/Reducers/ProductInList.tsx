@@ -23,7 +23,7 @@ const initialState: IstatePro = {
 } as IstatePro
 
 export const productInListReducer = (state = initialState, action: any) => {
-    debugger
+    // 
     switch (action.type) {
         case Action_Types.GET_PURCHASE_LIST:
             return {
@@ -32,7 +32,7 @@ export const productInListReducer = (state = initialState, action: any) => {
                 // state:action.payload
             }
         case Action_Types.REMOVE_PRODUCT:
-            debugger
+            // 
 
             return {
                 ...state,
@@ -40,14 +40,14 @@ export const productInListReducer = (state = initialState, action: any) => {
                 amountProducts: state.amountProducts - 1
             }
         case Action_Types.DECREASE_PRODUCT:
-            debugger
+            // 
             return {
                 ...state,
                 productsList: state.productsList.map((i: ProductByMount) => { if (i.id == action.payload.id) { i.amount -= 1; if (i.amount == 0) state.amountProducts = state.amountProducts - 1 } return i })
 
             }
         case Action_Types.INCREAES_PRODUCT:
-            debugger
+            // 
             if (state.productsList.find((i: ProductByMount) => i.id == action.payload.id))
                 return {
                     ...state,
@@ -67,10 +67,10 @@ export const productInListReducer = (state = initialState, action: any) => {
                 amountProducts: state.amountProducts + 1
             }
         case "clearPurchaseList":
-            debugger
+            // 
             return {
                 productsList: [],
-                amountProducts:0
+                amountProducts: 0
             }
     }
 

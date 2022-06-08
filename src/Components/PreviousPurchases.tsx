@@ -24,9 +24,8 @@ import { useSelector } from 'react-redux';
 interface IpreviosPurchase {
     orderId: string;
     orderDate: Date;
+    orderHebrewDate: string;
     orderDescription: String;
-    // orderProducts: ProductByMount[];
-
 }
 
 export default function PreviosPurchases() {
@@ -34,13 +33,14 @@ export default function PreviosPurchases() {
     async function getPreviouses() {
         let previosesList: IpreviosPurchase[] = [];
         try {
-            const res = await axios.get(`https://localhost:44378/api/PurchasesHistory/${user.id}`);
-            debugger
+            const res = await axios.get(`https://localhost:44378/api/GetAllPurchasesHistoryByCustomerId/${user.id}`);
+
             previosesList = res.data.map((item: any) => {
                 let previous: IpreviosPurchase
                 previous = {
                     orderId: item.PurchasesHistoryId,
                     orderDate: item.PurchaseDate,
+                    orderHebrewDate: item.HebrewDateId,
                     orderDescription: item.Description,
                 }
                 return previous as IpreviosPurchase
@@ -56,7 +56,7 @@ export default function PreviosPurchases() {
     const ref = React.useRef<HTMLDivElement>(null);
     async function anyNameFunction() {
         const tempPreviouses = await getPreviouses();
-        debugger
+
         setArr(tempPreviouses);
     }
     anyNameFunction();
@@ -64,7 +64,7 @@ export default function PreviosPurchases() {
     return (
         <>
             <div id="wrap">
-                {arr == null ? <span> לא נמצאו קניות קודמות...</span> : arr.map((item: IpreviosPurchase) => (
+                {arr == null ? <span>... בחיפוש אחר קניותך הקודמות</span> : arr.map((item: IpreviosPurchase) => (
                     <div className='basicCard'>
                         <BasicCard  {...item} />
                     </div>
@@ -80,14 +80,14 @@ export default function PreviosPurchases() {
 }
 
 
-const bull = (
-    <Box
-        component="span"
-        sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-    >
-        •
-    </Box>
-);
+// const bull = (
+//     <Box
+//         component="span"
+//         sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
+//     >
+//         •
+//     </Box>
+// );
 interface INavigateProps {
     orderId: number
 }
@@ -102,8 +102,8 @@ export function BasicCard(props: IpreviosPurchase) {
                     {props.orderId}
                 </Typography>
                 <Typography variant="h5" component="div">
-                    {/* {props.orderDate.getDay()*/}{/*bull*/}{/*props.orderDate.getMonth()*/}{/*bull*/}{/*props.orderDate.getFullYear()} */}
-                    {new Date(props.orderDate).getDate()}
+                    {new Date(props.orderDate).getDay()}/{new Date(props.orderDate).getMonth()}/{new Date(props.orderDate).getFullYear()}
+                    {/* {new Date(props.orderDate).getDate()} */}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
                     {new Date(props.orderDate).getHours()}{":" + new Date(props.orderDate).getMinutes()}
@@ -118,9 +118,10 @@ export function BasicCard(props: IpreviosPurchase) {
                 {/* <Button size="small" onClick={() => { navigate('./orderDetails', { state: { orderId: props.orderId } }) }}>show order products</Button> */}
                  <Button size="small" onClick={() => { AllOOrderDetails(props.orderId) }}>show order products</Button>
 
+
             </CardActions>
         </Card>
- 
+
     );
 }
 function AllOOrderDetails(orderId:string){
@@ -149,14 +150,16 @@ const [List,setList]=React.useState<ProductByMount[]>([]);
     navigate('./orderDetails', { state: List })
 }
 export function OrderDetails() {
-
+debugger
     const location = useLocation()
     const from = location.state as INavigateProps
-const [List,setList]=React.useState<ProductByMount[]>([]);
+    const [List, setList] = React.useState<ProductByMount[]>([]);
+    debugger
     async function getProducts() {
-        const res = await axios.get(`api/GetActuallyPurchasesByPurchaseHistoryId/${from.orderId}`);
-        debugger
-        const list:ProductByMount[]= res.data.map((item: any) => {
+        const res = await axios.get(`api/GetActuallyPurchasesByPurchasesHistoryId/${from.orderId}`);
+        
+        // 
+        const list: ProductByMount[] = res.data.map((item: any) => {
             let product: ProductByMount
             product = {
                 idrow: "",
@@ -170,8 +173,8 @@ const [List,setList]=React.useState<ProductByMount[]>([]);
             setList(list)
         })
     }
-const navigate=useNavigate();
-    debugger
+    const navigate = useNavigate();
+
     return (
         <>
             <TableContainer component={Paper}>

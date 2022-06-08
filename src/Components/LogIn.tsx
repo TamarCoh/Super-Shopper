@@ -59,7 +59,7 @@ export async function getList(payload: User) {
     prognosis.amountProducts = 0;
     prognosis.productsList = [];
     await axios.get(`https://localhost:44378/api/GetPurchaseOffer/${payload.id}`).then((response) => {
-        debugger
+
         prognosis.productsList = response.data.map((p: any) => {
             let product: ProductByMount
             product = {
@@ -86,34 +86,43 @@ export function LogIn(): JSX.Element {
     const { register, handleSubmit, formState: { errors } } = useForm<User>();
     const addCustomer = async (data: User) => {
         try {
-            debugger
+
             console.log("start")
             console.log(data);
-            let customerPromise = await axios.get(`https://localhost:44378/api/GetCustomerByPassswordName/${data.password}/${data.firstName}/${data.lastName}`).then(async response => {
-                if (response.data == null) {
-                    console.log("customer not found!!")
-                    navigate('/SignUp');
-                }
-                let user: User
-                user = {
-                    firstName: response.data.FirstName,
-                    lastName: response.data.LastName,
-                    id: response.data.CustomerId,
-                    password: response.data.Password,
-                    email: response.data.Email
-                }
-                localStorage.setItem('user', JSON.stringify(user))
-                console.log("user :   " + { user });
-                dispatch(logIn(user))
-                const list: IstatePro = await getList(user) as IstatePro
+            // try {
+            let customerPromise = await axios.get(`https://localhost:44378/api/GetCustomerByPasswordName/${data.password}/${data.firstName}/${data.lastName}`)
 
-                localStorage.setItem('productList', JSON.stringify(list))
-                dispatch(getPurchaseList(list));
+                .then(async response => {
+                    if (response.data == null) {
+                        console.log("customer not found!!")
+                        navigate('/SignUp');
+                    }
+                    let user: User
+                    user = {
+                        firstName: response.data.FirstName,
+                        lastName: response.data.LastName,
+                        id: response.data.CustomerId,
+                        password: response.data.Password,
+                        email: response.data.Email
+                    }
+                    localStorage.setItem('user', JSON.stringify(user))
+                    console.log("user :   " + { user });
+                    dispatch(logIn(user))
+                    const list: IstatePro = await getList(user) as IstatePro
 
-            }).then(() => { navigate('', { state: { isOpen: false } }) })
+                    localStorage.setItem('productList', JSON.stringify(list))
+                    dispatch(getPurchaseList(list));
+
+                })
+                // .catch(() => {
+                //     console.log("customer not found!!")
+                //     navigate('/SignUp');
+                // })
+                .then(() => { navigate('', { state: { isOpen: false } }) })
         }
         catch {
             console.log(errors)
+            alert("אינך רשום ,אנא עבור לרישום")
         }
         // <Stack sx={{ width: '100%' }} spacing={2}>
         //     <Alert variant="filled" severity="success">
@@ -129,70 +138,64 @@ export function LogIn(): JSX.Element {
 
     }
 
-    return <div>
+
+    return (
+
+        <>
+
+            <div className="card">
+                <h1>התחברות</h1>
+                <form onSubmit={handleSubmit(addCustomer)}>
+
+
+                    <span className="op">
+                        <TextField id="standard-basic" variant="standard" type="text" label="שם פרטי"   {...register('firstName', { required: true, minLength: 2, maxLength: 10 })}
+                        // InputProps={{ startAdornment: (<InputAdornment position="start">  <AccountCircleIcon /> </InputAdornment>), }}
+                        />
+                        {errors.firstName?.type === "required" && <span>חסר שם פרטי</span>}
+                        {errors.firstName?.type === "minLength" && <span>שם פרטי קצר מדי</span>}
+                        {errors.firstName?.type === "maxLength" && <span>שם פרטי ארוך מדי</span>}
+                    </span><br />
+
+                    <span className="op">
+                        <TextField id="standard-basic" variant="standard" type="text" label="שם משפחה"  {...register('lastName', { required: true, minLength: 2, maxLength: 10 })}
+                        // InputProps={{ startAdornment: (<InputAdornment position="start">  <AccountCircleIcon /> </InputAdornment>), }}
+                        />
+                        {errors.lastName?.type === "minLength" && <span>שם משפחה קצר מדי</span>}
+                        {errors.lastName?.type === "maxLength" && <span>שם משפחה ארוך מדי</span>}
+                        {errors.lastName?.type === "required" && <span>חסר שם משפחה</span>}
+                    </span><br />
 
 
 
-        <div className="card">
-            <h1>התחברות</h1>
-            <form onSubmit={handleSubmit(addCustomer)}>
-
-
-                <span className="op">
-                    <TextField id="standard-basic" variant="standard" type="text" label="שם פרטי"   {...register('firstName', { required: true, minLength: 2, maxLength: 10 })}
-                    // InputProps={{ startAdornment: (<InputAdornment position="start">  <AccountCircleIcon /> </InputAdornment>), }}
-                    />
-                    {errors.firstName?.type === "required" && <span>חסר שם פרטי</span>}
-                    {errors.firstName?.type === "minLength" && <span>שם פרטי קצר מדי</span>}
-                    {errors.firstName?.type === "maxLength" && <span>שם פרטי ארוך מדי</span>}
-                </span><br />
-
-                <span className="op">
-                    <TextField id="standard-basic" variant="standard" type="text" label="שם משפחה"  {...register('lastName', { required: true, minLength: 2, maxLength: 10 })}
-                    // InputProps={{ startAdornment: (<InputAdornment position="start">  <AccountCircleIcon /> </InputAdornment>), }}
-                    />
-                    {errors.lastName?.type === "minLength" && <span>שם משפחה קצר מדי</span>}
-                    {errors.lastName?.type === "maxLength" && <span>שם משפחה ארוך מדי</span>}
-                    {errors.lastName?.type === "required" && <span>חסר שם משפחה</span>}
-                </span><br />
+                    <span className="op">
+                        <TextField id="standard-basic" variant="standard" type="password" label="סיסמה"  {...register('password', { required: true, minLength: 6, maxLength: 8 })}
+                        // InputProps={{ startAdornment: (<InputAdornment position="start" > <IconButton ><VisibilityIcon /></IconButton> </InputAdornment>), }}
+                        />
+                        {errors.password?.type === "required" && <span>חסרה סיסמה</span>}
+                        {errors.password?.type === "minLength" && <span>סיסמה קצרה מדי</span>}
+                        {errors.password?.type === "maxLength" && <span>סיסמה ארוכה מדי</span>}
+                    </span><br />
 
 
 
-                <span className="op">
-                    <TextField id="standard-basic" variant="standard" type="password" label="סיסמה"  {...register('password', { required: true, minLength: 6, maxLength: 8 })}
-                    // InputProps={{ startAdornment: (<InputAdornment position="start" > <IconButton ><VisibilityIcon /></IconButton> </InputAdornment>), }}
-                    />
-                    {errors.password?.type === "required" && <span>חסרה סיסמה</span>}
-                    {errors.password?.type === "minLength" && <span>סיסמה קצרה מדי</span>}
-                    {errors.password?.type === "maxLength" && <span>סיסמה ארוכה מדי</span>}
-                </span><br />
+                    <Button variant="contained" type='submit'
+                        color="primary"
+                        endIcon={<SendIcon />}
+                    // onClick={() => { navigate('/') }}
+                    >
+                        {/* //check if existing */}
+                        {/* //update state with cuurrent user */}
+                        שלח
+                    </Button>
 
 
 
-                <Button variant="contained" type='submit'
-                    color="primary"
-                    endIcon={<SendIcon />}
-                // onClick={() => { navigate('/') }}
-                >
-                    {/* //check if existing */}
-                    {/* //update state with cuurrent user */}
-                    שלח
-                </Button>
+                </form>
 
+            </div>
 
-
-            </form>
-
-        </div>
-
-    </div >
-
-    function getComponent() {
-
-
-
-
-
-    }
+        </>
+    )
 }
 export default LogIn;

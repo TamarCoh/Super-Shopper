@@ -26,30 +26,35 @@ export function SignUp(): JSX.Element {
     const dispatch = useDispatch();
     const { register, handleSubmit, formState: { errors } } = useForm<User>();
     const addCustomer = async (data: User) => {
-        debugger
+
         console.log("start")
         console.log(data);
-        let customerPromise = axios.post("https://localhost:44378/api/Customer", data).then(async response => {
-            debugger
-            //  let response = await customerPromise;
-            console.log(response.data);
-            debugger
-            let user: User
-            user = {
-                firstName: response.data.FirstName,
-                lastName: response.data.LastName,
-                id: response.data.CustomerId,
-                password: response.data.Password,
-                email: response.data.Email
-            }
-            localStorage.setItem('user', JSON.stringify(user))
-            console.log("user :   " + { user });
-            dispatch(signUp(user))
-            const list: IstatePro = await getList(user) as IstatePro
-            localStorage.setItem('productList', JSON.stringify(list))
-            dispatch(getPurchaseList(list));
-        }).then(() => navigate('/homePage'))
+        let customerPromise = await axios.post("https://localhost:44378/api/Customer", data).
+            then(async () => {
+                let customer = await axios.get(`https://localhost:44378/api/GetCustomerByPasswordName/${data.password}/${data.firstName}/${data.lastName}`).
+                    then(async response => {
+
+                        //  let response = await customerPromise;
+                        console.log(response.data);
+
+                        let user: User
+                        user = {
+                            firstName: response.data.FirstName,
+                            lastName: response.data.LastName,
+                            id: response.data.CustomerId,
+                            password: response.data.Password,
+                            email: response.data.Email
+                        }
+                        localStorage.setItem('user', JSON.stringify(user))
+                        console.log("user :   " + { user });
+                        dispatch(signUp(user))
+                        const list: IstatePro = await getList(user) as IstatePro
+                        localStorage.setItem('productList', JSON.stringify(list))
+                        dispatch(getPurchaseList(list));
+                    }).then(() => { navigate('/allCategory') })
+            })
     }
+
     return <div >
 
         <div className="card">

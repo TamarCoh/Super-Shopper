@@ -18,7 +18,7 @@ export const userReducer = (state = initialState, action: any) => {
     switch (action.type) {
 
         case "logIn":
-            debugger;
+            ;
             return {
                 state: action.payload
 

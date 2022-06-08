@@ -2,19 +2,22 @@ import * as React from 'react';
 import { ProductByMount } from "../utils/modals";
 
 import {
-  DataGridPremium,
+  //   DataGrid,
   GridToolbarContainer,
   GridToolbarExport,
- 
-} from '@mui/x-data-grid-premium';
-import { DataGrid, GridColumns } from '@mui/x-data-grid';
+  DataGrid,
+  GridColumns
+
+} from '@mui/x-data-grid';
+
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-export interface GridRowsProp{
-name:string,
-//date:Date,
-id:Number,
-amount:Number
+
+export interface GridRowsProp {
+  name: string,
+  //date:Date,
+  id: Number,
+  amount: Number
 }
 // const rows: GridRowsProp = [
 //   {
@@ -110,19 +113,24 @@ amount:Number
 // ];
 
 const columns: GridColumns = [
-  { field: 'Name', headerName: 'שם מוצר', type: 'string', width: 200 },
- 
+  {
+    field: 'name',
+    headerName: 'שם מוצר',
+    type: 'string',
+    width: 200
+  },
+
   {
     field: 'amount',
     headerName: 'כמות',
     type: 'Number',
-    
+
     width: 150,
   },
-   {
-    field: 'recruitmentDate',
-    headerName: 'תאריך קניה',
-    type: 'date',
+  {
+    field: 'id',
+    headerName: 'קוד מוצר',
+    type: 'Number',
     width: 150,
   },
 ];
@@ -130,7 +138,12 @@ const columns: GridColumns = [
 function CustomToolbar() {
   return (
     <GridToolbarContainer>
-      <GridToolbarExport />
+      <GridToolbarExport
+        csvOptions={{
+          fileName: 'customerDataBase',
+          delimiter: ';',
+          utf8WithBom: true,
+        }} />
     </GridToolbarContainer>
   );
 }
@@ -149,6 +162,7 @@ amount:item.amount
   }
   return row as  GridRowsProp
 })
+
 
   return (
     <div style={{ height: 300, width: '100%' }}>

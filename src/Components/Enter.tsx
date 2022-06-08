@@ -11,8 +11,10 @@ import ArrowBackTwoToneIcon from '@mui/icons-material/ArrowBackTwoTone';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import { animated, useSpring } from 'react-spring';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
+import CloseIcon from '@material-ui/icons/Close';
+
 interface IMyProps {
     open: boolean,
 }
@@ -39,17 +41,17 @@ function ChildModal() {
     const handleClose = () => {
         setOpen(false);
     };
-
+    const navigate = useNavigate();
     return (
         <React.Fragment>
             <>
                 {!open && <div>
-                    <Button id="lin" onClick={handleOpen}>רישום</Button>
+                    <Button id="lin" onClick={handleOpen} >רישום</Button>
                     <>?משתמש חדש    </>
-                    </div>
+                </div>
                 }
-                
-                
+
+
                 <Modal
                     hideBackdrop
                     open={open}
@@ -59,8 +61,10 @@ function ChildModal() {
                 >
                     <>
                         <SignUp />
-                        <Button id="lin" onClick={handleClose} >התחברות</Button>
+
+                        <Button className='left' id="lin" onClick={handleClose} >התחברות</Button>
                         <>?רשום כבר   </>
+                        {/* <Button className='right' id="lin" onClick={()=>navigate("")} >יציאה</Button> */}
 
                     </>
 
@@ -81,13 +85,15 @@ export function Enter() {
     const handleOpen = () => {
         setOpenM(true);
     };
-   const handleClose = () => {
+    const handleClose = () => {
         setOpenM(false);
     };
     return (
         <div>
             <Logo class_name={"logo"} />
+            {!user &&
             <Button id='eneter' onClick={handleOpen}>כניסה</Button>
+            }
             <Modal
                 open={openM}
                 onClose={handleClose}
@@ -95,18 +101,17 @@ export function Enter() {
                 aria-describedby="parent-modal-description"
             >
                 <div>
-
                     <LogIn />
                     <ChildModal />
                 </div>
 
             </Modal>
-{user&&
-            <Stack direction="row" >
-                <div id="left" onClick={() => navigate('./PreviousPurchases')}><IconButton ><ArrowBackTwoToneIcon />קניות קודמות שלי </IconButton></div>
-                <div id="right" onClick={() => navigate('./purchaseList')}><IconButton >הכן לי רשימת קניות <ArrowForwardIcon /></IconButton></div>
-            </Stack >
-}
+            {user &&
+                <Stack direction="row" >
+                    <div id="left" onClick={() => navigate('./PreviousPurchases')}><IconButton ><ArrowBackTwoToneIcon />קניות קודמות שלי </IconButton></div>
+                    <div id="right" onClick={() => navigate('./purchaseList')}><IconButton >הכן לי רשימת קניות <ArrowForwardIcon /></IconButton></div>
+                </Stack >
+            }
         </div >
     );
 }

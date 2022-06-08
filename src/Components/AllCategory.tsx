@@ -87,7 +87,7 @@ async function getCategories() {
   let categoriesList: Category[] = [];
   try {
     const res = await axios.get("https://localhost:44378/api/Category");
-    // debugger
+    // 
     categoriesList = res.data.map((item: any) => {
       let category: Category
       category = {
@@ -103,17 +103,17 @@ async function getCategories() {
   return categoriesList;
   // return mockupCategoriesList;
 }
-interface keyValue{
-  key:string,
-  value:string
+interface keyValue {
+  key: string,
+  value: string
 }
 type tplotOptions = {
   [key: string]: string
 }
-function importAll(r:any) {
-  let images:tplotOptions = {};
-  r.keys().map((item:any, index:any) => { images[item.replace('./', '')]= r(item); });
-  console.log('images',images)
+function importAll(r: any) {
+  let images: tplotOptions = {};
+  r.keys().map((item: any, index: any) => { images[item.replace('./', '')] = r(item); });
+  console.log('images', images)
   return images;
 }
 
@@ -125,10 +125,10 @@ async function getProductsByCategory(category: Category) {
     const res = await axios.get(
       `https://localhost:44378/api/GetProductsByCategoryId/${category.id}`);
 
-    debugger
+
     // productList 
     //= res.data as ProductByCategory[]
-    let arrImg:keyValue[]=[]
+    let arrImg: keyValue[] = []
     productList = res.data.map((p: any) => {
       let product: ProductByCategory
       // arrImg.push({key:p.Image,value:}as keyValue)
@@ -136,7 +136,7 @@ async function getProductsByCategory(category: Category) {
         name: p.Name,
         id: p.ProductId,
         category: p.ProductCategoryId,
-        img:images['logo.png']
+        img: images[p.Image]||images['logo.png']
         // img:images[p.Image]
 
       }
@@ -172,7 +172,7 @@ export default function CategoriesNavigation() {
   React.useEffect(() => {
     async function anyNameFunction() {
       const tempProducts = await getProductsByCategory(category);
-      debugger
+
       setProductList(tempProducts);
     }
     anyNameFunction();
@@ -196,7 +196,7 @@ export default function CategoriesNavigation() {
     //       showLabels
     //       value={category.title}
     //       onChange={(event, newValue) => {
-    //         debugger
+    //         
     //         setCategory(newValue);
     //       }}
     //     >
@@ -225,7 +225,7 @@ export default function CategoriesNavigation() {
           <Tabs
             value={category.title}
             onChange={(event, newValue) => {
-              debugger
+
               setCategory(newValue);
             }}
             variant="scrollable"
@@ -234,21 +234,21 @@ export default function CategoriesNavigation() {
             textColor="primary"
             aria-label="scrollable force tabs example"
           >
-             {categoryList == null ? <span> רשימת הקטגוריות ריקה</span> : categoryList.map((category: Category) =>
-          (
-            <>
-              < Tab
-                className="bottomNavigationAction"
-                value={category}
-                label={category.title}
-                onClick={() => {
-                  setCategory(category);
-                }}
-                {...a11yProps(i)}
-              />
-                {()=>{setI(i+1)}}
-            </>
-          ))}
+            {categoryList == null ? <span> רשימת הקטגוריות ריקה</span> : categoryList.map((category: Category) =>
+            (
+              <>
+                < Tab
+                  className="bottomNavigationAction"
+                  value={category}
+                  label={category.title}
+                  onClick={() => {
+                    setCategory(category);
+                  }}
+                  {...a11yProps(i)}
+                />
+                {() => { setI(i + 1) }}
+              </>
+            ))}
             {/* <Tab label="Item One" icon={<PhoneIcon />} {...a11yProps(0)} />
             <Tab label="Item Two" icon={<FavoriteIcon />} {...a11yProps(1)} />
             <Tab label="Item Three" icon={<PersonPinIcon />} {...a11yProps(2)} />
