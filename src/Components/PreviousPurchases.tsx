@@ -1,6 +1,6 @@
 import ReplyRoundedIcon from '@mui/icons-material/ReplyRounded';
 import { Button } from '@mui/material';
-import { Navigate, useNavigate, useLocation, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {  useNavigate, useLocation, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import "./PreviousPurchases.css";
 import * as React from 'react';
 import Box from '@mui/material/Box';
@@ -115,16 +115,40 @@ export function BasicCard(props: IpreviosPurchase) {
                 </Typography>
             </CardContent>
             <CardActions>
-                
-                <Button size="small" onClick={() => {
-                    debugger
-                     navigate('/orderDetails', { state: { orderId: props.orderId } }) }}>show order products</Button>
+                {/* <Button size="small" onClick={() => { navigate('./orderDetails', { state: { orderId: props.orderId } }) }}>show order products</Button> */}
+                 <Button size="small" onClick={() => { AllOOrderDetails(props.orderId) }}>show order products</Button>
+
+
             </CardActions>
         </Card>
 
     );
 }
+function AllOOrderDetails(orderId:string){
+    const navigate=useNavigate();
 
+const [List,setList]=React.useState<ProductByMount[]>([]);
+    async function getProducts() {
+        const res = await axios.get(`api/GetActuallyPurchasesByPurchaseHistoryId/${orderId}`);
+        debugger
+        const list:ProductByMount[]= res.data.map((item: any) => {
+            let product: ProductByMount
+            product = {
+                idrow: "",
+                id: item.id,
+                name: item.name,
+                // category: number,
+                PurchasesHistoryId: "",
+                PurchasePrognosisId: "",
+                amount: item.amount
+            }
+            return product as ProductByMount
+        })
+        setList(list)
+    }
+    getProducts()
+    navigate('./orderDetails', { state: List })
+}
 export function OrderDetails() {
 debugger
     const location = useLocation()

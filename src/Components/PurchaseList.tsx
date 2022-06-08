@@ -232,7 +232,9 @@ export default function PurchaseList(): JSX.Element {
             },
         },
     ];
-const navigate=useNavigate();
+    const navigate=useNavigate();
+
+
     return (
         <>
             {(user == null || user == undefined) ? <span>ספר לנו מי אתה ונכין לך רשימת קניות</span> :
@@ -285,14 +287,19 @@ const navigate=useNavigate();
                                 } as ActuallyPurchase
                                 return product
                             })
-                            await axios.post(`https://localhost:44378/api/AddActPur/${user.id}`, l).then(res =>{
+                            axios.post(`https://localhost:44378/api/BasketBuilder/AddActPur/${user.id}`, l)
+                                .then((res) =>{ console.log(res); navigate('./orderDetails', { state: productList })
+                            })
+                                .catch(err => console.log(err))
+
+                                    /*  await axios.post(`https://localhost:44378/api/AddActPur/${user.id}`, l).then(res =>{
                                     console.log(res)
                                     navigate('purchaselistToSave')
                                     alert("קנייתך נשמרה בהצלחה")
                                     }).catch(
                                         err =>{ console.log(err)
                                         alert(err)
-                                    }).finally(()=>navigate('purchaselistToSave'))
+                                    }).finally(()=>navigate('purchaselistToSave'))*/
                         }}>שמור</Button>
                     <Logo class_name={"logo-small"} />
                     <h4>!משתמש יקר  </h4>

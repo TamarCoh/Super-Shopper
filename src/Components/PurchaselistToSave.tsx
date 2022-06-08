@@ -12,6 +12,7 @@ import {
 
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+
 export interface GridRowsProp {
   name: string,
   //date:Date,
@@ -148,17 +149,20 @@ function CustomToolbar() {
 }
 
 export default function PurchaselistToSave() {
-  const stateRows: ProductByMount[] = useSelector((st: any) => st.pro.productsList) || []
-  let rows: GridRowsProp[] = stateRows.map((item: ProductByMount) => {
-    let row: GridRowsProp
-    row = {
-      name: item.name,
-      //date:
-      id: item.id,
-      amount: item.amount
-    }
-    return row as GridRowsProp
-  })
+  const location = useLocation()
+  const from = location.state as ProductByMount[]
+  // const stateRows:ProductByMount[]=   useSelector((st: any) => st.pro.productsList)||[]
+let rows:GridRowsProp[]=from.map((item: ProductByMount) => {
+  let row: GridRowsProp
+  row = {
+    name:item.name,
+//date:
+id:item.id,
+amount:item.amount
+  }
+  return row as  GridRowsProp
+})
+
 
   return (
     <div style={{ height: 300, width: '100%' }}>
