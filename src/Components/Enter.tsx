@@ -91,7 +91,9 @@ export function Enter() {
     return (
         <div>
             <Logo class_name={"logo"} />
+            {!user &&
             <Button id='eneter' onClick={handleOpen}>כניסה</Button>
+            }
             <Modal
                 open={openM}
                 onClose={handleClose}
