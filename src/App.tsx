@@ -50,7 +50,7 @@ function App() {
           <Route path="/purchaseList" element={<PurchaseList />} />
           <Route path="/orderDetails" element={<OrderDetails />} />
           <Route path="/purchaselistToSave" element={<PurchaselistToSave />} />
-
+          <Route path="/purchaseList/purchaselistToSave" element={<PurchaselistToSave />} />
           <Route path="/previousPurchases/orderDetails" element={<OrderDetails />} />
         </Routes>
       </Router>

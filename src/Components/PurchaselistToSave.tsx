@@ -112,7 +112,12 @@ export interface GridRowsProp {
 // ];
 
 const columns: GridColumns = [
-  { field: 'name', headerName: 'שם מוצר', type: 'string', width: 200 },
+  {
+    field: 'name',
+    headerName: 'שם מוצר',
+    type: 'string',
+    width: 200
+  },
 
   {
     field: 'amount',
@@ -122,9 +127,9 @@ const columns: GridColumns = [
     width: 150,
   },
   {
-    field: 'recruitmentDate',
-    headerName: 'תאריך קניה',
-    type: 'date',
+    field: 'id',
+    headerName: 'קוד מוצר',
+    type: 'Number',
     width: 150,
   },
 ];
@@ -133,11 +138,11 @@ function CustomToolbar() {
   return (
     <GridToolbarContainer>
       <GridToolbarExport
-       csvOptions={{
-        fileName: 'customerDataBase',
-        delimiter: ';',
-        utf8WithBom: true,
-      }} />
+        csvOptions={{
+          fileName: 'customerDataBase',
+          delimiter: ';',
+          utf8WithBom: true,
+        }} />
     </GridToolbarContainer>
   );
 }

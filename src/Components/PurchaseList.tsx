@@ -287,9 +287,12 @@ const navigate=useNavigate();
                             })
                             await axios.post(`https://localhost:44378/api/AddActPur/${user.id}`, l).then(res =>{
                                     console.log(res)
-                                    navigate('purchaselistToSave')}).catch(
+                                    navigate('purchaselistToSave')
+                                    alert("קנייתך נשמרה בהצלחה")
+                                    }).catch(
                                         err =>{ console.log(err)
-                        }).finally(()=>navigate('purchaselistToSave'))
+                                        alert(err)
+                                    }).finally(()=>navigate('purchaselistToSave'))
                         }}>שמור</Button>
                     <Logo class_name={"logo-small"} />
                     <h4>!משתמש יקר  </h4>
