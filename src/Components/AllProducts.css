@@ -4,3 +4,7 @@ width: 100%;
 flex-wrap: wrap;
 justify-content: space-between;
 }
+.productImg{
+    height: 20vh;
+    width: 10vh;
+}

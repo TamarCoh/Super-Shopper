@@ -273,9 +273,9 @@ export default function PurchaseList(): JSX.Element {
 
                     </Box>
                     <Button
+                        id="savePurchaseButton"
                         // {/* //update DB by state */}
-                        onClick={async () => {
-                            
+                        onClick={async () => {                        
                             let l: ActuallyPurchase[]
                             l = productList.map((item: ProductByMount) => {
                                 let product: ActuallyPurchase = {
@@ -287,19 +287,19 @@ export default function PurchaseList(): JSX.Element {
                                 } as ActuallyPurchase
                                 return product
                             })
-                            axios.post(`https://localhost:44378/api/BasketBuilder/AddActPur/${user.id}`, l)
-                                .then((res) =>{ console.log(res); navigate('./orderDetails', { state: productList })
-                            })
-                                .catch(err => console.log(err))
+                            // axios.post(`https://localhost:44378/api/BasketBuilder/AddActPur/${user.id}`, l)
+                            //     .then((res) =>{ console.log(res); navigate('./orderDetails', { state: productList })
+                            // })
+                            //     .catch(err => console.log(err))
 
-                                    /*  await axios.post(`https://localhost:44378/api/AddActPur/${user.id}`, l).then(res =>{
+                                     await axios.post(`https://localhost:44378/api/AddActPur/${user.id}`, l).then(res =>{
                                     console.log(res)
                                     navigate('purchaselistToSave')
                                     alert("קנייתך נשמרה בהצלחה")
                                     }).catch(
                                         err =>{ console.log(err)
                                         alert(err)
-                                    }).finally(()=>navigate('purchaselistToSave'))*/
+                                    }).finally(()=>navigate('purchaselistToSave', { state: productList }))
                         }}>שמור</Button>
                     <Logo class_name={"logo-small"} />
                     <h4>!משתמש יקר  </h4>
