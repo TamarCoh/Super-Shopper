@@ -34,9 +34,13 @@
     padding: 0.5%;
     background-color: white;
     color: #213f65;
-    border-radius: 100%;
+    border-radius: 45%;
+    font-weight: 500;
 }
-
+#update-details{
+    color: white;
+    font-size: 18px;
+}
 #div-nav {
     display: flex;
     flex-direction: column;

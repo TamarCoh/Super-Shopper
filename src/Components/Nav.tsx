@@ -27,6 +27,7 @@ import Fade from '@mui/material/Fade';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import { Input } from "@material-ui/core";
+import { useForm } from "react-hook-form";
 interface Icustomer{
     CustomerId:Number,
     FirstName:string,
@@ -59,6 +60,7 @@ await axios.put(`https://localhost:44378/api/Customer/${customer}`).then(()=>{
 
 export function SimplePopper() {
 const dispatch = useDispatch();
+const { register, handleSubmit, formState: { errors } } = useForm<User>();
 
     const user = useSelector((st: any) => st.Use.state) as User
     
@@ -81,23 +83,36 @@ const dispatch = useDispatch();
           The content of the Popper.
         </Box> */}
                 <form onSubmit={() => {
-                    handleClick;
                      const u = {
                         id: user.id ,
-                        firstName: "firstName",
-                        lastName: "lastName",
-                        password: "password",
-                        email: "email"
+                        firstName: "firstName"||user.firstName,
+                        lastName: "lastName"||user.lastName,
+                        password: "password"||user.password,
+                        email: "email"||user.email
                     } as User;
                      updateUserDetails(u);
                      dispatch(logIn(u));
+                     handleClick;
                 }}>
-
-
-                    <input type="text" placeholder="first name" name="updateFirstName"></input>
-                    <input type="text" placeholder="last name" name="updateLastName"></input>
-                    <input type="password" placeholder="password" name="updatePassword"></input>
-                    <input type="email" placeholder="email" name="updateEmail"></input>
+                    <input type="text" placeholder={'שם: '+user.firstName} {...register('firstName', { required: true, minLength: 2, maxLength: 10 })}></input>
+                    <span className="op">
+                        {errors.firstName?.type === "required" && <span>חסר שם פרטי</span>}
+                        {errors.firstName?.type === "minLength" && <span>שם פרטי קצר מדי</span>}
+                        {errors.firstName?.type === "maxLength" && <span>שם פרטי ארוך מדי</span>}
+                        </span>
+                    <input type="text" placeholder={'משפחה: '+user.lastName} {...register('lastName', { required: true, minLength: 2, maxLength: 10 })}></input>
+                    <span className="op">
+                        {errors.lastName?.type === "minLength" && <span>שם משפחה קצר מדי</span>}
+                        {errors.lastName?.type === "maxLength" && <span>שם משפחה ארוך מדי</span>}
+                        {errors.lastName?.type === "required" && <span>חסר שם משפחה</span>}
+                        </span>
+                    <input type="password" placeholder={'סיסמא: '+user.password} {...register('password', { required: true, minLength: 2, maxLength: 10 })}></input>
+                    <span className="op">
+                        {errors.password?.type === "required" && <span>חסרה סיסמה</span>}
+                        {errors.password?.type === "minLength" && <span>סיסמה קצרה מדי</span>}
+                        {errors.password?.type === "maxLength" && <span>סיסמה ארוכה מדי</span>}
+                    </span>
+                    <input type="email" placeholder={'מייל: '+user.email} {...register('email', { required: true, minLength: 2, maxLength: 10 })}></input>
                     <Button type="submit">עדכן פרטים</Button>
                 </form>
             </Popper>

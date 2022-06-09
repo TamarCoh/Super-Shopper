@@ -15,3 +15,7 @@
     
   margin: auto;
 }
+#savePurchaseButton{
+   font-size: 10vw; 
+  font-weight: 500;
+}
