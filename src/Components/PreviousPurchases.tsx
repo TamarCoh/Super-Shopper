@@ -64,7 +64,7 @@ export default function PreviosPurchases() {
     return (
         <>
             <div id="wrap">
-                {arr == null ? <span>... בחיפוש אחר קניותך הקודמות</span> : arr.map((item: IpreviosPurchase) => (
+                {arr == null ? <span>... בחיפוש אחר קניותיך הקודמות</span> : arr.map((item: IpreviosPurchase) => (
                     <div className='basicCard'>
                         <BasicCard  {...item} />
                     </div>

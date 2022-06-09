@@ -24,6 +24,7 @@ import { useDispatch } from "react-redux";
 import { increaseProductInList } from "../store/Actions/ProductInList";
 import { randomId } from "@mui/x-data-grid-generator";
 import img1 from '../images/bedroom.jpg';
+import { autocompleteClasses } from "@mui/material";
 
 function AddProductBuy(
   product: ProductByCategory,
@@ -108,19 +109,21 @@ export const BadgeVisibility: React.FunctionComponent<BadgeVisibilityModal> = ({
 
 export default function Product(props: any) {
   return (
-    <Card sx={{ width: 230, margin: 4 }}>
+    <Card sx={{ width: 230,height:350, margin: 4 }}>
       <CardMedia
+      sx={{ minWidth:50,  width:120,maxWidth:130, minHeight:100, maxHeight:130,marginRight:0,marginLeft:4,padding:0 }}
+      //  className="productImg"
         component="img"
         height="140"
         src={`./${props.product.img?.default}`}
         alt=""
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography gutterBottom  component="div" sx={{ fontSize:25, padding:0 }}>
           {props.product.name}
         </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions sx={{  margin: 1 }}>
         <BadgeVisibility product={props.product} />
       </CardActions>
     </Card>
