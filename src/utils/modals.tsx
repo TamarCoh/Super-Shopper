@@ -26,7 +26,8 @@ export interface ProductByCategory {
     name: string,
     id: number,
     img: string,
-    category: number
+    category: number,
+    description:string
 }
 
 export interface ProductByMount {
@@ -36,7 +37,8 @@ export interface ProductByMount {
     // category: number,
     PurchasesHistoryId: string,
     PurchasePrognosisId: string,
-    amount: number
+    amount: number,
+    description:string
 }
 
 export interface ActuallyPurchase {

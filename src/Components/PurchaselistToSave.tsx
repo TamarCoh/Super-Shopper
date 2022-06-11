@@ -1,4 +1,6 @@
+/* eslint-disable react/jsx-no-undef */
 import * as React from 'react';
+import ReplyRoundedIcon from '@mui/icons-material/ReplyRounded';
 import { ProductByMount } from "../utils/modals";
 
 import {
@@ -11,7 +13,8 @@ import {
 } from '@mui/x-data-grid';
 
 import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Button } from '@material-ui/core';
 
 export interface GridRowsProp {
   name: string,
@@ -149,6 +152,7 @@ function CustomToolbar() {
 }
 
 export default function PurchaselistToSave() {
+  const navigate=useNavigate();
   const location = useLocation()
   const from = location.state as ProductByMount[]
   // const stateRows:ProductByMount[]=   useSelector((st: any) => st.pro.productsList)||[]
@@ -163,8 +167,8 @@ amount:item.amount
   return row as  GridRowsProp
 })
 
-
   return (
+    <>
     <div style={{ height: 300, width: '100%' }}>
       <DataGrid
         rows={rows}
@@ -174,5 +178,8 @@ amount:item.amount
         }}
       />
     </div>
+    <Button className="detailsToPreviouses" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/previousPurchases') }}>חזרה</Button>
+
+  </>
   );
 }
