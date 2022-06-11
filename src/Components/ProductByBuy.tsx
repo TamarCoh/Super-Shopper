@@ -119,11 +119,11 @@ export default function Product(props: any) {
         alt=""
       />
       <CardContent>
-        <Typography gutterBottom  component="div" sx={{ fontSize:25, padding:0 }}>
+        <Typography gutterBottom  component="div" sx={{ fontSize:21, padding:0 }}>
           {props.product.name}
         </Typography>
-        <Typography gutterBottom  component="div" sx={{ fontSize:25, padding:0 }}>
-          {props.product.Description}
+        <Typography gutterBottom  component="div" sx={{ fontSize:9, padding:0 }}>
+          {props.product.description}
         </Typography>
       </CardContent>
       <CardActions sx={{  margin: 1 }}>

@@ -105,6 +105,7 @@ export function SimplePopper() {
             } as User;
             updateUserDetails(u);
             dispatch(logIn(u));
+            localStorage.setItem('user', JSON.stringify(user))
             handleClick;
           }}
         >

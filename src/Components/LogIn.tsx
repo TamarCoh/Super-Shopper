@@ -68,7 +68,8 @@ export async function getList(payload: User) {
                 name: p.Name,
                 PurchasesHistoryId: p.PurchasesHistoryId,
                 PurchasePrognosisId: p.PurchasePrognosisId,
-                amount: p.Amount
+                amount: p.Amount,
+                description:p.Description
             }
             return product as ProductByMount
         });

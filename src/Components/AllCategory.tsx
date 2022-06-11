@@ -136,9 +136,9 @@ async function getProductsByCategory(category: Category) {
         name: p.Name,
         id: p.ProductId,
         category: p.ProductCategoryId,
-        img: images[p.Image]||images['logo.png']
+        img: images[p.Image]||images['logo.png'],
         // img:images[p.Image]
-
+        description:p.Description
       }
       console.log(product.img)
       return product as ProductByCategory

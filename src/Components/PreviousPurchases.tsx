@@ -129,7 +129,7 @@ export function BasicCard(props: IpreviosPurchase) {
     const navigate = useNavigate();
     const [List,setList]=React.useState<ProductByMount[]>([]);
     async function getProducts(orderId:string) {
-        const res = await axios.get(`api/GetActuallyPurchasesByPurchaseHistoryId/${orderId}`);
+        const res = await axios.get(`https://localhost:44378/api/GetActuallyPurchasesByPurchaseHistoryId/${orderId}`);
         debugger
         const list:ProductByMount[]= res.data.map((item: any) => {
             let product: ProductByMount
@@ -140,7 +140,8 @@ export function BasicCard(props: IpreviosPurchase) {
                 // category: number,
                 PurchasesHistoryId: "",
                 PurchasePrognosisId: "",
-                amount: item.amount
+                amount: item.amount,
+                description:item.Description
             }
             return product as ProductByMount
         })
@@ -194,7 +195,8 @@ const [List,setList]=React.useState<ProductByMount[]>([]);
                 // category: number,
                 PurchasesHistoryId: "",
                 PurchasePrognosisId: "",
-                amount: item.amount
+                amount: item.amount,
+                description:item.Description
             }
             return product as ProductByMount
         })
@@ -223,7 +225,8 @@ debugger
                 // category: number,
                 PurchasesHistoryId: "",
                 PurchasePrognosisId: "",
-                amount: item.amount
+                amount: item.amount,
+                description:item.Description
             }
             setList(list)
         })
