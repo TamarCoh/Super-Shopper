@@ -92,8 +92,60 @@ interface INavigateProps {
     orderId: number
 }
 
+// export function BasicCard(props: IpreviosPurchase) {
+//     const navigate = useNavigate();
+//     return (
+
+//         <Card sx={{ maxWidth: 275 }}>
+//             <CardContent>
+//                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+//                     {props.orderId}
+//                 </Typography>
+//                 <Typography variant="h5" component="div">
+//                     {new Date(props.orderDate).getDay()}/{new Date(props.orderDate).getMonth()}/{new Date(props.orderDate).getFullYear()}
+//                     {/* {new Date(props.orderDate).getDate()} */}
+//                 </Typography>
+//                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
+//                     {new Date(props.orderDate).getHours()}{":" + new Date(props.orderDate).getMinutes()}
+//                 </Typography>
+//                 <Typography variant="body2">
+//                     {/* {props.orderDate.getDate()} */}
+//                     {props.orderDescription}
+//                     <br />
+//                 </Typography>
+//             </CardContent>
+//             <CardActions>
+//                 {/* <Button size="small" onClick={() => { navigate('./orderDetails', { state: { orderId: props.orderId } }) }}>show order products</Button> */}
+//                  {/* <Button size="small" onClick={() => { AllOOrderDetails(props.orderId) }}> */}
+//                  <Button size="small" onClick={() => {const List= AllOOrderDetails(props.orderId) ;    navigate('/purchaselistToSave', { state: List })}}>
+//                      show order products</Button>
+
+//             </CardActions>
+//         </Card>
+
+//     );
+// }
 export function BasicCard(props: IpreviosPurchase) {
     const navigate = useNavigate();
+    const [List,setList]=React.useState<ProductByMount[]>([]);
+    async function getProducts(orderId:string) {
+        const res = await axios.get(`api/GetActuallyPurchasesByPurchaseHistoryId/${orderId}`);
+        debugger
+        const list:ProductByMount[]= res.data.map((item: any) => {
+            let product: ProductByMount
+            product = {
+                idrow: "",
+                id: item.id,
+                name: item.name,
+                // category: number,
+                PurchasesHistoryId: "",
+                PurchasePrognosisId: "",
+                amount: item.amount
+            }
+            return product as ProductByMount
+        })
+        setList(list)
+    }
     return (
 
         <Card sx={{ maxWidth: 275 }}>
@@ -116,7 +168,8 @@ export function BasicCard(props: IpreviosPurchase) {
             </CardContent>
             <CardActions>
                 {/* <Button size="small" onClick={() => { navigate('./orderDetails', { state: { orderId: props.orderId } }) }}>show order products</Button> */}
-                 <Button size="small" onClick={() => { AllOOrderDetails(props.orderId) }}>show order products</Button>
+                 <Button size="small" onClick={() => {getProducts(props.orderId) ;    navigate('/purchaselistToSave', { state: List })
+ }}>show order products</Button>
 
 
             </CardActions>
@@ -124,8 +177,9 @@ export function BasicCard(props: IpreviosPurchase) {
 
     );
 }
+
 function AllOOrderDetails(orderId:string){
-    const navigate=useNavigate();
+    // const navigate=useNavigate();
 
 const [List,setList]=React.useState<ProductByMount[]>([]);
     async function getProducts() {
@@ -147,7 +201,8 @@ const [List,setList]=React.useState<ProductByMount[]>([]);
         setList(list)
     }
     getProducts()
-    navigate('./orderDetails', { state: List })
+    // navigate('./orderDetails', { state: List })
+    return List;
 }
 export function OrderDetails() {
 debugger
