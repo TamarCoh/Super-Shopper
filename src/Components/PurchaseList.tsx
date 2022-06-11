@@ -7,6 +7,7 @@ import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Close';
 import RemoveIcon from '@mui/icons-material/Remove';
+// import moduleName from 'module';
 import {
     GridRowsProp,
     useGridApiRef,
@@ -278,7 +279,7 @@ export default function PurchaseList(): JSX.Element {
                         onClick={async () => {                        
                             let l: ActuallyPurchase[]
                             l = productList.map((item: ProductByMount) => {
-                                let product: ActuallyPurchase = {
+                                 let product: ActuallyPurchase = {
                                     PurchasesHistoryId: parseInt(item.PurchasesHistoryId),
                                     ProductId: item.id,
                                     Name: item.name,
