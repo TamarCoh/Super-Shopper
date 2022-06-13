@@ -150,14 +150,17 @@ function CustomToolbar() {
     </GridToolbarContainer>
   );
 }
+interface IforLocation{
+  p:ProductByMount[]
+}
 
 export default function PurchaselistToSave() {
   debugger;
   const navigate=useNavigate();
-  const location = useLocation()
-  const from = location.state as ProductByMount[]
+  const location = useLocation();
+  const from = location.state as IforLocation
   // const stateRows:ProductByMount[]=   useSelector((st: any) => st.pro.productsList)||[]
-let rows:GridRowsProp[]=from.map((item: ProductByMount) => {
+let rows:GridRowsProp[]=from.p.map((item: ProductByMount) => {
   let row: GridRowsProp
   row = {
     name:item.name,

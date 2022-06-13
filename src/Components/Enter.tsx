@@ -141,19 +141,3 @@ export function Enter() {
 //     )
 //   }
 export default Enter;
-// const mapStateToProps = (st: any) => {
-//     //הפונקציה תחזיר אובייקט ובו כל השדות שאנו רוצים שייכנסו לפרופס של הקומםוננטה שלנו
-//     //מתןך הסטייט הכללי
-//     return {
-//         //  myArr: st.pro.productsList,
-//         count: st.pro.amountProducts,
-//         user: st.Use.state
-//         // myArr:[]=[{d: 123,
-//         //     name: "name",
-//         //     category: 1,
-//         //     PurchasesHistoryId: "123",
-//         //     PurchasePrognosisId: "fgvhj",
-//         //     amount: 3}]
-//     };
-// }
-// export default connect(mapStateToProps)(Enter);

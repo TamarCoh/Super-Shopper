@@ -105,23 +105,23 @@ const mapStateToProps = (st: any) => {
 };
 
 export default function PurchaseList(): JSX.Element {
-  const apiRef = useGridApiRef();
-  const [productList, setProductList] = React.useState<ProductByMount[]>([]);
-  const List = useSelector((st: any) => st.pro.productsList);
-  setProductList(List);
-  const productState = useSelector((st: any) => st.pro);
-  const user = useSelector((st: any) => st.Use.state);
-  async function getlist() {
-    const list: IstatePro = (await getList(user)) as IstatePro;
-     setProductList(list.productsList)
-    localStorage.setItem("productList", JSON.stringify(list));
-    dispatch(getPurchaseList(list));
-  }
-  if (user.id != null && productList == null) getlist();
-//   const productList = useSelector((st: any) => st.pro.productsList)
-//   const productState = useSelector((st: any) => st.pro)
+  // const apiRef = useGridApiRef();
+  // const [productList, setProductList] = React.useState<ProductByMount[]>([]);
+  // const List = useSelector((st: any) => st.pro.productsList);
+  // setProductList(List);
+  // const productState = useSelector((st: any) => st.pro);
+  // const user = useSelector((st: any) => st.Use.state);
+  // async function getlist() {
+  //   const list: IstatePro = (await getList(user)) as IstatePro;
+  //    setProductList(list.productsList)
+  //   localStorage.setItem("productList", JSON.stringify(list));
+  //   dispatch(getPurchaseList(list));
+  // }
+  // if (user.id != null && productList == null) getlist();
+  const productList = useSelector((st: any) => st.pro.productsList)
+  const productState = useSelector((st: any) => st.pro)
 
-//   const user = useSelector((st: any) => st.Use.state)
+  const user = useSelector((st: any) => st.Use.state)
   let rows: ProductByMount[] = [];
   //useEffect?->
   rows = productList.filter((i: ProductByMount) => i.amount > 0);
@@ -321,7 +321,7 @@ export default function PurchaseList(): JSX.Element {
                 .post(`https://localhost:44378/api/AddActPur/${user.id}`, l)
                 .then((res) => {
                   console.log(res);
-                  navigate("purchaselistToSave");
+                  navigate("/purchaselistToSave", { state:{p: productList} });
                    dispatch(clearPurchaseList());
                   alert("קנייתך נשמרה בהצלחה");
                 })
@@ -330,7 +330,7 @@ export default function PurchaseList(): JSX.Element {
                   alert(err);
                 })
                 .finally(() =>
-                  navigate("/purchaselistToSave", { state: productList })
+                  navigate("/purchaselistToSave", { state:{p: productList} })
                 );
             }}
           >
@@ -341,7 +341,7 @@ export default function PurchaseList(): JSX.Element {
           <h5>
             באם הצעת הקניות שלנו לא מספיק טובה עבורך בשל ארוע קרב/ זמן מיוחד
             באפשרותך לשנות כמויות ו/או מוצרים והמערכת תלמד את שינוייך לפעמים
-            הבאות{" "}
+            הבאות
           </h5>
         </>
       )}
