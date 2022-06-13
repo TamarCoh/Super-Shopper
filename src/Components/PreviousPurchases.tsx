@@ -155,16 +155,16 @@ interface INavigateProps {
 // }
 export function BasicCard(props: IpreviosPurchase) {
   const navigate = useNavigate();
-  const [List, setList] = React.useState<ProductByMount[]>([]);
+//   const [List, setList] = React.useState<ProductByMount[]>([]);
   async function getProducts(orderId: string) {
     debugger;
-    try {
+    // try {
       const res = await axios.get(
         `https://localhost:44378/api/GetActuallyPurchasesByPurchasesHistoryId/${orderId}`
       );
       debugger;
-      let list: ProductByMount[] =
-       await res.data.map((item: any) => {
+      let list: ProductByMount[] =[]
+       list=await res.data.map((item: any) => {
         let product: ProductByMount;
         product = {
           idrow: "",
@@ -180,10 +180,11 @@ export function BasicCard(props: IpreviosPurchase) {
         return product as ProductByMount;
       });
       debugger;
-      await setList(list);
-    } catch {
-      console.log(console.error());
-    }
+      return list;
+    //   await setList(list);
+    // } catch {
+    //   console.log(console.error());
+    // }
   }
   const [hebrewDate, setHebrewDate] = React.useState("");
   async function convertIdToHebrewDate() {
@@ -223,9 +224,11 @@ export function BasicCard(props: IpreviosPurchase) {
         <Button
           size="small"
           onClick={async () => {
-            await getProducts(props.orderId).then(() =>
-              navigate("/purchaselistToSave", { state: { p: List ,d:new Date(props.orderDate).toLocaleString()+" "} })
-            );
+           let g:ProductByMount[]
+           g= await getProducts(props.orderId)
+        //    .then(() =>
+              navigate("/purchaselistToSave", { state: { p: g ,d:new Date(props.orderDate).toLocaleString()+" "} })
+            // );
           }}
         >
           show order products
@@ -241,7 +244,7 @@ function AllOOrderDetails(orderId: string) {
   const [List, setList] = React.useState<ProductByMount[]>([]);
   async function getProducts() {
     const res = await axios.get(
-      `api/GetActuallyPurchasesByPurchaseHistoryId/${orderId}`
+      `https://localhost:44378/api/GetActuallyPurchasesByPurchaseHistoryId/${orderId}`
     );
     debugger;
     const list: ProductByMount[] = res.data.map((item: any) => {
@@ -273,7 +276,7 @@ export function OrderDetails() {
   debugger;
   async function getProducts() {
     const res = await axios.get(
-      `api/GetActuallyPurchasesByPurchasesHistoryId/${from.orderId}`
+      `https://localhost:44378/api/GetActuallyPurchasesByPurchasesHistoryId/${from.orderId}`
     );
 
     //
