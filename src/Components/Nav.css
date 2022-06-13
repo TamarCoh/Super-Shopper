@@ -18,7 +18,7 @@
     color: white;
     text-decoration: none;
     /* margin-top: 15vh; */
-    margin-inline: 15px;
+    margin-inline: 27px;
 }
 
 #nav-logIn {
@@ -36,6 +36,11 @@
     color: #213f65;
     border-radius: 45%;
     font-weight: 500;
+}
+#currentDate{
+    float:left;
+    font-weight: 500;
+
 }
 #update-details{
     color: white;

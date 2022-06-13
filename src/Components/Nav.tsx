@@ -58,7 +58,7 @@ async function updateUserDetails(props: User) {
       alert("succeeded to update");
     })
     .catch((res) => {
-      alert("didnt succeeded to update");
+      alert("didnt succeed to update");
     });
 }
 
@@ -75,7 +75,7 @@ export function SimplePopper() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [firstName, setInputFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
-  const [password, setPassword ]= useState(user.password);
+  const [password, setPassword] = useState(user.password);
   const [email, setEmail] = useState(user.email);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -105,7 +105,7 @@ export function SimplePopper() {
             } as User;
             updateUserDetails(u);
             dispatch(logIn(u));
-            localStorage.setItem('user', JSON.stringify(user))
+            localStorage.setItem("user", JSON.stringify(user));
             handleClick;
           }}
         >
@@ -155,7 +155,7 @@ export function SimplePopper() {
               minLength: 2,
               maxLength: 10,
             })}
-          onChange={(event) => setPassword(event.target.value)}
+            onChange={(event) => setPassword(event.target.value)}
           ></input>
           <span className="op">
             {errors.password?.type === "required" && <span>חסרה סיסמה</span>}
@@ -173,8 +173,8 @@ export function SimplePopper() {
               required: true,
               minLength: 2,
               maxLength: 10,
-            })}        
-           onChange={(event) => setEmail(event.target.value)}
+            })}
+            onChange={(event) => setEmail(event.target.value)}
           ></input>
           <Button type="submit">עדכן פרטים</Button>
         </form>
@@ -218,6 +218,23 @@ function Nav(props: any): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((st: any) => st.Use.state) as User;
+  const [currentDtaeTime, setCurrentDateTime] = useState<string>("");
+  React.useEffect(() => {
+    async function f() {
+      let resGet = await axios
+        .get("https://localhost:44378/api/GetCurrentJewishHebrewDate")
+        .then((res) => {
+          let d = res.data;
+          debugger;
+          setCurrentDateTime(d);
+        })
+        .catch(() => {
+          debugger;
+          setCurrentDateTime("failed");
+        });
+    }
+    f();
+  }, []);
 
   return (
     // <ThemeProvider theme={theme}>
@@ -242,47 +259,45 @@ function Nav(props: any): JSX.Element {
                     {/* <AddCircleOutlineIcon></AddCircleOutlineIcon> */}
 
         {/* </Link> */}
-        <li className="nav-links" id="currentUser">
-          {props.user != null
-            ? props.user.firstName + " " + props.user.lastName
-            : ""}
+        <li className="nav-links">
+          {props.user != null ? (
+            <>
+              <li className="nav-links" id="currentUser">
+                {props.user.firstName + " " + props.user.lastName}
+              </li>
+              {/*  : ""} */}
+
+              <div id="div-nav">
+                {/* {props.user != null ? ( */}
+                <div>
+                  <li
+                    className="nav-links"
+                    id="nav-logIn"
+                    onClick={() => {
+                      localStorage.removeItem("user");
+                      localStorage.removeItem("productList");
+                      dispatch(logOut());
+                      dispatch(clearPurchaseList());
+                    }}
+                  >
+                    התנתקות
+                  </li>
+                  <li className="nav-links" id="nav-logIn">
+                    <SimplePopper />
+                  </li>
+                </div>
+              </div>
+            </>
+          ) : (
+            ""
+          )}
+        <li className="nav-links" id="currentDate">
+          {currentDtaeTime}
         </li>
-        {props.user != null ? (
-          <div id="div-nav">
-            {/* <button className="nav-links" id="nav-logIn" > */}
-            <li
-              className="nav-links"
-              id="nav-logIn"
-              onClick={() => {
-                localStorage.removeItem("user");
-                localStorage.removeItem("productList");
-                dispatch(logOut());
-                dispatch(clearPurchaseList());
-              }}
-            >
-              התנתקות
-            </li>
-            {/* <li className="nav-links" id="nav-logIn" onClick={async ()=>{
-                    const p:User={}as User
-                    p.id=props.user.id
-                    p.firstName=""
-                    p.lastName=""
-                    p.email=""
-                    p.password=""
-                    await axios.put(`https://localhost:44378/api/Customer/${p}`);
-                 }} >עריכה</li> */}
-            <li className="nav-links" id="nav-logIn">
-              <SimplePopper />
-            </li>
-            {/* </button> */}
-          </div>
-        ) : null}
-        {/* <button className="nav-links" id="nav-logIn" onClick={() => navigate('/logIn')}>
-                    <li className="nav-links" id="nav-logIn" >התחברות</li>
-                </button> */}
+        </li>
+        {/* ) : null} */}
       </ul>
     </div>
-    // </ThemeProvider>
   );
 }
 
