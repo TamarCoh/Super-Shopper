@@ -18,7 +18,7 @@
     color: white;
     text-decoration: none;
     /* margin-top: 15vh; */
-    margin-inline: 27px;
+    margin-inline: 25px;
 }
 
 #nav-logIn {
@@ -40,7 +40,7 @@
 #currentDate{
     float:left;
     font-weight: 500;
-
+    padding: 0.5%;
 }
 #update-details{
     color: white;
