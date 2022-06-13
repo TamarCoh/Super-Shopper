@@ -24,7 +24,7 @@ import { useSelector } from 'react-redux';
 interface IpreviosPurchase {
     orderId: string;
     orderDate: Date;
-    orderHebrewDate: string;
+    orderHebrewDateId: string;
     orderDescription: String;
 }
 
@@ -40,7 +40,7 @@ export default function PreviosPurchases() {
                 previous = {
                     orderId: item.PurchasesHistoryId,
                     orderDate: item.PurchaseDate,
-                    orderHebrewDate: item.HebrewDateId,
+                    orderHebrewDateId: item.HebrewDateId,
                     orderDescription: item.Description,
                 }
                 return previous as IpreviosPurchase
@@ -147,6 +147,12 @@ export function BasicCard(props: IpreviosPurchase) {
         })
         setList(list)
     }
+    // const [hebrewDate,setHebrewDate]=React.useState('')
+    // async function convertIdToHebrewDate() {
+    //     const res=await (await axios.get(`https://localhost:44378/api/GetJewishHebrewDateByForeignDate/${props.orderHebrewDateId}`));
+    //     setHebrewDate(res.data)
+    // }
+    // convertIdToHebrewDate();
     return (
 
         <Card sx={{ maxWidth: 275 }}>
@@ -154,6 +160,9 @@ export function BasicCard(props: IpreviosPurchase) {
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     {props.orderId}
                 </Typography>
+                {/* <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                    {hebrewDate}
+                </Typography> */}
                 <Typography variant="h5" component="div">
                     {new Date(props.orderDate).getDay()}/{new Date(props.orderDate).getMonth()}/{new Date(props.orderDate).getFullYear()}
                     {/* {new Date(props.orderDate).getDate()} */}
