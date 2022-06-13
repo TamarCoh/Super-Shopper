@@ -157,25 +157,25 @@ export function BasicCard(props: IpreviosPurchase) {
   const navigate = useNavigate();
   const [List, setList] = React.useState<ProductByMount[]>([]);
   async function getProducts(orderId: string) {
-    let list: ProductByMount[] = [];
     debugger;
     try {
       const res = await axios.get(
         `https://localhost:44378/api/GetActuallyPurchasesByPurchasesHistoryId/${orderId}`
       );
       debugger;
-      list = await res.data.map((item: any) => {
+      let list: ProductByMount[] =
+       await res.data.map((item: any) => {
         let product: ProductByMount;
         product = {
           idrow: "",
-          id: item.Productid,
+          id: item.ProductId,
           name: item.Name,
           // category: number,
           PurchasesHistoryId: "",
           PurchasePrognosisId: "",
           amount: item.Amount,
           description: item.Description,
-          img: item.Image
+          img: item.Image,
         };
         return product as ProductByMount;
       });
@@ -224,7 +224,7 @@ export function BasicCard(props: IpreviosPurchase) {
           size="small"
           onClick={async () => {
             await getProducts(props.orderId).then(() =>
-              navigate("/purchaselistToSave", { state: { p: List } })
+              navigate("/purchaselistToSave", { state: { p: List ,d:new Date(props.orderDate).toLocaleString()+" "} })
             );
           }}
         >
@@ -248,15 +248,14 @@ function AllOOrderDetails(orderId: string) {
       let product: ProductByMount;
       product = {
         idrow: "",
-        id: item.id,
-        name: item.name,
+        id: item.ProductId,
+        name: item.Name,
         // category: number,
         PurchasesHistoryId: "",
         PurchasePrognosisId: "",
-        amount: item.amount,
+        amount: item.Amount,
         description: item.Description,
-        img: item.Image
-
+        img: item.Image,
       };
       return product as ProductByMount;
     });
@@ -289,8 +288,7 @@ export function OrderDetails() {
         PurchasePrognosisId: "",
         amount: item.Amount,
         description: item.Description,
-        img: item.Image
-
+        img: item.Image,
       };
       setList(list);
     });

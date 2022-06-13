@@ -46,7 +46,7 @@ import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
 import Logo from "./Logo";
 import { DataGrid } from "@mui/x-data-grid";
 import useEnhancedEffect from "@mui/material/utils/useEnhancedEffect";
-import { PropaneSharp } from "@mui/icons-material";
+import { PropaneSharp, Today } from "@mui/icons-material";
 import axios from "axios";
 import { getList } from "./LogIn";
 
@@ -321,7 +321,7 @@ export default function PurchaseList(): JSX.Element {
                 .post(`https://localhost:44378/api/AddActPur/${user.id}`, l)
                 .then((res) => {
                   console.log(res);
-                  navigate("/purchaselistToSave", { state:{p: productList} });
+                  navigate("/purchaselistToSave", { state:{p: productList,d:new Date().toLocaleString() + ""} });
                    dispatch(clearPurchaseList());
                   alert("קנייתך נשמרה בהצלחה");
                 })
@@ -330,7 +330,7 @@ export default function PurchaseList(): JSX.Element {
                   alert(err);
                 })
                 .finally(() =>
-                  navigate("/purchaselistToSave", { state:{p: productList} })
+                  navigate("/purchaselistToSave", { state:{p: productList,d:new Date().toLocaleString() + ""} })
                 );
             }}
           >
