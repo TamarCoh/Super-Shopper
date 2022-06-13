@@ -151,7 +151,8 @@ function CustomToolbar() {
   );
 }
 interface IforLocation{
-  p:ProductByMount[]
+  p:ProductByMount[],
+  d:Date
 }
 
 export default function PurchaselistToSave() {
@@ -173,6 +174,9 @@ amount:item.amount
 
   return (
     <>
+    <div>
+      {"קנייה בתאריך: "+from.d}
+      </div>
     <div style={{ height: 300, width: '100%' }}>
       <DataGrid
         rows={rows}
