@@ -38,7 +38,8 @@ export interface ProductByMount {
     PurchasesHistoryId: string,
     PurchasePrognosisId: string,
     amount: number,
-    description:string
+    description:string,
+    img:string
 }
 
 export interface ActuallyPurchase {

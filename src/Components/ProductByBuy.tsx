@@ -111,7 +111,7 @@ export default function Product(props: any) {
   return (
     <Card sx={{ width: 230,height:350, margin: 4 }}>
       <CardMedia
-      sx={{ minWidth:50,  width:120,maxWidth:130, minHeight:100, maxHeight:130,marginRight:0,marginLeft:4,padding:0 }}
+      sx={{ minWidth:50, maxWidth:140, minHeight:100, maxHeight:130,marginRight:0,marginLeft:4.5,padding:0 }}
       //  className="productImg"
         component="img"
         height="140"
@@ -122,7 +122,7 @@ export default function Product(props: any) {
         <Typography gutterBottom  component="div" sx={{ fontSize:21, padding:0 }}>
           {props.product.name}
         </Typography>
-        <Typography gutterBottom  component="div" sx={{ fontSize:9, padding:0 }}>
+        <Typography gutterBottom  component="div" sx={{ fontSize:10, padding:0 }}>
           {props.product.description}
         </Typography>
       </CardContent>
