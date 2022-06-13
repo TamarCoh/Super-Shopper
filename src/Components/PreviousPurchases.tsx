@@ -129,9 +129,12 @@ export function BasicCard(props: IpreviosPurchase) {
     const navigate = useNavigate();
     const [List,setList]=React.useState<ProductByMount[]>([]);
     async function getProducts(orderId:string) {
-        const res = await axios.get(`https://localhost:44378/api/GetActuallyPurchasesByPurchaseHistoryId/${orderId}`);
-        debugger
-        const list:ProductByMount[]= res.data.map((item: any) => {
+        let list:ProductByMount[]=[]
+        debugger;
+        try{
+        const res = await axios.get(`https://localhost:44378/api/GetActuallyPurchasesByPurchasesHistoryId/${orderId}`);
+        debugger;
+        list=await res.data.map((item: any) => {
             let product: ProductByMount
             product = {
                 idrow: "",
@@ -147,12 +150,18 @@ export function BasicCard(props: IpreviosPurchase) {
         })
         setList(list)
     }
-    // const [hebrewDate,setHebrewDate]=React.useState('')
-    // async function convertIdToHebrewDate() {
-    //     const res=await (await axios.get(`https://localhost:44378/api/GetJewishHebrewDateByForeignDate/${props.orderHebrewDateId}`));
-    //     setHebrewDate(res.data)
-    // }
-    // convertIdToHebrewDate();
+    catch{
+        console.log(console.error());
+    }
+        
+        
+    }
+     const [hebrewDate,setHebrewDate]=React.useState('')
+    async function convertIdToHebrewDate() {
+        const res=await (await axios.get(`https://localhost:44378/api/GetJewishHebrewDateByForeignDate/${props.orderId}`));
+        setHebrewDate(res.data)
+    }
+    convertIdToHebrewDate();
     return (
 
         <Card sx={{ maxWidth: 275 }}>
@@ -160,9 +169,9 @@ export function BasicCard(props: IpreviosPurchase) {
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     {props.orderId}
                 </Typography>
-                {/* <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     {hebrewDate}
-                </Typography> */}
+                </Typography>
                 <Typography variant="h5" component="div">
                     {new Date(props.orderDate).getDay()}/{new Date(props.orderDate).getMonth()}/{new Date(props.orderDate).getFullYear()}
                     {/* {new Date(props.orderDate).getDate()} */}
