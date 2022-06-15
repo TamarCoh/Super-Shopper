@@ -33,27 +33,6 @@ import { getPurchaseList } from "../store/Actions/ProductInList";
 import { IstatePro } from "../store/Reducers/ProductInList";
 import { randomId } from "@mui/x-data-grid-generator";
 
-
-// import { createTheme } from '@mui/material/styles';
-
-
-// const theme = createTheme({
-//     palette: {
-//         primary: {
-//             light: '#757ce8',
-//             main: '#f8bbd0',
-//             dark: '#002884',
-//             contrastText: '#fff',
-//         },
-//         secondary: {
-//             light: '#ff7961',
-//             main: '#f44336',
-//             dark: '#ba000d',
-//             contrastText: '#000',
-//         },
-//     },
-// });
-
 export async function getList(payload: User) {
     let prognosis: IstatePro = {} as IstatePro;
     prognosis.amountProducts = 0;
@@ -79,7 +58,7 @@ export async function getList(payload: User) {
     })
 
 
-    return prognosis
+    return prognosis as IstatePro
 }
 
 export function LogIn(): JSX.Element {
@@ -92,7 +71,6 @@ export function LogIn(): JSX.Element {
 
             console.log("start")
             console.log(data);
-            // try {
             let customerPromise = await axios.get(`https://localhost:44378/api/GetCustomerByPasswordName/${data.password}/${data.firstName}/${data.lastName}`)
 
                 .then(async response => {
@@ -117,10 +95,6 @@ export function LogIn(): JSX.Element {
                     dispatch(getPurchaseList(list));
 
                 })
-                // .catch(() => {
-                //     console.log("customer not found!!")
-                //     navigate('/SignUp');
-                // })
                 .then(() => { navigate('', { state: { isOpen: false } }) })
         }
         catch {
@@ -132,13 +106,6 @@ export function LogIn(): JSX.Element {
         //         This is a success alert — check it out!
         //     </Alert>
         // </Stack>
-        // if (response.data === null) {
-        //    
-        // }
-        // else {
-
-        // }
-
     }
 
 
@@ -185,7 +152,6 @@ export function LogIn(): JSX.Element {
                     <Button variant="contained" type='submit'
                         color="primary"
                         endIcon={<SendIcon />}
-                    // onClick={() => { navigate('/') }}
                     >
                         {/* //check if existing */}
                         {/* //update state with cuurrent user */}
