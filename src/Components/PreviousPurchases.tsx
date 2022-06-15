@@ -227,7 +227,7 @@ export function BasicCard(props: IpreviosPurchase) {
            let g:ProductByMount[]
            g= await getProducts(props.orderId)
         //    .then(() =>
-              navigate("/purchaselistToSave", { state: { p: g ,d:new Date(props.orderDate).toLocaleString()+" "} })
+              navigate("/purchaselistToSave", { state: { p: g ,pd:new Date(props.orderDate).toLocaleString()+" ",hd:hebrewDate} })
             // );
           }}
         >

@@ -120,14 +120,12 @@ export default function PurchaseList(): JSX.Element {
   //   dispatch(getPurchaseList(list));
   // }
   //  if (user.id != null && productList == null) getlist();
-  
+
   const dispatch = useDispatch();
-  
 
   const productList = useSelector((st: any) => st.pro.productsList);
   const productState = useSelector((st: any) => st.pro);
   // const user = useSelector((st: any) => st.Use.state);
-
 
   async function checking() {
     if (user != null && productList === []) {
@@ -138,11 +136,9 @@ export default function PurchaseList(): JSX.Element {
   }
   checking();
 
-
-
   let rows: ProductByMount[] = [];
   //useEffect?->
-  rows = productList.filter((i: ProductByMount) => i.amount > 0);
+  rows = productList?.filter((i: ProductByMount) => i.amount > 0);
   React.useEffect(() => {
     localStorage.setItem("productList", JSON.stringify(productState));
   }, [productList]);
@@ -292,7 +288,7 @@ export default function PurchaseList(): JSX.Element {
               },
             }}
           >
-            {rows.length < 2 && (
+            {rows?.length < 2 && (
               <span>
                 הנך חדש במערכת, בצע קניות והמערכת תלמד את הרגליך לעתיד
               </span>
@@ -341,7 +337,8 @@ export default function PurchaseList(): JSX.Element {
                   navigate("/purchaselistToSave", {
                     state: {
                       p: productList,
-                      d: new Date().toLocaleString() + "",
+                      pd: new Date().toLocaleString() + "",
+                      hd: null,
                     },
                   });
                   alert("קנייתך נשמרה בהצלחה");
@@ -358,7 +355,8 @@ export default function PurchaseList(): JSX.Element {
                   navigate("/purchaselistToSave", {
                     state: {
                       p: productList,
-                      d: new Date().toLocaleString() + "",
+                      pd: new Date().toLocaleString() + "",
+                      hd: null,
                     },
                   })
                 );
