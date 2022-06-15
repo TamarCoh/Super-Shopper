@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-undef */
-import * as React from 'react';
-import ReplyRoundedIcon from '@mui/icons-material/ReplyRounded';
+import * as React from "react";
+import ReplyRoundedIcon from "@mui/icons-material/ReplyRounded";
 import { ProductByMount } from "../utils/modals";
 
 import {
@@ -8,19 +8,20 @@ import {
   GridToolbarContainer,
   GridToolbarExport,
   DataGrid,
-  GridColumns
+  GridColumns,
+} from "@mui/x-data-grid";
 
-} from '@mui/x-data-grid';
-
-import { useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Button } from '@material-ui/core';
+import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Button } from "@material-ui/core";
+import axios from "axios";
+import { useState } from "react";
 
 export interface GridRowsProp {
-  name: string,
+  name: string;
   //date:Date,
-  id: Number,
-  amount: Number
+  id: Number;
+  amount: Number;
 }
 // const rows: GridRowsProp = [
 //   {
@@ -117,23 +118,23 @@ export interface GridRowsProp {
 
 const columns: GridColumns = [
   {
-    field: 'name',
-    headerName: 'שם מוצר',
-    type: 'string',
-    width: 200
+    field: "name",
+    headerName: "שם מוצר",
+    type: "string",
+    width: 200,
   },
 
   {
-    field: 'amount',
-    headerName: 'כמות',
-    type: 'Number',
+    field: "amount",
+    headerName: "כמות",
+    type: "Number",
 
     width: 150,
   },
   {
-    field: 'id',
-    headerName: 'קוד מוצר',
-    type: 'Number',
+    field: "id",
+    headerName: "קוד מוצר",
+    type: "Number",
     width: 150,
   },
 ];
@@ -143,51 +144,81 @@ function CustomToolbar() {
     <GridToolbarContainer>
       <GridToolbarExport
         csvOptions={{
-          fileName: 'customerDataBase',
-          delimiter: ';',
+          fileName: "customerDataBase",
+          delimiter: ";",
           utf8WithBom: true,
-        }} />
+        }}
+      />
     </GridToolbarContainer>
   );
 }
-interface IforLocation{
-  p:ProductByMount[],
-  d:Date
+interface IforLocation {
+  p: ProductByMount[];
+  pd: Date;
+  hd: Date;
 }
 
 export default function PurchaselistToSave() {
   debugger;
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state as IforLocation
+  const from = location.state as IforLocation;
   // const stateRows:ProductByMount[]=   useSelector((st: any) => st.pro.productsList)||[]
-let rows:GridRowsProp[]=from.p.map((item: ProductByMount) => {
-  let row: GridRowsProp
-  row = {
-    name:item.name,
-//date:
-id:item.id,
-amount:item.amount
-  }
-  return row as  GridRowsProp
-})
-
+  let rows: GridRowsProp[] = from.p.map((item: ProductByMount) => {
+    let row: GridRowsProp;
+    row = {
+      name: item.name,
+      //date:
+      id: item.id,
+      amount: item.amount,
+    };
+    return row as GridRowsProp;
+  });
+  const [currentDtaeTime, setCurrentDateTime] = useState<string>("");
+  React.useEffect(() => {
+    async function f() {
+      let resGet = await axios
+        .get("https://localhost:44378/api/GetCurrentJewishHebrewDate")
+        .then((res) => {
+          let d = res.data;
+          debugger;
+          setCurrentDateTime(d);
+        })
+        .catch(() => {
+          debugger;
+          setCurrentDateTime("failed");
+        });
+    }
+    f();
+  });
   return (
     <>
-    <div>
-      {"קנייה בתאריך: "+from.d}
+      <div>
+        {"קנייה בתאריך: "}
+        <nav>
+          {currentDtaeTime}
+          {" , " + from.pd + " "}
+        </nav>
       </div>
-    <div style={{ height: 300, width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        components={{
-          Toolbar: CustomToolbar,
+      <div style={{ height: 300, width: "100%" }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          components={{
+            Toolbar: CustomToolbar,
+          }}
+        />
+      </div>
+      <Button
+        className="detailsToPreviouses"
+        color="primary"
+        startIcon={<ReplyRoundedIcon />}
+        onClick={() => {
+          navigate("/previousPurchases");
         }}
-      />
-    </div>
-    <Button className="detailsToPreviouses" color="primary" startIcon={<ReplyRoundedIcon />} onClick={() => { navigate('/previousPurchases') }}>חזרה</Button>
-
-  </>
+      >
+        חזרה
+      </Button>
+    </>
   );
 }

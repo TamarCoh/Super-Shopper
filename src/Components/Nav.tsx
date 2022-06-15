@@ -28,7 +28,8 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import { Input } from "@material-ui/core";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { SecurityUpdate } from "@mui/icons-material";
 interface Icustomer {
   CustomerId: Number;
   FirstName: string;
@@ -215,6 +216,10 @@ function CustomizedBadges(props: any) {
   );
 }
 function Nav(props: any): JSX.Element {
+const[pDate,setPDate]=useState("");
+  setTimeout(()=>{
+    setPDate(" "+new Date().toLocaleString()+" ")
+  },1000)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((st: any) => st.Use.state) as User;
@@ -234,7 +239,7 @@ function Nav(props: any): JSX.Element {
         });
     }
     f();
-  }, []);
+  });
 
   return (
     // <ThemeProvider theme={theme}>
@@ -292,7 +297,7 @@ function Nav(props: any): JSX.Element {
             ""
           )}
         <li className="nav-links" id="currentDate">
-          {currentDtaeTime}
+          {currentDtaeTime+"  /  "}{" "+pDate+"   "}
         </li>
         </li>
         {/* ) : null} */}

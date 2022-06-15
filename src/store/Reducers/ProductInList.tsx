@@ -48,14 +48,14 @@ export const productInListReducer = (state = initialState, action: any) => {
             }
         case Action_Types.INCREAES_PRODUCT:
             // 
-            if (state.productsList.find((i: ProductByMount) => i.id == action.payload.id))
+            if (state.productsList?.find((i: ProductByMount) => i.id === action.payload.id))
                 return {
                     ...state,
                     productsList: [...state.productsList.map((i: ProductByMount) => {
-                        if (i.id == action.payload.id) {
+                        if (i.id === action.payload.id) {
                             console.log(i.amount, action.payload.amount)
                             i.amount = i.amount + action.payload.amount;
-                            console.log(i)
+                            // console.log(i)
                         }
                         return i
                     })],
@@ -63,7 +63,7 @@ export const productInListReducer = (state = initialState, action: any) => {
                 }
             else return {
                 ...state,
-                productsList: [...state.productsList, action.payload],
+                productsList: [...state.productsList||[], action.payload],
                 amountProducts: state.amountProducts + 1
             }
         case "clearPurchaseList":
