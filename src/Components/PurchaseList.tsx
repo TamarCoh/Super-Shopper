@@ -49,6 +49,7 @@ import useEnhancedEffect from "@mui/material/utils/useEnhancedEffect";
 import { PropaneSharp, Today } from "@mui/icons-material";
 import axios from "axios";
 import { getList } from "./LogIn";
+import { logOut } from "../store/Actions/User";
 
 interface EditToolbarProps {
   apiRef: React.MutableRefObject<GridApi>;
@@ -78,24 +79,24 @@ function EditToolbar(props: EditToolbarProps) {
         onClick={() => {
           navigate("/allCategory");
         }}
-        >
+      >
         הוספת מוצרים
       </Button>
       <Button
         color="primary"
         startIcon={<ExitToAppRoundedIcon />}
         onClick={() => {
-            navigate("/PreviousPurchases");
+          navigate("/PreviousPurchases");
         }}
-        >
+      >
         קניות קודמות שלי
       </Button>
     </GridToolbarContainer>
   );
 }
 const mapStateToProps = (st: any) => {
-    //הפונקציה תחזיר אובייקט ובו כל השדות שאנו רוצים שייכנסו לפרופס של הקומםוננטה שלנו
-    //מתןך הסטייט הכללי
+  //הפונקציה תחזיר אובייקט ובו כל השדות שאנו רוצים שייכנסו לפרופס של הקומםוננטה שלנו
+  //מתןך הסטייט הכללי
 
   console.log(st.pro.productsList);
   return {
@@ -105,23 +106,40 @@ const mapStateToProps = (st: any) => {
 };
 
 export default function PurchaseList(): JSX.Element {
+  debugger;
   // const apiRef = useGridApiRef();
-  // const [productList, setProductList] = React.useState<ProductByMount[]>([]);
+  //  const [productList, setProductList] = React.useState<ProductByMount[]>([]);
   // const List = useSelector((st: any) => st.pro.productsList);
   // setProductList(List);
   // const productState = useSelector((st: any) => st.pro);
-  // const user = useSelector((st: any) => st.Use.state);
+  const user = useSelector((st: any) => st.Use.state);
   // async function getlist() {
   //   const list: IstatePro = (await getList(user)) as IstatePro;
   //    setProductList(list.productsList)
   //   localStorage.setItem("productList", JSON.stringify(list));
   //   dispatch(getPurchaseList(list));
   // }
-  // if (user.id != null && productList == null) getlist();
-  const productList = useSelector((st: any) => st.pro.productsList)
-  const productState = useSelector((st: any) => st.pro)
+  //  if (user.id != null && productList == null) getlist();
+  
+  const dispatch = useDispatch();
+  
 
-  const user = useSelector((st: any) => st.Use.state)
+  const productList = useSelector((st: any) => st.pro.productsList);
+  const productState = useSelector((st: any) => st.pro);
+  // const user = useSelector((st: any) => st.Use.state);
+
+
+  async function checking() {
+    if (user != null && productList === []) {
+      const list: IstatePro = await getList(user);
+      localStorage.setItem("productList", JSON.stringify(list));
+      dispatch(getPurchaseList(list));
+    }
+  }
+  checking();
+
+
+
   let rows: ProductByMount[] = [];
   //useEffect?->
   rows = productList.filter((i: ProductByMount) => i.amount > 0);
@@ -129,7 +147,6 @@ export default function PurchaseList(): JSX.Element {
     localStorage.setItem("productList", JSON.stringify(productState));
   }, [productList]);
   // const rows = useSelector<IstatePro, ProductByMount[]>(state => state.productsList);
-  const dispatch = useDispatch();
 
   const handleRowEditStart = (
     params: GridRowParams,
@@ -321,16 +338,29 @@ export default function PurchaseList(): JSX.Element {
                 .post(`https://localhost:44378/api/AddActPur/${user.id}`, l)
                 .then((res) => {
                   console.log(res);
-                  navigate("/purchaselistToSave", { state:{p: productList,d:new Date().toLocaleString() + ""} });
-                   dispatch(clearPurchaseList());
+                  navigate("/purchaselistToSave", {
+                    state: {
+                      p: productList,
+                      d: new Date().toLocaleString() + "",
+                    },
+                  });
                   alert("קנייתך נשמרה בהצלחה");
+                  // localStorage.removeItem("user");
+                  localStorage.removeItem("productList");
+                  // dispatch(logOut());
+                  dispatch(clearPurchaseList());
                 })
                 .catch((err) => {
                   console.log(err);
                   alert(err);
                 })
                 .finally(() =>
-                  navigate("/purchaselistToSave", { state:{p: productList,d:new Date().toLocaleString() + ""} })
+                  navigate("/purchaselistToSave", {
+                    state: {
+                      p: productList,
+                      d: new Date().toLocaleString() + "",
+                    },
+                  })
                 );
             }}
           >
