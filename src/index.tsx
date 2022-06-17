@@ -1,14 +1,13 @@
-
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 import { combineReducers } from "redux";
 import { legacy_createStore, compose } from "redux";
-import { productInListReducer } from "./store/Reducers/ProductInList"
-import { userReducer } from './store/Reducers/User';
+import { productInListReducer } from "./store/Reducers/ProductInList";
+import { userReducer } from "./store/Reducers/User";
 
 declare global {
   interface Window {
@@ -18,8 +17,8 @@ declare global {
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
- const store = legacy_createStore(
-  combineReducers({ pro: productInListReducer,Use:userReducer }),
+const store = legacy_createStore(
+  combineReducers({ pro: productInListReducer, Use: userReducer }),
   composeEnhancers()
 );
 ReactDOM.render(
@@ -28,7 +27,7 @@ ReactDOM.render(
       <App />
     </Provider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

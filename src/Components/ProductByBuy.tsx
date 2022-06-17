@@ -10,21 +10,21 @@ import Badge from "@mui/material/Badge";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import MailIcon from "@mui/icons-material/Mail";
-import Switch from "@mui/material/Switch";
-import FormControlLabel from "@mui/material/FormControlLabel";
+// import MailIcon from "@mui/icons-material/Mail";
+// import Switch from "@mui/material/Switch";
+// import FormControlLabel from "@mui/material/FormControlLabel";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import IconButton from "@mui/material/IconButton";
 import { ProductByMount, ProductByCategory } from "../utils/modals";
-import { connect } from "tls";
+// import { connect } from "tls";
 import "./CommonColor.css";
 import "./AllProducts.css";
-import { margin } from "@mui/system";
+// import { margin } from "@mui/system";
 import { useDispatch } from "react-redux";
 import { increaseProductInList } from "../store/Actions/ProductInList";
 import { randomId } from "@mui/x-data-grid-generator";
-import img1 from '../images/bedroom.jpg';
-import { autocompleteClasses } from "@mui/material";
+// import img1 from '../images/bedroom.jpg';
+// import { autocompleteClasses } from "@mui/material";
 
 function AddProductBuy(
   product: ProductByCategory,
@@ -32,7 +32,7 @@ function AddProductBuy(
   dispatch: any
 ) {
   let productByBuy: ProductByMount = {} as ProductByMount;
-  productByBuy.idrow=randomId()
+  productByBuy.idrow = randomId();
   productByBuy.name = product.name;
   productByBuy.id = product.id;
   productByBuy.amount = amount;
@@ -46,13 +46,11 @@ export const BadgeVisibility: React.FunctionComponent<BadgeVisibilityModal> = ({
   product,
 }: BadgeVisibilityModal) => {
   const [count, setCount] = React.useState(0);
-  const [invisible, setInvisible] = React.useState(false);
+  // const [invisible, setInvisible] = React.useState(false);
   const dispatch = useDispatch();
-
-  const handleBadgeVisibility = () => {
-    setInvisible(!invisible);
-  };
-
+  // const handleBadgeVisibility = () => {
+  //   setInvisible(!invisible);
+  // };
   return (
     <Box
       className="allCard"
@@ -109,24 +107,39 @@ export const BadgeVisibility: React.FunctionComponent<BadgeVisibilityModal> = ({
 
 export default function Product(props: any) {
   return (
-    <Card sx={{ width: 230,height:350, margin: 4 }}>
+    <Card sx={{ width: 230, height: 350, margin: 4 }}>
       <CardMedia
-      sx={{ minWidth:50, maxWidth:140, minHeight:100, maxHeight:130,marginRight:0,marginLeft:4.5,padding:0 }}
-      //  className="productImg"
+        sx={{
+          minWidth: 50,
+          maxWidth: 140,
+          minHeight: 100,
+          maxHeight: 130,
+          marginRight: 0,
+          marginLeft: 4.5,
+          padding: 0,
+        }}
         component="img"
         height="140"
         src={`./${props.product.img?.default}`}
         alt=""
       />
       <CardContent>
-        <Typography gutterBottom  component="div" sx={{ fontSize:21, padding:0 }}>
+        <Typography
+          gutterBottom
+          component="div"
+          sx={{ fontSize: 21, padding: 0 }}
+        >
           {props.product.name}
         </Typography>
-        <Typography gutterBottom  component="div" sx={{ fontSize:10, padding:0 }}>
+        <Typography
+          gutterBottom
+          component="div"
+          sx={{ fontSize: 10, padding: 0 }}
+        >
           {props.product.description}
         </Typography>
       </CardContent>
-      <CardActions sx={{  margin: 1 }}>
+      <CardActions sx={{ margin: 1 }}>
         <BadgeVisibility product={props.product} />
       </CardActions>
     </Card>

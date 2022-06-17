@@ -1,35 +1,20 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import "./Nav.css";
-import { Link, useNavigate } from "react-router-dom";
-// import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
-// import SettingsIcon from '@mui/icons-material/Settings';
-// import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-// import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import { Link } from "react-router-dom";
 import * as React from "react";
 import Badge, { BadgeProps } from "@mui/material/Badge";
-import { styled, ThemeProvider } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-// import connect from "react-redux/es/components/connect";
 import { connect, useDispatch, useSelector } from "react-redux";
-import { count } from "console";
-import Enter from "./Enter";
-import { userInfo } from "os";
 import { logIn, logOut } from "../store/Actions/User";
 import { clearPurchaseList } from "../store/Actions/ProductInList";
 import axios from "axios";
 import { User } from "../utils/modals";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Popper from "@mui/material/Popper";
-// import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
-import Fade from "@mui/material/Fade";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import { Input } from "@material-ui/core";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
-import { SecurityUpdate } from "@mui/icons-material";
+import { useState } from "react";
 interface Icustomer {
   CustomerId: Number;
   FirstName: string;
@@ -38,13 +23,6 @@ interface Icustomer {
   Email: string;
 }
 async function updateUserDetails(props: User) {
-  debugger;
-  // public int CustomerId { get; set; }
-  // public string FirstName { get; set; }
-  // public string LastName { get; set; }
-  // public string Password { get; set; }
-  // public string Email { get; set; }
-  // PUT: api/Customer/5
   let customer: Icustomer;
   customer = {
     CustomerId: props.id,
@@ -56,10 +34,10 @@ async function updateUserDetails(props: User) {
   await axios
     .put(`https://localhost:44378/api/Customer/${customer}`)
     .then(() => {
-      alert("succeeded to update");
+      alert("עודכן בהצלחה");
     })
     .catch((res) => {
-      alert("didnt succeed to update");
+      alert("העדכון כשל"+res);
     });
 }
 
@@ -67,7 +45,6 @@ export function SimplePopper() {
   const dispatch = useDispatch();
   const {
     register,
-    handleSubmit,
     formState: { errors },
   } = useForm<User>();
 
@@ -75,9 +52,9 @@ export function SimplePopper() {
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [firstName, setInputFirstName] = useState(user.firstName);
-  const [lastName, setLastName] = useState(user.lastName);
-  const [password, setPassword] = useState(user.password);
-  const [email, setEmail] = useState(user.email);
+  const [lastName, setInputLastName] = useState(user.lastName);
+  const [password, setInputPassword] = useState("");
+  const [email, setInputEmail] = useState("");
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
@@ -86,27 +63,24 @@ export function SimplePopper() {
   const open = Boolean(anchorEl);
   const id = open ? "simple-popper" : undefined;
   return (
-    //type="button" aria-describedby={id}
     <div>
       <Button className="nav-links" id="update-details" onClick={handleClick}>
         עריכה
       </Button>
       <Popper id={id} open={open} anchorEl={anchorEl}>
-        {/* <Box sx={{ border: 1, p: 1, bgcolor: 'background.paper' }}>
-          The content of the Popper.
-        </Box> */}
         <form
           onSubmit={() => {
+            debugger;
             const u = {
               id: user.id,
-              firstName: firstName,
-              lastName: lastName,
-              password: password,
-              email: email,
+              firstName: firstName === "" ? user.firstName : firstName,
+              lastName: lastName === "" ? user.lastName : lastName,
+              password: password === "" ? user.password : password,
+              email: email === "" ? user.email : email,
             } as User;
             updateUserDetails(u);
             dispatch(logIn(u));
-            localStorage.setItem("user", JSON.stringify(user));
+            localStorage.setItem("user", JSON.stringify(u));
             handleClick;
           }}
         >
@@ -137,7 +111,7 @@ export function SimplePopper() {
               minLength: 2,
               maxLength: 10,
             })}
-            onChange={(event) => setLastName(event.target.value)}
+            onChange={(event) => setInputLastName(event.target.value)}
           ></input>
           <span className="op">
             {errors.lastName?.type === "minLength" && (
@@ -150,13 +124,13 @@ export function SimplePopper() {
           </span>
           <input
             type="password"
-            placeholder={"סיסמא: " + user.password}
+            placeholder={"סיסמא: " }
             {...register("password", {
               required: true,
               minLength: 2,
               maxLength: 10,
             })}
-            onChange={(event) => setPassword(event.target.value)}
+            onChange={(event) => setInputPassword(event.target.value)}
           ></input>
           <span className="op">
             {errors.password?.type === "required" && <span>חסרה סיסמה</span>}
@@ -169,13 +143,13 @@ export function SimplePopper() {
           </span>
           <input
             type="email"
-            placeholder={"מייל: " + user.email}
+            placeholder={"מייל: "}
             {...register("email", {
               required: true,
               minLength: 2,
               maxLength: 10,
             })}
-            onChange={(event) => setEmail(event.target.value)}
+            onChange={(event) => setInputEmail(event.target.value)}
           ></input>
           <Button type="submit">עדכן פרטים</Button>
         </form>
@@ -184,18 +158,6 @@ export function SimplePopper() {
   );
 }
 
-// import { indigo,pink,purple,blueGrey,red } from '@mui/material/colors';
-// import { createTheme } from '@mui/material/styles';
-// const theme = createTheme({
-//     palette: {
-//       primary: {
-//         main: '#0d47a1',
-//       },
-//       secondary: {
-//         main: '#c51162',
-//       },
-//     },
-//   })
 const StyledBadge = styled(Badge)<BadgeProps>(({ theme }) => ({
   "& .MuiBadge-badge": {
     right: -3,
@@ -216,25 +178,24 @@ function CustomizedBadges(props: any) {
   );
 }
 function Nav(props: any): JSX.Element {
-const[pDate,setPDate]=useState("");
-  setTimeout(()=>{
-    setPDate(" "+new Date().toLocaleString()+" ")
-  },1000)
-  const navigate = useNavigate();
+  const [pDate, setPDate] = useState("");
+  setTimeout(() => {
+    setPDate(" " + new Date().toLocaleString() + " ");
+  }, 1000);
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((st: any) => st.Use.state) as User;
+  // const user = useSelector((st: any) => st.Use.state) as User;
   const [currentDtaeTime, setCurrentDateTime] = useState<string>("");
   React.useEffect(() => {
     async function f() {
-      let resGet = await axios
+      // let resGet =
+      await axios
         .get("https://localhost:44378/api/GetCurrentJewishHebrewDate")
         .then((res) => {
           let d = res.data;
-          debugger;
           setCurrentDateTime(d);
         })
         .catch(() => {
-          debugger;
           setCurrentDateTime("failed");
         });
     }
@@ -242,38 +203,27 @@ const[pDate,setPDate]=useState("");
   });
 
   return (
-    // <ThemeProvider theme={theme}>
     <div className="Nav">
       <ul>
         <Link to="/PurchaseList" className="nav-links">
-          {/* <HomeRoundedIcon></HomeRoundedIcon> */}
           {/* get count from state */}
           <li className="nav-links">
             <CustomizedBadges count={props.count} />
           </li>
         </Link>
         <Link to="/" className="nav-links">
-          {/* <HomeRoundedIcon></HomeRoundedIcon> */}
           <li className="nav-links">כניסה</li>
         </Link>
         <Link to="/allCategory" className="nav-links">
-          {/* <AddCircleOutlineIcon></AddCircleOutlineIcon> */}
           <li className="nav-links">מוצרים</li>
         </Link>
-        {/* <Link to='/logIn' className="nav-links" id="nav-logIn">
-                    {/* <AddCircleOutlineIcon></AddCircleOutlineIcon> */}
-
-        {/* </Link> */}
         <li className="nav-links">
           {props.user != null ? (
             <>
               <li className="nav-links" id="currentUser">
                 {props.user.firstName + " " + props.user.lastName}
               </li>
-              {/*  : ""} */}
-
               <div id="div-nav">
-                {/* {props.user != null ? ( */}
                 <div>
                   <li
                     className="nav-links"
@@ -296,29 +246,20 @@ const[pDate,setPDate]=useState("");
           ) : (
             ""
           )}
-        <li className="nav-links" id="currentDate">
-          {currentDtaeTime+"  /  "}{" "+pDate+"   "}
+          <li className="nav-links" id="currentDate">
+            {currentDtaeTime + "  /  "}
+            {" " + pDate + "   "}
+          </li>
         </li>
-        </li>
-        {/* ) : null} */}
       </ul>
     </div>
   );
 }
 
 const mapStateToProps = (st: any) => {
-  //הפונקציה תחזיר אובייקט ובו כל השדות שאנו רוצים שייכנסו לפרופס של הקומםוננטה שלנו
-  //מתןך הסטייט הכללי
   return {
-    //  myArr: st.pro.productsList,
     count: st.pro.amountProducts,
     user: st.Use.state,
-    // myArr:[]=[{d: 123,
-    //     name: "name",
-    //     category: 1,
-    //     PurchasesHistoryId: "123",
-    //     PurchasePrognosisId: "fgvhj",
-    //     amount: 3}]
   };
 };
 export default connect(mapStateToProps)(Nav);
