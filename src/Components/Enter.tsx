@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import LogIn from './LogIn';
@@ -10,38 +9,18 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackTwoToneIcon from '@mui/icons-material/ArrowBackTwoTone';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
-import { animated, useSpring } from 'react-spring';
-import { Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { connect, useSelector } from 'react-redux';
-import CloseIcon from '@material-ui/icons/Close';
+import {  useLocation, useNavigate } from 'react-router-dom';
+import {  useSelector } from 'react-redux';
 
-interface IMyProps {
-    open: boolean,
-}
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    pt: 2,
-    px: 4,
-    pb: 3,
-};
 
 function ChildModal() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => {
         setOpen(true);
-
     };
     const handleClose = () => {
         setOpen(false);
     };
-    const navigate = useNavigate();
     return (
         <React.Fragment>
             <>
@@ -50,8 +29,6 @@ function ChildModal() {
                     <>?משתמש חדש    </>
                 </div>
                 }
-
-
                 <Modal
                     hideBackdrop
                     open={open}
@@ -61,13 +38,9 @@ function ChildModal() {
                 >
                     <>
                         <SignUp />
-
                         <Button className='left' id="lin" onClick={handleClose} >התחברות</Button>
                         <>?רשום כבר   </>
-                        {/* <Button className='right' id="lin" onClick={()=>navigate("")} >יציאה</Button> */}
-
                     </>
-
                 </Modal>
             </>
         </React.Fragment>
@@ -78,7 +51,6 @@ export function Enter() {
     const location = useLocation()
     const from = location.state as boolean
     const [openM, setOpenM] = React.useState<boolean>(from);
-    // const [userIn, setUserIn] = React.useState(false);
     const navigate = useNavigate();
     const user = useSelector((st: any) => st.Use.state)
 
@@ -115,29 +87,4 @@ export function Enter() {
         </div >
     );
 }
-// function BackwardsCompatability() {
-//     const [styles, api] = useSpring(() => ({
-//       from: { x: -50, opacity: 1 },
-//     }))
-
-//     React.useEffect(() => {
-//       api({
-//         x: 50,
-//         opacity: 1,
-//         loop: { reverse: true },
-//       })
-//     }, [])
-
-//     return (
-//       <animated.div
-//         style={{
-//           width: 80,
-//           height: 80,
-//           backgroundColor: '#46e891',
-//           borderRadius: 16,
-//           ...styles,
-//         }}
-//       />
-//     )
-//   }
 export default Enter;

@@ -1,21 +1,14 @@
-#wrap
-{
-    width:50vw;
-    margin:auto;
-    
-
-}
-.row
-{
-    background-color: #4c6a92;
-}
-.container
-{
-    
-    
+#wrap {
+  width: 50vw;
   margin: auto;
 }
-#savePurchaseButton{
-   font-size: 10vw; 
+.row {
+  background-color: #4c6a92;
+}
+.container {
+  margin: auto;
+}
+#savePurchaseButton {
+  font-size: 10vw;
   font-weight: 500;
 }

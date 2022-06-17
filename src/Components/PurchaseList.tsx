@@ -2,16 +2,13 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
-import EditIcon from "@mui/icons-material/Edit";
+// import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
-import SaveIcon from "@mui/icons-material/Save";
-import CancelIcon from "@mui/icons-material/Close";
+// import SaveIcon from "@mui/icons-material/Save";
+// import CancelIcon from "@mui/icons-material/Close";
 import RemoveIcon from "@mui/icons-material/Remove";
 // import moduleName from 'module';
 import {
-  GridRowsProp,
-  useGridApiRef,
-  DataGridPro,
   GridApi,
   GridColumns,
   GridRowParams,
@@ -23,12 +20,7 @@ import {
   GridRowId,
   GridRowModel,
 } from "@mui/x-data-grid-pro";
-import {
-  randomCreatedDate,
-  randomTraderName,
-  randomUpdatedDate,
-  randomId,
-} from "@mui/x-data-grid-generator";
+import { randomId } from "@mui/x-data-grid-generator";
 import { useNavigate } from "react-router-dom";
 import {
   clearPurchaseList,
@@ -39,17 +31,17 @@ import {
 } from "../store/Actions/ProductInList";
 // import { AllProducts } from "./AllProducts";
 import { ProductByMount, ActuallyPurchase } from "../utils/modals";
-import { connect, useDispatch, useSelector } from "react-redux";
-import { productInListReducer } from "../store/Reducers/ProductInList";
+import { useDispatch, useSelector } from "react-redux";
+// import { productInListReducer } from "../store/Reducers/ProductInList";
 import { IstatePro } from "../store/Reducers/ProductInList";
 import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
 import Logo from "./Logo";
 import { DataGrid } from "@mui/x-data-grid";
-import useEnhancedEffect from "@mui/material/utils/useEnhancedEffect";
-import { PropaneSharp, Today } from "@mui/icons-material";
+// import useEnhancedEffect from "@mui/material/utils/useEnhancedEffect";
+// import { PropaneSharp, Today } from "@mui/icons-material";
 import axios from "axios";
 import { getList } from "./LogIn";
-import { logOut } from "../store/Actions/User";
+// import { logOut } from "../store/Actions/User";
 
 interface EditToolbarProps {
   apiRef: React.MutableRefObject<GridApi>;
@@ -94,16 +86,16 @@ function EditToolbar(props: EditToolbarProps) {
     </GridToolbarContainer>
   );
 }
-const mapStateToProps = (st: any) => {
-  //הפונקציה תחזיר אובייקט ובו כל השדות שאנו רוצים שייכנסו לפרופס של הקומםוננטה שלנו
-  //מתןך הסטייט הכללי
+// const mapStateToProps = (st: any) => {
+//   //הפונקציה תחזיר אובייקט ובו כל השדות שאנו רוצים שייכנסו לפרופס של הקומםוננטה שלנו
+//   //מתןך הסטייט הכללי
 
-  console.log(st.pro.productsList);
-  return {
-    productList: st.pro.productsList,
-    user: st.Use.state,
-  };
-};
+//   console.log(st.pro.productsList);
+//   return {
+//     productList: st.pro.productsList,
+//     user: st.Use.state,
+//   };
+// };
 
 export default function PurchaseList(): JSX.Element {
   debugger;
@@ -162,7 +154,7 @@ export default function PurchaseList(): JSX.Element {
   const handleDeleteClick = (id: GridRowId) => (event: React.MouseEvent) => {
     event.stopPropagation();
     let p: ProductByMount = rows.find(
-      (item: ProductByMount) => item.id == id
+      (item: ProductByMount) => item.id === id
     ) as ProductByMount;
 
     dispatch(removeProductFromList(p));
@@ -171,7 +163,7 @@ export default function PurchaseList(): JSX.Element {
   };
   const handleAddClick = (id: GridRowId) => (event: React.MouseEvent) => {
     let p: ProductByMount = rows.find(
-      (item: ProductByMount) => item.id == id
+      (item: ProductByMount) => item.id === id
     ) as ProductByMount;
     const temp = {
       idrow: p.idrow,
@@ -185,7 +177,7 @@ export default function PurchaseList(): JSX.Element {
   };
   const handleReductionClick = (id: GridRowId) => (event: React.MouseEvent) => {
     let p = rows.find(
-      (item: ProductByMount) => item.id == id
+      (item: ProductByMount) => item.id === id
     ) as ProductByMount;
     // if(p)
     // == undefined ? {} as ProductByMount : rows.find((item: ProductByMount) => item.idrow == id)
@@ -271,7 +263,7 @@ export default function PurchaseList(): JSX.Element {
 
   return (
     <>
-      {user == null || user == undefined ? (
+      {user == null || user === undefined ? (
         <span>ספר לנו מי אתה ונכין לך רשימת קניות</span>
       ) : (
         <>
@@ -290,7 +282,7 @@ export default function PurchaseList(): JSX.Element {
           >
             {rows?.length < 2 && (
               <span>
-                הנך חדש במערכת, בצע קניות והמערכת תלמד את הרגליך לעתיד
+                הרשימה ריקה, באם הנך חדש במערכת, בצע קניות והמערכת תלמד את הרגליך לעתיד
               </span>
             )}
             <DataGrid
@@ -325,11 +317,6 @@ export default function PurchaseList(): JSX.Element {
                 } as ActuallyPurchase;
                 return product;
               });
-              // axios.post(`https://localhost:44378/api/BasketBuilder/AddActPur/${user.id}`, l)
-              //     .then((res) =>{ console.log(res); navigate('./orderDetails', { state: productList })
-              // })
-              //     .catch(err => console.log(err))
-
               await axios
                 .post(`https://localhost:44378/api/AddActPur/${user.id}`, l)
                 .then((res) => {
@@ -342,9 +329,7 @@ export default function PurchaseList(): JSX.Element {
                     },
                   });
                   alert("קנייתך נשמרה בהצלחה");
-                  // localStorage.removeItem("user");
                   localStorage.removeItem("productList");
-                  // dispatch(logOut());
                   dispatch(clearPurchaseList());
                 })
                 .catch((err) => {

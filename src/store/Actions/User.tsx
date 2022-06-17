@@ -1,19 +1,18 @@
-import { User } from "../../utils/modals"
+import { User } from "../../utils/modals";
 export const logIn = (person: User) => {
-    return {
-        type: "logIn",
-        payload: person
-    }
-}
+  return {
+    type: "logIn",
+    payload: person,
+  };
+};
 export const logOut = () => {
-    return {
-        type: "logOut",
-        
-    }
-}
+  return {
+    type: "logOut",
+  };
+};
 export const signUp = (person: User) => {
-    return {
-        type: "signUp",
-        payload: person
-    }
-}
+  return {
+    type: "signUp",
+    payload: person,
+  };
+};
