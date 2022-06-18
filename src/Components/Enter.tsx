@@ -21,7 +21,6 @@ function ChildModal() {
     setOpen(false);
   };
   return (
-    // <React.Fragment>
     <>
       {!open && (
         <div>
@@ -32,7 +31,6 @@ function ChildModal() {
         </div>
       )}
       <Modal
-        // hideBackdrop
         open={open}
         onClose={handleClose}
         // aria-labelledby="child-modal-title"
@@ -47,23 +45,27 @@ function ChildModal() {
         </>
       </Modal>
     </>
-    // </React.Fragment>
   );
 }
-
+interface Iboolean {
+  isOpen: boolean;
+  closeLogin: boolean;
+}
 export function Enter() {
   const location = useLocation();
-  const from = location.state as boolean;
-  const [open, setOpen] = React.useState<boolean>(from);
+  const from = location.state as Iboolean;
+  const [open, setOpen] = React.useState<boolean>(from.isOpen);
   const navigate = useNavigate();
   const user = useSelector((st: any) => st.Use.state);
-
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
+  React.useEffect(() => {
+    {user && setOpen(false)}
+  });
   return (
     <div>
       <Logo class_name={"logo"} />

@@ -82,7 +82,7 @@ export function LogIn(): JSX.Element {
           dispatch(getPurchaseList(list));
         })
         .then(() => {
-          navigate("", { state: { isOpen: false } });
+          navigate("", { state: { isOpen: false ,closeLogin:false} });
         });
     } catch {
       console.log(errors);
