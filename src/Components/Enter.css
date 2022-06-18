@@ -1,5 +1,7 @@
 #lin {
-    color: #234775;
+    /* color: #234775; */
+    color: white;
+    font-weight: 500;
 }
 
 #right {
@@ -15,4 +17,12 @@
 #eneter {
     font-size: larger;
     color: #234775;
+}
+#x{
+    position: fixed;
+    right: 3vw;
+    top: 3vh;
+    color: white;
+    font-weight: 500;
+    font-size: larger;
 }

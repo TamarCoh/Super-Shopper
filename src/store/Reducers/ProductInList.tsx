@@ -1,10 +1,5 @@
-// import { ActionTypes } from "@mui/base";
 import * as Action_Types from "../actionsTypes";
 import { ProductByMount } from "../../utils/modals";
-// import { removeProductFromList } from "../Actions/ProductInList";
-// import React, { useEffect, useState } from "react";
-// import axios from "axios";
-// import { randomId } from "@mui/x-data-grid-generator";
 
 export interface IstatePro {
   productsList: ProductByMount[];
@@ -67,7 +62,7 @@ export const productInListReducer = (state = initialState, action: any) => {
           productsList: [...(state.productsList || []), action.payload],
           amountProducts: state.amountProducts + 1,
         };
-    case "clearPurchaseList":
+    case Action_Types.CLEAR_PURCHASE_LIST:
       return {
         productsList: [],
         amountProducts: 0,

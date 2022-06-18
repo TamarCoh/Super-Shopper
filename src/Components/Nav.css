@@ -7,29 +7,14 @@
   text-align: left;
   margin: 0;
 }
-
 .nav-links {
-  width: 70%;
+  /* width: 70%; */
   display: inline;
   color: white;
   text-decoration: none;
   margin-inline: 25px;
 }
-
-#nav-logIn {
-  float: right;
-  width: auto;
-  padding: 0.5%;
-  border: none;
-}
-
-#currentUser {
-  float: right;
-  width: auto;
-  padding: 0.5%;
-  background-color: white;
-  color: #213f65;
-  border-radius: 45%;
+.nav-links:hover {
   font-weight: 500;
 }
 #currentDate {
@@ -38,16 +23,43 @@
   padding: 0.5%;
   font-size: smaller;
 }
-#update-details {
-  color: white;
-  font-size: 18px;
+
+
+
+#right-nav{
+  /* top: -3vh; */
+  /* margin: 0; */
+  left: 0%;
+  display: flex;
+  flex-direction: row-reverse;
+  float: right;
 }
-#div-nav {
+#currentUser {
+  float: right;
+  width: auto;
+  padding: 6%;
+  top: 0;
+  background-color: white;
+  color: #213f65;
+  border-radius: 50%;
+  /* border-color: white;
+  border-width: 500; */
+  font-weight: 500;
+}
+#div-in-right-nav {
   display: flex;
   flex-direction: column;
   float: right;
 }
-.nav-links:hover {
-  font-weight: 500;
+#li-in-div-in-right-nav{
+  float: right;
+  width: auto;
+  padding: 0.5%;
+  border: none;
 }
+#update-details-button {
+  color: white;
+  font-size: 18px;
+}
+
 

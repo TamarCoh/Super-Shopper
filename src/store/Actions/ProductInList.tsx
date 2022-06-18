@@ -28,6 +28,6 @@ export const getPurchaseList = (list: IstatePro) => {
 };
 export const clearPurchaseList = () => {
   return {
-    type: "clearPurchaseList",
+    type: Action_Types.CLEAR_PURCHASE_LIST,
   };
 };

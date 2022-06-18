@@ -10,21 +10,14 @@ import Badge from "@mui/material/Badge";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-// import MailIcon from "@mui/icons-material/Mail";
-// import Switch from "@mui/material/Switch";
-// import FormControlLabel from "@mui/material/FormControlLabel";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import IconButton from "@mui/material/IconButton";
 import { ProductByMount, ProductByCategory } from "../utils/modals";
-// import { connect } from "tls";
 import "./CommonColor.css";
 import "./AllProducts.css";
-// import { margin } from "@mui/system";
 import { useDispatch } from "react-redux";
 import { increaseProductInList } from "../store/Actions/ProductInList";
 import { randomId } from "@mui/x-data-grid-generator";
-// import img1 from '../images/bedroom.jpg';
-// import { autocompleteClasses } from "@mui/material";
 
 function AddProductBuy(
   product: ProductByCategory,
