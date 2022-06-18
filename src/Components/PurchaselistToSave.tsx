@@ -57,7 +57,7 @@ function CustomToolbar() {
 interface IforLocation {
   p: ProductByMount[];
   pd: Date;
-  hd: Date;
+  hd: string;
 }
 
 export default function PurchaselistToSave() {
@@ -74,19 +74,19 @@ export default function PurchaselistToSave() {
     };
     return row as GridRowsProp;
   });
-  const [currentDtaeTime, setCurrentDateTime] = useState<string>("");
+  const [currentHebrewDateTime, setCurrentHebrewDateTime] = useState<string>("");
   React.useEffect(() => {
     async function f() {
-       await axios
+      await axios
         .get("https://localhost:44378/api/GetCurrentJewishHebrewDate")
         .then((res) => {
           let d = res.data;
           debugger;
-          setCurrentDateTime(d);
+          setCurrentHebrewDateTime(d);
         })
         .catch(() => {
           debugger;
-          setCurrentDateTime("failed");
+          setCurrentHebrewDateTime("_____");
         });
     }
     f();
@@ -96,7 +96,7 @@ export default function PurchaselistToSave() {
       <div>
         {"קנייה בתאריך: "}
         <nav>
-          {currentDtaeTime}
+          {from.hd==null?currentHebrewDateTime:from.hd}
           {" , " + from.pd + " "}
         </nav>
       </div>

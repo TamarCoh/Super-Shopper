@@ -1,21 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-// import CssBaseline from "@mui/material/CssBaseline";
-// import BottomNavigation from "@mui/material/BottomNavigation";
-// import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-// import RestoreIcon from "@mui/icons-material/Restore";
-// import FavoriteIcon from "@mui/icons-material/Favorite";
-// import ArchiveIcon from "@mui/icons-material/Archive";
-// import Paper from "@mui/material/Paper";
-// import List from "@mui/material/List";
-// import ListItem from "@mui/material/ListItem";
-// import ListItemAvatar from "@mui/material/ListItemAvatar";
-// import ListItemText from "@mui/material/ListItemText";
-// import Avatar from "@mui/material/Avatar";
 import axios from "axios";
 import { Category, ProductByCategory } from "../utils/modals";
-// import { JsxElement } from "typescript";
-// import { Container } from "@material-ui/core";
 import AllProducts from "../Components/AllProducts";
 import './AllCategory.css';
 import { Button } from "@mui/material";
@@ -23,23 +9,11 @@ import ReplyRoundedIcon from '@mui/icons-material/ReplyRounded';
 import { useNavigate } from "react-router-dom";
 import Logo from "./Logo";
 import './Logo.css'
-// import AllProducts from "./AllProducts";
-// import { ProductByMount } from "../utils/modals";
-// import { connect, useDispatch, useSelector } from "react-redux";
-// import { productInListReducer } from "../store/Reducers/ProductInList";
-// import { IstatePro } from '../store/Reducers/ProductInList'
-// import ExitToAppRoundedIcon from '@mui/icons-material/ExitToAppRounded';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-// import PhoneIcon from '@material-ui/icons/Phone';
-// import PersonPinIcon from '@material-ui/icons/PersonPin';
-// import HelpIcon from '@material-ui/icons/Help';
-// import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
-// import ThumbDown from '@material-ui/icons/ThumbDown';
-// import ThumbUp from '@material-ui/icons/ThumbUp';
 import Typography from '@material-ui/core/Typography';
 
 function TabPanel(props: any) {
@@ -106,7 +80,7 @@ type tplotOptions = {
 }
 function importAll(r: any) {
   let images: tplotOptions = {};
-  r.keys().map((item: any, index: any) => { images[item.replace('./', '')] = r(item); });
+  r.keys().map((item: any, index: any) => { images[item.replace('./', '')] = r(item); return true;});
   console.log('images', images)
   return images;
 }
@@ -166,7 +140,7 @@ export default function CategoriesNavigation() {
   const [i, setI] = React.useState<number>(0);
   return (
     <>
-      <div className={classes.root}>
+      <div className={classes.root} id="categoriesNav">
         <AppBar position="static" color="default">
           <Tabs
             value={category.title}

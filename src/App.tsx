@@ -40,6 +40,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Enter />} />
           <Route path="" element={<Enter />} />
+          <Route path="/enter" element={<Enter />} />
           <Route path="/homePage" element={<Enter />} />
           <Route path="/signUp" element={<Enter />} />
           <Route path="/logIn" element={<Enter />} />

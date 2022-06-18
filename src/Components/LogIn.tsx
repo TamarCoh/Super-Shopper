@@ -1,32 +1,12 @@
-// import { Component, useState } from "react";
-// import { JsxElement, SignatureKind } from "typescript";
+
 import { TextField, Button } from "@material-ui/core";
-// import Icon from "@mui/material/Icon";
 import "./SignIn.css";
-// import { render } from "@testing-library/react";
 import * as React from "react";
 import SendIcon from "@mui/icons-material/Send";
-// import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
-// import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-// import IconButton from "@material-ui/core/IconButton";
-// import InputAdornment from "@mui/material/InputAdornment";
-// import VisibilityIcon from "@mui/icons-material/Visibility";
-// import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
-// import FilledInput from "@mui/material/FilledInput";
-// import OutlinedInput from "@mui/material/OutlinedInput";
-// import InputLabel from "@mui/material/InputLabel";
-// import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-// import { type } from "os";
-// import { ClassNames } from "@emotion/react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-// import Customer from "./Customer";
-// import SignUp from "./SignUp";
-// import Alert from "@mui/material/Alert";
-// import Stack from "@mui/material/Stack";
 import { ProductByMount, User } from "../utils/modals";
 import { useNavigate } from "react-router-dom";
-// import { SsidChart } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { logIn } from "../store/Actions/User";
 import { getPurchaseList } from "../store/Actions/ProductInList";
@@ -79,12 +59,12 @@ export function LogIn(): JSX.Element {
         .get(
           `https://localhost:44378/api/GetCustomerByPasswordName/${data.password}/${data.firstName}/${data.lastName}`
         )
-
         .then(async (response) => {
           if (response.data == null) {
-            console.log("customer not found!!");
+            console.log("לקוח לא קיים");
             navigate("/SignUp");
           }
+          
           let user: User;
           user = {
             firstName: response.data.FirstName,

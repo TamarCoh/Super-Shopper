@@ -1,14 +1,6 @@
-// import { TableBody, TableCell, TableContainer, TableHead, TableRow, Table, TextField } from "@material-ui/core";
-// import Paper from '@mui/material/Paper';
-// import { useForm, } from "react-hook-form";
-// import axios from "axios";
-// import { StyledComponentProps } from "@material-ui/core";
+
 import { } from "@material-ui/core";
-// import { Component, useState, useEffect } from "react";
-// import { JsxElement } from "typescript";
 import "./AllProducts.css"
-// import Category from "./Category";
-// import ProdInCategory from "./ProdInCategory";
 import { Category, ProductByCategory } from "../utils/modals";
 import Product from "./ProductByBuy";
 

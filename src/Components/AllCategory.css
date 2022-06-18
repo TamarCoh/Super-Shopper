@@ -14,7 +14,7 @@
 .css-1gh6k7f-MuiBottomNavigationAction-label{
     opacity: 1 !important;
 }
-.navigation{
+#categoriesNav{
     position: sticky;
-    top: 0;
+    top: 3vh;
 }

@@ -37,7 +37,7 @@ async function updateUserDetails(props: User) {
       alert("עודכן בהצלחה");
     })
     .catch((res) => {
-      alert("העדכון כשל"+res);
+      alert("העדכון כשל" + res);
     });
 }
 
@@ -63,8 +63,8 @@ export function SimplePopper() {
   const open = Boolean(anchorEl);
   const id = open ? "simple-popper" : undefined;
   return (
-    <div>
-      <Button className="nav-links" id="update-details" onClick={handleClick}>
+    <>
+      <Button className="nav-links" id="update-details-button" onClick={handleClick}>
         עריכה
       </Button>
       <Popper id={id} open={open} anchorEl={anchorEl}>
@@ -124,7 +124,7 @@ export function SimplePopper() {
           </span>
           <input
             type="password"
-            placeholder={"סיסמא: " }
+            placeholder={"סיסמא: "}
             {...register("password", {
               required: true,
               minLength: 2,
@@ -154,7 +154,7 @@ export function SimplePopper() {
           <Button type="submit">עדכן פרטים</Button>
         </form>
       </Popper>
-    </div>
+    </>
   );
 }
 
@@ -180,15 +180,20 @@ function CustomizedBadges(props: any) {
 function Nav(props: any): JSX.Element {
   const [pDate, setPDate] = useState("");
   setTimeout(() => {
-    setPDate(" " + new Date().toLocaleString() + " ");
+    setPDate(
+      " " +
+        new Date().toLocaleDateString() +
+        "  ,   " +
+        new Date().toLocaleTimeString() +
+        " "
+    );
   }, 1000);
   // const navigate = useNavigate();
   const dispatch = useDispatch();
   // const user = useSelector((st: any) => st.Use.state) as User;
-  const [currentDtaeTime, setCurrentDateTime] = useState<string>("");
+  const [currentHebrewDateTime, setCurrentDateTime] = useState<string>("");
   React.useEffect(() => {
     async function f() {
-      // let resGet =
       await axios
         .get("https://localhost:44378/api/GetCurrentJewishHebrewDate")
         .then((res) => {
@@ -196,7 +201,7 @@ function Nav(props: any): JSX.Element {
           setCurrentDateTime(d);
         })
         .catch(() => {
-          setCurrentDateTime("failed");
+          setCurrentDateTime("_____");
         });
     }
     f();
@@ -205,6 +210,10 @@ function Nav(props: any): JSX.Element {
   return (
     <div className="Nav">
       <ul>
+        <li className="nav-links" id="currentDate">
+          {currentHebrewDateTime + "   /   "}
+          {"   " + pDate + "   "}
+        </li>
         <Link to="/PurchaseList" className="nav-links">
           {/* get count from state */}
           <li className="nav-links">
@@ -217,40 +226,33 @@ function Nav(props: any): JSX.Element {
         <Link to="/allCategory" className="nav-links">
           <li className="nav-links">מוצרים</li>
         </Link>
-        <li className="nav-links">
-          {props.user != null ? (
-            <>
-              <li className="nav-links" id="currentUser">
-                {props.user.firstName + " " + props.user.lastName}
+
+        {props.user != null ? (
+          <nav className="nav-links" id="right-nav">
+            <li className="nav-links" id="currentUser">
+              {props.user.firstName + " " + props.user.lastName}
+            </li>
+            <div id="div-in-right-nav">
+              <li
+                className="nav-links"
+                id="li-in-div-in-right-nav"
+                onClick={() => {
+                  localStorage.removeItem("user");
+                  localStorage.removeItem("productList");
+                  dispatch(logOut());
+                  dispatch(clearPurchaseList());
+                }}
+              >
+                התנתקות
               </li>
-              <div id="div-nav">
-                <div>
-                  <li
-                    className="nav-links"
-                    id="nav-logIn"
-                    onClick={() => {
-                      localStorage.removeItem("user");
-                      localStorage.removeItem("productList");
-                      dispatch(logOut());
-                      dispatch(clearPurchaseList());
-                    }}
-                  >
-                    התנתקות
-                  </li>
-                  <li className="nav-links" id="nav-logIn">
-                    <SimplePopper />
-                  </li>
-                </div>
-              </div>
-            </>
-          ) : (
-            ""
-          )}
-          <li className="nav-links" id="currentDate">
-            {currentDtaeTime + "  /  "}
-            {" " + pDate + "   "}
-          </li>
-        </li>
+              <li className="nav-links" id="li-in-div-in-right-nav">
+                <SimplePopper />
+              </li>
+            </div>
+          </nav>
+        ) : (
+          ""
+        )}
       </ul>
     </div>
   );

@@ -1,19 +1,10 @@
-// import { Component } from "react";
-// import { JsxElement } from "typescript";
+
 import { TextField, Button } from "@material-ui/core";
-// import { send } from "process";
-// import Send from "@mui/icons-material";
 import "./SignIn.css";
-// import { render } from "@testing-library/react";
 import SendIcon from "@mui/icons-material/Send";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-// import Customer from "./Customer";
 import { User } from "../utils/modals";
-// import IconButton from "@material-ui/core/IconButton";
-// import VisibilityIcon from '@mui/icons-material/Visibility';
-// import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
-// import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signUp } from "../store/Actions/User";
@@ -32,16 +23,15 @@ export function SignUp(): JSX.Element {
   const addCustomer = async (data: User) => {
     console.log("start");
     console.log(data);
-    // let customerPromise =
     await axios
       .post("https://localhost:44378/api/Customer", data)
       .then(async () => {
-        // let customer =
         await axios
           .get(
             `https://localhost:44378/api/GetCustomerByPasswordName/${data.password}/${data.firstName}/${data.lastName}`
           )
           .then(async (response) => {
+            // handleClose
             console.log(response.data);
             let user: User;
             user = {
