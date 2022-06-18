@@ -47,14 +47,11 @@ function ChildModal() {
     </>
   );
 }
-interface Iboolean {
-  isOpen: boolean;
-  closeLogin: boolean;
-}
+
 export function Enter() {
   const location = useLocation();
-  const from = location.state as Iboolean;
-  const [open, setOpen] = React.useState<boolean>(from.isOpen);
+  const from = location.state as boolean;
+  const [open, setOpen] = React.useState<boolean>(from);
   const navigate = useNavigate();
   const user = useSelector((st: any) => st.Use.state);
   const handleOpen = () => {
@@ -64,7 +61,7 @@ export function Enter() {
     setOpen(false);
   };
   React.useEffect(() => {
-    {user && setOpen(false)}
+    user && setOpen(false)
   });
   return (
     <div>
@@ -77,8 +74,8 @@ export function Enter() {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description"
+        // aria-labelledby="parent-modal-title"
+        // aria-describedby="parent-modal-description"
       >
         <div>
           <LogIn />
